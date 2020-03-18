@@ -5,21 +5,28 @@
 layout: home
 ---
 
-# Prayer app plan
-
 ## Basic Features
 
 - Select any number predefined prayers
 - Select readings to read
+- Yearly read through the psalms
 - Select amount of time for centering prayer/meditation
 - Select ending sound
-- Select any number of predefined prayers
 
 ## Advanced features
 
 - provide own prayers and have them saved.
+- rearrange order of prayers and readings
 
-### resources
+## Version 1 Flow
+
+1. Show the Lord's Prayer
+2. Reading from Psalms
+3. Intro to Centering prayer prayer
+4. Timer with pleasant ending sound
+5. Closing prayer
+
+## resources
 
 - Circle timer <https://github.com/itaditya/circlebars>
 - Alternative circle timer: <https://codepen.io/elaelation/pen/CxgmH/>
