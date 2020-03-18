@@ -6,3 +6,5 @@ layout: home
 ---
 
 # Here is a new page
+
+AND SOME NEW CONTENT
