@@ -1,179 +1,226 @@
 ---
 layout: default
 ---
-<!--Main container-->
-<div class="container">
 
-  <!--Grid row-->
-  <div class="row my-5">
+<div class="container-flex">
+ <!-- Sidebar  -->
+ <nav id="sidebar" class="blue-gradient">
+    <div id="dismiss">
+        <i class="fas fa-arrow-left"></i>
+    </div>
 
-      <!--Grid column-->
-      <div class="col-md-7 mb-4 mb-md-0">
+    <div class="sidebar-header">
+        <h3>Simply Pray</h3>
+    </div>
 
-        <!--Featured image -->
-        <div class="view overlay z-depth-1-half">
-          <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" class="card-img-top" alt="">
-          <div class="mask rgba-white-light"></div>
+    <ul class="list-unstyled components">
+        <p>Dummy Heading</p>
+        <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#">Home 1</a>
+                </li>
+                <li>
+                    <a href="#">Home 2</a>
+                </li>
+                <li>
+                    <a href="#">Home 3</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">About</a>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
+            <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                    <a href="#">Page 1</a>
+                </li>
+                <li>
+                    <a href="#">Page 2</a>
+                </li>
+                <li>
+                    <a href="#">Page 3</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Portfolio</a>
+        </li>
+        <li>
+            <a href="#">Contact</a>
+        </li>
+    </ul>
+
+    <ul class="list-unstyled CTAs">
+        <li>
+            <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+        </li>
+        <li>
+            <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+        </li>
+    </ul>
+</nav>
+
+
+    <div id="prayer-carousel" class="carousel slide carousel-fade carousel-fullscreen" data-ride="false" data-wrap="false" data-interval="false" >
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <!-- Carousel item 1 -->
+            <div class="carousel-item active" id="opening-prayer">
+                        <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
+                                <div class="card"> <!-- Card -->
+                                    <div class="card-header"><h4>Opening Prayer</h4></div>
+                                    <div class="card-body text-center"> 
+                                        <h5 class="card-title">The Lord's Prayer</h5>
+                                        <!-- Text -->
+                                        <p class="card-text">
+                                            Our Father who art in heaven,<br>
+                                            hallowed be thy name,<br>
+                                            thy kingdom come,<br>
+                                            thy will be done on earth as it is in heaven.<br>
+                                            Give us this day our daily bread;<br>
+                                            and forgive us our trespasses<br>
+                                            as we forgive those<br>
+                                            who trespass against us;<br>
+                                            and lead us not into temptation,<br>
+                                            but deliver us from evil.
+                                            For thine is the kingdom<br>
+                                            and the power and the glory<br>
+                                            forever and ever. Amen<br>
+                                        </p>
+                                     
+                                    </div>
+                                    <div class="card-footer d-flex">&nbsp;
+                                        <a class="ml-auto" href="{{site.url}}/credits.html"><img src="{{site.url}}/img/logo_black.png" class="image-fluid" style="height:20px"/></a>
+
+                                    </div>
+                                </div><!-- ./ Card -->
+                            </div><!-- ./ flex box card container -->
+            </div> <!-- ./ Carousel item 1-->
+
+            <!-- Carousel item 2-->
+            <div class="carousel-item" id="daily-reading">
+                <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
+                <div class="card"> <!-- Card -->
+                    <div class="card-header"><h4>Daily Psalm</h4></div>
+                    <div class="card-body"> 
+                        <!-- Text -->
+                        <div class="card-text" id="daily-psalm">
+                            
+                            <!--embed type="text/html" src="http://read.csbible.com/?book=psalms&chapter=6" style="width:95%; height:400px;"-->
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex">
+                        Source:&nbsp;<a href="https://read.csbible.com/">CSB Online Bible</a>
+                        <a class="ml-auto" href="{{site.url}}/credits.html"><img src="{{site.url}}/img/logo_black.png" class="image-fluid" style="height:20px"/>&nbsp; credits</a>
+                    </div>
+                </div> <!-- ./ Card -->
+                </div><!-- ./ flex box card container -->
+            </div> <!-- ./ Carousel item 2-->
+
+            <!-- Carousel item 3-->
+            <div class="carousel-item" id="intro-prayer">
+                <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
+                <div class="card"> <!-- Card -->
+                    <div class="card-header"><h4>Intro prayer</h4></div>
+                    <div class="card-body"> 
+                        <h5 class="card-title">Intro Prayer</h5>
+                        <!-- Text -->
+                        <div class="card-text">
+                            Father, Son and Holy Spirit,<br>
+                            Creator, Redeemer and Sanctifier,<br>
+                            alive at the center of our beings,<br>
+                            we wish to surrender in love to You.<br>
+                            May our sacred word,<br>
+                            which we will gently pray when we engage with our thoughts,<br>
+                            be a sign and symbol of our intention to consent to Your Divine Presence and Action within.<br>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex">
+                        Source:&nbsp;<a href="http://www.centeriowa.org/prayer-groups/vestibule-prayers"> Contemplative Outreach of Central Iowa</a>
+                        <a class="ml-auto" href="{{site.url}}/credits.html"><img src="{{site.url}}/img/logo_black.png" class="image-fluid" style="height:20px"/></a>
+                    </div>
+                  </div><!-- ./ Card -->
+                </div><!-- ./ flex box card container -->
+            </div> <!-- ./ Carousel item 3-->
+
+            <!-- Carousel item 4-->
+            <div class="carousel-item" id="prayer-timer-item">
+                <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
+                    <div class="card"> <!-- Card -->
+                        <div class="card-header"><h4>Prayer Timer</h4></div>
+                        <div class="card-body"> 
+                            <h5 class="card-title">Select amount of time</h5>
+                            <!-- Text -->
+                            <div class="card-text">
+                                <div id="prayer-timer" data-timer="1201"></div>
+                                
+                                <button id="start-timer" class="btn blue-gradient">Start</button>
+                                <button id="stop-timer" class="btn blue-gradient">Stop</button>
+                                <button id="restart-timer" class="btn blue-gradient">restart</button>
+                                <button id="make-timer" class="btn blue-gradient">make</button>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex">
+                            &nbsp;
+                            <a class="ml-auto" href="{{site.url}}/credits.html"><img src="{{site.url}}/img/logo_black.png" class="image-fluid" style="height:20px"/></a>
+                        </div>
+                      </div><!-- ./ Card -->
+                </div><!-- ./ flex box card container -->
+            </div> <!-- ./ Carousel item 4-->
+
+            <!-- Carousel item 5-->
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
+                    <div class="card"> <!-- Card -->
+                        <div class="card-header"><h4>Closing Prayer</h4></div>
+                        <div class="card-body"> 
+                            <h5 class="card-title">Selected Prayer</h5>
+                            <!-- Text -->
+                            <p class="card-text">
+                                <div class="bible-chapter" data-chapter="25"><h5>Psalm 25:4-5</h5>
+                                    <ul class="scripture-list poetry-list">
+                                    <verse reference="psalms.25.4" display-number="4">
+                                        <li><sup class="verse-ref" id="psalms.25.4">4</sup> Make your ways known to me, <span class="smallcaps">
+                                            Lord</span>;
+                                         </li>
+                                        <li>teach me your paths.<sup class="cross-ref"><a href="#" data-toggle="popover" title="25:4" data-content="Ex 33:13; Ps 27:11; 86:11"><i class="cross-ref-icon"></i></a></sup>
+                                         </li>
+                                    </verse>
+                                    <verse reference="psalms.25.5" display-number="5">
+                                        <li><sup class="verse-ref" id="psalms.25.5">5</sup> Guide me in your truth and teach me,<sup class="cross-ref"><a href="#" data-toggle="popover" title="25:5" data-content="Jn 16:13"><i class="cross-ref-icon"></i></a></sup>
+                                         </li>
+                                        <li>for you are the God of my salvation;<sup class="cross-ref"><a href="#" data-toggle="popover" title="25:5" data-content="Ex 15:2"><i class="cross-ref-icon"></i></a></sup>
+                                         </li>
+                                        <li>I wait for you all day long.<sup class="cross-ref"><a href="#" data-toggle="popover" title="25:5" data-content="Ps 40:1"><i class="cross-ref-icon"></i></a></sup>
+                                         </li>
+                                    </verse>
+                                </ul></div>
+                            </p>
+                        </div>
+                        <div class="card-footer d-flex">
+                            Source:&nbsp; <a href="https://read.csbible.com/">CSB Online Bible</a>
+                            <a class="ml-auto" href="{{site.url}}/credits.html"><img src="{{site.url}}/img/logo_black.png" class="image-fluid" style="height:20px"/></a>
+                        </div>
+                      </div><!-- ./ Card -->
+                </div><!-- ./ flex box card container -->
+            </div> <!-- ./ Carousel item 5-->
         </div>
 
-
-      </div>
-      <!--Grid column-->
-
-      <!--Grid column-->
-      <div class="col-md-5">
-
-        <h2>A prayer app worth praying for</h2>
-        <hr>
-        <p>Pray with out ceasing he said. But how? This app will help you solve that mystery.</p>
-        <a href="https://mdbootstrap.com/" class="btn btn-indigo">Get it now! </a>
-
-
-      </div>
-      <!--Grid column-->
-
-  </div>
-  <!--End Grid row-->
-
-  <!--Grid row-->
-  <div class="row mb-4">
-
-      <!--Grid column-->
-      <div class="col-lg-4 col-md-12">
-        <!-- Card Wider -->
-        <div class="card card-cascade wider">
-
-          <!-- Card image -->
-          <div class="view view-cascade overlay">
-            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-            <a href="#!">
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-
-          <!-- Card content -->
-          <div class="card-body card-body-cascade text-center pb-0">
-
-            <!-- Title -->
-            <h4 class="card-title"><strong>Alison Belmont</strong></h4>
-            <!-- Subtitle -->
-            <h5 class="blue-text pb-2"><strong>Graffiti Artist</strong></h5>
-            <!-- Text -->
-            <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque
-              laudantium, totam rem aperiam. </p>
-
-            <!-- Linkedin -->
-            <a class="px-2 fa-lg li-ic"><i class="fab fa-linkedin-in"></i></a>
-            <!-- Twitter -->
-            <a class="px-2 fa-lg tw-ic"><i class="fab fa-twitter"></i></a>
-            <!-- Dribbble -->
-            <a class="px-2 fa-lg fb-ic"><i class="fab fa-facebook-f"></i></a>
-
-            <!-- Card footer -->
-            <div class="card-footer text-muted text-center mt-4">
-              2 days ago
-            </div>
-
-          </div>
-
-        </div>
-        <!-- Card Wider -->
-
-      </div>
-      <!--End Grid column-->
-
-      <!--Grid column-->
-      <div class="col-lg-4 col-md-6">
-        <!-- Card Wider -->
-        <div class="card card-cascade wider">
-
-          <!-- Card image -->
-          <div class="view view-cascade overlay">
-            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-            <a href="#!">
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-
-          <!-- Card content -->
-          <div class="card-body card-body-cascade text-center pb-0">
-
-            <!-- Title -->
-            <h4 class="card-title"><strong>Alison Belmont</strong></h4>
-            <!-- Subtitle -->
-            <h5 class="blue-text pb-2"><strong>Graffiti Artist</strong></h5>
-            <!-- Text -->
-            <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque
-              laudantium, totam rem aperiam. </p>
-
-            <!-- Linkedin -->
-            <a class="px-2 fa-lg li-ic"><i class="fab fa-linkedin-in"></i></a>
-            <!-- Twitter -->
-            <a class="px-2 fa-lg tw-ic"><i class="fab fa-twitter"></i></a>
-            <!-- Dribbble -->
-            <a class="px-2 fa-lg fb-ic"><i class="fab fa-facebook-f"></i></a>
-
-            <!-- Card footer -->
-            <div class="card-footer text-muted text-center mt-4">
-              2 days ago
-            </div>
-
-          </div>
-
-        </div>
-        <!-- Card Wider -->
-
-
-      </div>
-      <!--End Grid column-->
-
-      <!--Grid column-->
-      <div class="col-lg-4 col-md-6">
-        <!-- Card Wider -->
-        <div class="card card-cascade wider">
-
-          <!-- Card image -->
-          <div class="view view-cascade overlay">
-            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-            <a href="#!">
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-
-          <!-- Card content -->
-          <div class="card-body card-body-cascade text-center pb-0">
-
-            <!-- Title -->
-            <h4 class="card-title"><strong>Alison Belmont</strong></h4>
-            <!-- Subtitle -->
-            <h5 class="blue-text pb-2"><strong>Graffiti Artist</strong></h5>
-            <!-- Text -->
-            <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque
-              laudantium, totam rem aperiam. </p>
-
-            <!-- Linkedin -->
-            <a class="px-2 fa-lg li-ic"><i class="fab fa-linkedin-in"></i></a>
-            <!-- Twitter -->
-            <a class="px-2 fa-lg tw-ic"><i class="fab fa-twitter"></i></a>
-            <!-- Dribbble -->
-            <a class="px-2 fa-lg fb-ic"><i class="fab fa-facebook-f"></i></a>
-
-            <!-- Card footer -->
-            <div class="card-footer text-muted text-center mt-4">
-              2 days ago
-            </div>
-
-          </div>
-
-        </div>
-        <!-- Card Wider -->
-
-
-      </div>
-      <!--End Grid column-->
-
-  </div>
-  <!--End Grid row-->
-
+        <!-- Controls -->
+        <a class="carousel-control-prev" href="#prayer-carousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#prayer-carousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 </div>
+
+
+<!--Main container-->
+
 <!--Main container-->
