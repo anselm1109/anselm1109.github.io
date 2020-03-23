@@ -55,8 +55,8 @@
 ================================= */
 var $chapterHTML = '';
 
-function formatBible(theChapter) {
-    var $this = $(theChapter),
+function formatBible(ele) {
+    var $this = ele,
         $thisType = $this[0].nodeName;
 
     if ($thisType === 'p') {
@@ -242,7 +242,11 @@ success: function(xml) {
       } else {
         $chapterHTML += '<h4>Chapter ' + $thisChapter.attr('display') + '</h4>';
       }
-      $thisChapter.children().each(formatBible($thisChapter));
+      $thisChapter.children().each(function(){
+        var $this = $(this);
+        formatBible($this);
+
+      });
 /*
       $thisChapter.children().each(function () {
         var $this = $(this),
