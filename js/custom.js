@@ -21,12 +21,13 @@ variables that need stored
   
 */
 var psalmNumber, lastViewDate, openingPrayerId, prayerOfIntentId, silentPrayerTime, closingPrayerId;
-var today = new Date();
+const today = new Date();
+const oneDay = 1000*60*60*24;
 
 //check for stored variables
 if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
 
-  lastViewDate = today.toLocaleDateString();//getFullYear()+', '+(today.getMonth()+1)+', '+today.getDate();
+  lastViewDate = today.toLocaleDateString();
   psalmNumber = 1;
   openingPrayerId = 0;
   prayerOfIntentId = 1; 
@@ -50,25 +51,19 @@ if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
   silentPrayerTime = localStorage.getItem('silentPrayerTime');
   closingPrayerId = localStorage.getItem('closingPrayerId');
 
-    if (today > lastViewDate) {  
-         console.log("today date:"+today);  
-         console.log("last view date:"+lastViewDate);  
-     }else {  
-         console.log("Today Date is less than last view date.");  
-     }  
-  
-     localStorage.clear();
+  let dayDiff = (today.getTime() - lastViewDate.getTime())/oneDay;
+
+    // more than 1 day since lastViewDate? Increment psalmNumber 
+    if (dayDiff>1) {  
+         psalmNumber++;
+         if(psalmNumber==172){psalmNumber=1};//reset to first psalm if we have reached the last psalm
+         localStorage.setItem('psalmNumber', psalmNumber);
+         console.log("The Psalm Number is:"+psalmNumber);
+     } 
+
+
 }
 
-
-// compare lastViewDate to today
-    // if lastViewDate is older than today, 
-        // increase psalmNumber by 1
-        // update lastViewDate to today
-    // else 
-        // do not increase psalmNumber or change lastViewDate
-
-// 
 
 
 
@@ -259,18 +254,29 @@ function setPrayers(results){ // this is called by the Papa parse object below a
 /* Daily Psalm javascript
 ================================= */
       /* 
-      store psalm # in local storage and rotate through 172
+      set psalm numbers
       */
+     var $chapterNumber = psalmNumber;
+     var ps19BlockId = 1;
+
+     if (psalmNumber >= 119 && psalmNumber <= 140) {
+        $chapterNumber = 119;
+        ps19BlockId = psalmNumber - 119;
+     } else if (psalmNumber > 140) {
+        $chapterNumber = psalmNumber - 21;
+     }
+     console.log("The $chapterNumber is: "+ $chapterNumber);
+     console.log("The ps19BlockId is: "+ ps19BlockId);
+
       $.ajax({
       type: "GET",
       url: "{{site.url}}/bible/19-Ps.xml",
       dataType: "xml",
       success: function(xml) {
-          var $chapterNumber = 119; 
           var $chapterHTML = '';
-          var chapter = $(xml).find('chapter[id="psalms.119"]');
+          var chapter = $(xml).find('chapter[id="psalms.'+$chapterNumber+'"]');
           var $mainText = $("#daily-psalm");
-          var ps19BlockId = 21;
+          
 
       /*format xml for ps 119
       ==========================*/
