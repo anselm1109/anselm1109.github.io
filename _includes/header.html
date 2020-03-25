@@ -4,13 +4,62 @@
     <div class="container d-flex justify-content-around" style="max-width:550px;">
         <!-- Navbar brand -->
         
-        <a href="#prayer-carousel" class="text-white" data-slide="prev"><i class="fas fa-chevron-left fa-2x"></i></a>
+        <a href="#prayer-carousel" id="prev" class="text-white" data-slide="prev"><i class="fas fa-chevron-left fa-2x"></i></a>
         <a href="#" class="text-white" id="sidebarCollapse"><i class="fas fa-cogs fa-2x"></i></a>
         <a class="navbar-brand" href="{{site.url}}"><img src="img/logo_white.png" class="image-fluid" style="height:32px"/></a>
-        <a href="#" class="text-white"><i class="fas fa-book fa-2x"></i></a>
-        <a href="#prayer-carousel" class="text-white" data-slide="next"><i class="fas fa-chevron-right fa-2x"></i></a>
+        <a href="{{site.url}}/prayer.html?prayerId=0" class="text-white"><i class="fas fa-book fa-2x"></i></a>
+        <a href="#prayer-carousel" id="next" class="text-white" data-slide="next"><i class="fas fa-chevron-right fa-2x"></i></a>
              
     </div>
 </nav>
 <!--/.Navbar-->
 </header>
+
+ <!-- Sidebar  -->
+ <nav id="sidebar" class="blue-gradient">
+    <div id="dismiss">
+        <i class="fas fa-arrow-left"></i>
+    </div>
+
+    <div class="sidebar-header">
+        <h3><img src="{{site.url}}/img/logo_white.png" style="height:25px"/> Simply Pray</h3>
+    </div>
+
+    <ul class="list-unstyled components">
+        <p style="border-bottom: 1px solid #fff;">Settings</p>
+        <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Opening Prayer</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#">Home 1</a>
+                </li>
+                <li>
+                    <a href="#">Home 2</a>
+                </li>
+                <li>
+                    <a href="#">Home 3</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Intro Prayer</a>
+            <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                    <a href="#">Page 1</a>
+                </li>
+                <li>
+                    <a href="#">Page 2</a>
+                </li>
+                <li>
+                    <a href="#">Page 3</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Silent Prayer Time</a>
+        </li>
+        <li>
+            <a href="#">Closing Prayer</a>
+        </li>
+    </ul>
+</nav>
