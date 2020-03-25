@@ -1,34 +1,65 @@
 ---
 ---
+$(document).ready(function () {
 /* Local Storage
 ============================*/
 /* 
 variables that need stored
   psalmNumber
   lastViewDate (only update psalm # if a different day)
-  openingPrayerNumber
-  introPrayerNumber
+  openingPrayerId
+  prayerOfIntentId
   silentPrayerTime
-  closingPrayerNumber
+  closingPrayerId
 
 
   === functions:
   getSetting() gets the localstorage variable
   updateSetting() updates the variable
 
- === Need to create Jekyll collections for
-  I think these can all be the same just tagged as specific things
-  Opening Prayers
-  Intro Prayers
-  Closing Prayers 
+
   
 */
-
+var psalmNumber, lastViewDate, openingPrayerId, prayerOfIntentId, silentPrayerTime, closingPrayerId;
+var today = new Date();
 
 //check for stored variables
-  //set defaults if they don't exist;
+if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
 
-// read them into variables if they exist.
+  lastViewDate = today.toLocaleDateString();//getFullYear()+', '+(today.getMonth()+1)+', '+today.getDate();
+  psalmNumber = 1;
+  openingPrayerId = 0;
+  prayerOfIntentId = 1; 
+  silentPrayerTime = 20;
+  closingPrayerId = 2;
+
+  localStorage.setItem('lastViewDate', lastViewDate);
+  localStorage.setItem('psalmNumber', psalmNumber);
+  localStorage.setItem('openingPrayerId', openingPrayerId);
+  localStorage.setItem('prayerOfIntentId', prayerOfIntentId);
+  localStorage.setItem('silentPrayerTime', silentPrayerTime);
+  localStorage.setItem('closingPrayerId', closingPrayerId);
+
+
+} else { // there are locally stored variables already so read those 
+
+  lastViewDate = new Date(localStorage.getItem('lastViewDate'));
+  psalmNumber = localStorage.getItem('psalmNumber');
+  openingPrayerId = localStorage.getItem('openingPrayerId');
+  prayerOfIntentId = localStorage.getItem('prayerOfIntentId'); 
+  silentPrayerTime = localStorage.getItem('silentPrayerTime');
+  closingPrayerId = localStorage.getItem('closingPrayerId');
+
+    if (today > lastViewDate) {  
+         console.log("today date:"+today);  
+         console.log("last view date:"+lastViewDate);  
+     }else {  
+         console.log("Today Date is less than last view date.");  
+     }  
+  
+     localStorage.clear();
+}
+
 
 // compare lastViewDate to today
     // if lastViewDate is older than today, 
@@ -39,7 +70,9 @@ variables that need stored
 
 // 
 
-$(document).ready(function () {
+
+
+  
 
 /* ================================
                                   |
@@ -237,7 +270,7 @@ function setPrayers(results){ // this is called by the Papa parse object below a
           var $chapterHTML = '';
           var chapter = $(xml).find('chapter[id="psalms.119"]');
           var $mainText = $("#daily-psalm");
-          var $blockid = 21;
+          var ps19BlockId = 21;
 
       /*format xml for ps 119
       ==========================*/
@@ -246,7 +279,7 @@ function setPrayers(results){ // this is called by the Papa parse object below a
           var $thisPoetryBlocks = chapter.find('poetryblock');
         
           $thisPoetryBlocks.each(function(index){
-            if (index == $blockid ){
+            if (index == ps19BlockId ){
               var $thisPoetryBlock = $(this);
               var $sectionName = $thisPoetryBlock.prev();
               $chapterHTML +='<strong>'+ $sectionName.text() +'</strong>';
