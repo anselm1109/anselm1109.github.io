@@ -202,31 +202,7 @@ function setPrayers(results){ // this is called by the Papa parse object below a
   default: // or main page so 
 
 
-/* Timer creation and music player
-================================= */
-        $("#prayer-timer").TimeCircles({
-          "start": false,
-          "bg_width": 0.4,
-          "total_duration": 1201,
-          "fg_width": 0.04666666666666667,
-          "time": {
-              "Days": {
-                  "show": false
-              },
-              "Hours": {
-                  "show": false
-              },
-              "Minutes": {
-                  "text": "Minutes",
-                  "color": "#45cafc",
-                  "show": true
-              },
-              "Seconds": {
-                  "show": false
-              }
-          }
-        }); 
-      // ./ end Timer Javascript
+
 
 
 /* Daily Psalm javascript
@@ -478,32 +454,41 @@ function populateDailyPsalm(psNumber){
 
 // Timer related controls
     var audio = new Audio('{{site.url}}/sounds/quiet-thought-clip.m4a');
+    var prayerTimer = $("#prayer-timer");//document.getElementById('prayer-timer');
 
-    $("#start-timer").click(function(){ $("#prayer-timer").TimeCircles().start().addListener(function(unit, value, total){     
-      if (total==0){ 
-          audio.currentTime = 0;
-          audio.play();
-        }
-    },"all");});
+    $("#start-timer").click(function(){ 
+        audio.currentTime = 0;    
+        prayerTimer.get(0).play();
+    });
 
-    $("#stop-timer").click(function(){ $("#prayer-timer").TimeCircles().stop(); 
+    $("#stop-timer").click(function(){ 
+        prayerTimer.get(0).pause(); 
         if (audio) { audio.pause();}
     });
 
-    $("#restart-timer").click(function(){ $("#prayer-timer").TimeCircles().restart(); }); 
-    $("#make-timer").click(function(){$("#prayer-timer").TimeCircles().rebuild(); }); 
+    $("#restart-timer").click(function(){ 
+        prayerTimer.get(0).currentTime = 0;
+        prayerTimer.get(0).play();
 
-    $('#prayer-carousel').on('slid.bs.carousel', function () {
-      if ($('#prayer-timer-item').hasClass('active')){
-      $("#prayer-timer").TimeCircles().rebuild();
+     }); 
+
+    //play the ending sound when video ends
+    prayerTimer.get(0).addEventListener('ended',myHandler,false);
+    function myHandler(e) {
+        audio.play();
     }
-    })
+
+
 
 //display psalm controls    
     $("#psalm-select").change(function(){
       populateDailyPsalm($(this).val()); // update the view
       localStorage.setItem("psalmNumber",$(this).val());
     });
+
+
+  
+  
 
 
 

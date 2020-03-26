@@ -70,6 +70,19 @@ h1,h2,h3,h4,h5,h6 {
   }
 
 
+  /* Prayer timer black line fix styles
+==============================*/
+#video-fix {
+    content: ".";
+    display: block;
+    color: #fff;
+    background: #fff;
+    position: relative;
+    top:-7px;
+    height:2px;
+   
+
+}
 
 
   /* Prayer pages styles

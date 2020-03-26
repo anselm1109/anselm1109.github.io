@@ -1,0 +1,193 @@
+---
+layout: default
+title: Simply Pray
+---
+
+    <div id="prayer-carousel" class="carousel slide carousel-fade carousel-fullscreen" data-ride="false" data-wrap="false" data-interval="false" >
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+
+
+            <!-- Carousel item 1 -->
+            <div class="carousel-item active" id="splash-page-item">
+                <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
+                        <div class="card"> <!-- Card -->
+                            <div class="card-header"><h4>Welcome</h4></div>
+                            <div class="card-body text-center"> 
+                                <!-- Text -->
+                                <div class="card-text">
+                                   <img src="{{site.url}}/img/logo_gradient.png" width="150" />
+                                </div>
+                                <h2 class="card-title" style="font-size: 28px; font-weight: 200; color: #3143A2;">Simply Pray</h2>    
+                            </div>
+                            <div class="card-footer d-flex">&nbsp;
+                                <a class="ml-auto" href="{{site.url}}/credits.html">credits </a>
+
+                            </div>
+                        </div><!-- ./ Card -->
+                    </div><!-- ./ flex box card container -->
+    </div> <!-- ./ Carousel item 1-->
+            
+            <!-- Carousel item 2 -->
+            <div class="carousel-item" id="opening-prayer-item">
+                        <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
+                                <div class="card"> <!-- Card -->
+                                    <div class="card-header"><h4>Opening Prayer</h4></div>
+                                    <div class="card-body text-center"> 
+                                        <h5 class="card-title">The Lord's Prayer</h5>
+                                        <!-- Text -->
+                                        <p class="card-text">
+                                            Our Father who art in heaven,<br>
+                                            hallowed be thy name,<br>
+                                            thy kingdom come,<br>
+                                            thy will be done on earth as it is in heaven.<br>
+                                            Give us this day our daily bread;<br>
+                                            and forgive us our trespasses<br>
+                                            as we forgive those<br>
+                                            who trespass against us;<br>
+                                            and lead us not into temptation,<br>
+                                            but deliver us from evil.
+                                            For thine is the kingdom<br>
+                                            and the power and the glory<br>
+                                            forever and ever. Amen<br>
+                                        </p>
+                                     
+                                    </div>
+                                    <div class="card-footer d-flex">&nbsp;
+                                        <a class="ml-auto" href="{{site.url}}/credits.html">credits </a>
+
+                                    </div>
+                                </div><!-- ./ Card -->
+                            </div><!-- ./ flex box card container -->
+            </div> <!-- ./ Carousel item 2-->
+
+            <!-- Carousel item 3-->
+            <div class="carousel-item" id="daily-reading-item">
+                <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
+                <div class="card"> <!-- Card -->
+                    <div class="card-header d-flex" >
+                        <h4 class="mr-auto">Daily Psalm</h4>
+                        <select class="ml-auto custom-select" id="psalm-select" style="width: 200px;">
+                            <option selected>Pick a Psalm</option>
+                            {% for psalm in site.data.psalms %}
+                            <option value="{{psalm.id}}">{{psalm.title}} 
+                                {% if psalm.section %} 
+                                - {{psalm.section}} 
+                                {% endif %} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="card-body"> 
+                        <!-- Text -->
+                        <div class="card-text" id="daily-psalm">
+                            
+                            <!--embed type="text/html" src="http://read.csbible.com/?book=psalms&chapter=6" style="width:95%; height:400px;"-->
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex">
+                        Source:&nbsp;<a href="https://read.csbible.com/">CSB Online Bible</a>
+                        <a class="ml-auto" href="{{site.url}}/credits.html">credits </a>
+                    </div>
+                </div> <!-- ./ Card -->
+                </div><!-- ./ flex box card container -->
+            </div> <!-- ./ Carousel item 3-->
+
+            <!-- Carousel item 4-->
+            <div class="carousel-item" id="prayer-of-intent-item">
+                <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
+                <div class="card"> <!-- Card -->
+                    <div class="card-header"><h4>Prayer of Intent</h4></div>
+                    <div class="card-body"> 
+                        <h5 class="card-title">Intro Prayer</h5>
+                        <!-- Text -->
+                        <div class="card-text">
+                            Father, Son and Holy Spirit,<br>
+                            Creator, Redeemer and Sanctifier,<br>
+                            alive at the center of our beings,<br>
+                            we wish to surrender in love to You.<br>
+                            May our sacred word,<br>
+                            which we will gently pray when we engage with our thoughts,<br>
+                            be a sign and symbol of our intention to consent to Your Divine Presence and Action within.<br>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex">
+                        Source:&nbsp;<a href="http://www.centeriowa.org/prayer-groups/vestibule-prayers"> COCI</a>
+                        <a class="ml-auto" href="{{site.url}}/credits.html">credits </a>
+                    </div>
+                  </div><!-- ./ Card -->
+                </div><!-- ./ flex box card container -->
+            </div> <!-- ./ Carousel item 4-->
+
+            <!-- Carousel item 5-->
+            <div class="carousel-item" id="prayer-timer-item">
+                <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
+                    <div class="card"> <!-- Card -->
+                        <div class="card-header"><h4>Prayer Timer</h4></div>
+                        <div class="card-body"> 
+                            <!-- Text -->
+                            <div class="card-text">
+                                <div id="prayer-timer" data-timer="61"></div>
+                                
+                                <button id="start-timer" class="btn blue-gradient">Start</button>
+                                <button id="stop-timer" class="btn blue-gradient">Stop</button>
+                                <button id="restart-timer" class="btn blue-gradient">restart</button>
+                                <button id="make-timer" class="btn blue-gradient">make</button>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex">
+                            &nbsp;
+                            <a class="ml-auto" href="{{site.url}}/credits.html">credits </a>
+                        </div>
+                      </div><!-- ./ Card -->
+                </div><!-- ./ flex box card container -->
+            </div> <!-- ./ Carousel item 5-->
+
+            <!-- Carousel item 6-->
+            <div class="carousel-item" id="closing-prayer-item">
+                <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
+                    <div class="card"> <!-- Card -->
+                        <div class="card-header"><h4>Closing Prayer</h4></div>
+                        <div class="card-body"> 
+                            <h5 class="card-title">Selected Prayer</h5>
+                            <!-- Text -->
+                            <p class="card-text">
+                                <div class="bible-chapter" data-chapter="25"><h5>Psalm 25:4-5</h5>
+                                    <ul class="scripture-list poetry-list">
+                                    <verse reference="psalms.25.4" display-number="4">
+                                        <li><sup class="verse-ref" id="psalms.25.4">4</sup> Make your ways known to me, <span class="smallcaps">
+                                            Lord</span>;
+                                         </li>
+                                        <li>teach me your paths.<sup class="cross-ref"><a href="#" data-toggle="popover" title="25:4" data-content="Ex 33:13; Ps 27:11; 86:11"><i class="cross-ref-icon"></i></a></sup>
+                                         </li>
+                                    </verse>
+                                    <verse reference="psalms.25.5" display-number="5">
+                                        <li><sup class="verse-ref" id="psalms.25.5">5</sup> Guide me in your truth and teach me,<sup class="cross-ref"><a href="#" data-toggle="popover" title="25:5" data-content="Jn 16:13"><i class="cross-ref-icon"></i></a></sup>
+                                         </li>
+                                        <li>for you are the God of my salvation;<sup class="cross-ref"><a href="#" data-toggle="popover" title="25:5" data-content="Ex 15:2"><i class="cross-ref-icon"></i></a></sup>
+                                         </li>
+                                        <li>I wait for you all day long.<sup class="cross-ref"><a href="#" data-toggle="popover" title="25:5" data-content="Ps 40:1"><i class="cross-ref-icon"></i></a></sup>
+                                         </li>
+                                    </verse>
+                                </ul></div>
+                            </p>
+                        </div>
+                        <div class="card-footer d-flex">
+                            Source:&nbsp; <a href="https://read.csbible.com/">CSB Online Bible</a>
+                            <a class="ml-auto" href="{{site.url}}/credits.html">credits </a>
+                        </div>
+                      </div><!-- ./ Card -->
+                </div><!-- ./ flex box card container -->
+            </div> <!-- ./ Carousel item 6-->
+        </div>
+
+        <!-- Controls -->
+        <a class="carousel-control-prev" href="#prayer-carousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#prayer-carousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
