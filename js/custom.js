@@ -53,7 +53,7 @@ if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
 
   let dayDiff = (today.getTime() - lastViewDate.getTime())/oneDay;
 
-    // more than 24 hours have passed since lastViewDate? Increase psalmNumber by 1 and update last view date
+    // more than 20 hours have passed since lastViewDate? Increase psalmNumber by 1 and update last view date
     if (dayDiff>1) {  
          psalmNumber++;
          if(psalmNumber==172){psalmNumber=1};//reset to first psalm if we have reached the last psalm
@@ -68,7 +68,7 @@ if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
 
 
   
-
+ 
 /* ================================
                                   |
 Functions needed on every page    |
@@ -85,12 +85,12 @@ for UI to work                    |
 
       $('#dismiss, .overlay').on('click', function () {
           $('#sidebar').removeClass('active');
-          $('.overlay').removeClass('active');
+        //  $('.overlay').removeClass('active');
       });
 
       $('#sidebarCollapse').on('click', function () {
           $('#sidebar').addClass('active');
-          $('.overlay').addClass('active');
+        //  $('.overlay').addClass('active');
           $('.collapse.in').toggleClass('in');
           $('a[aria-expanded=true]').attr('aria-expanded', 'false');
       });

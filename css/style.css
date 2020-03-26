@@ -108,7 +108,7 @@ body {
     /*background: #7386D5;*/
     color: #fff;
     transition: all 0.3s;
-    overflow-y: scroll;
+    overflow-y: auto;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 

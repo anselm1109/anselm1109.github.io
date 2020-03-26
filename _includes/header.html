@@ -28,38 +28,45 @@
     <ul class="list-unstyled components">
         <p style="border-bottom: 1px solid #fff;">Settings</p>
         <li class="active">
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Opening Prayer</a>
-            <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li>
-                    <a href="#">Home 1</a>
-                </li>
-                <li>
-                    <a href="#">Home 2</a>
-                </li>
-                <li>
-                    <a href="#">Home 3</a>
-                </li>
+            <a href="#opening-prayers" data-toggle="collapse" aria-expanded="false">Opening Prayer</a>
+            <ul class="collapse list-unstyled" id="opening-prayers">
+                {% assign prayers = site.data.prayers  %}
+                {% for prayer in prayers %}
+                    {% if prayer.tags contains "opening" %}
+                    <li>
+                        <a href="#">{{prayer.title}}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
             </ul>
         </li>
         <li>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Intro Prayer</a>
-            <ul class="collapse list-unstyled" id="pageSubmenu">
-                <li>
-                    <a href="#">Page 1</a>
-                </li>
-                <li>
-                    <a href="#">Page 2</a>
-                </li>
-                <li>
-                    <a href="#">Page 3</a>
-                </li>
+            <a href="#prayers-of-intent" data-toggle="collapse" aria-expanded="false">Prayers of Intent</a>
+            <ul class="collapse list-unstyled" id="prayers-of-intent">
+                {% for prayer in prayers %}
+                    {% if prayer.tags contains "intent" %}
+                    <li>
+                        <a href="#">{{prayer.title}}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
             </ul>
         </li>
         <li>
             <a href="#">Silent Prayer Time</a>
         </li>
         <li>
-            <a href="#">Closing Prayer</a>
+            <a href="#closing-prayers" data-toggle="collapse" aria-expanded="false">Closing Prayers</a>
+            <ul class="collapse list-unstyled" id="closing-prayers">
+                {% for prayer in prayers %}
+                    {% if prayer.tags contains "closing" %}
+                    <li>
+                        <a href="#">{{prayer.title}}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
         </li>
     </ul>
+    <div class="pb-5">&nbsp;</div>
 </nav>
