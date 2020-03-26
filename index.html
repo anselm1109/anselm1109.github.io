@@ -65,17 +65,9 @@ title: Simply Pray
             <div class="carousel-item" id="daily-reading-item">
                 <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
                 <div class="card"> <!-- Card -->
-                    <div class="card-header d-flex" >
+                    <div class="card-header" >
                         <h4 class="mr-auto">Daily Psalm</h4>
-                        <select class="ml-auto custom-select" id="psalm-select" style="width: 200px;">
-                            <option selected>Pick a Psalm</option>
-                            {% for psalm in site.data.psalms %}
-                            <option value="{{psalm.id}}">{{psalm.title}} 
-                                {% if psalm.section %} 
-                                - {{psalm.section}} 
-                                {% endif %} </option>
-                            {% endfor %}
-                        </select>
+                        
                     </div>
                     <div class="card-body"> 
                         <!-- Text -->
