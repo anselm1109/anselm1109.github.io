@@ -22,7 +22,7 @@ variables that need stored
 */
 var psalmNumber, lastViewDate, openingPrayerId, prayerOfIntentId, silentPrayerTime, closingPrayerId;
 const today = new Date();
-const oneDay = 1000*60*60*24;
+const oneDay = 1000*60*60*20; //20 hours instead of 24 just to make sure each morning is a new psalm
 
 //check for stored variables
 if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
@@ -53,12 +53,12 @@ if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
 
   let dayDiff = (today.getTime() - lastViewDate.getTime())/oneDay;
 
-    // more than 1 day since lastViewDate? Increment psalmNumber 
+    // more than 24 hours have passed since lastViewDate? Increase psalmNumber by 1 and update last view date
     if (dayDiff>1) {  
          psalmNumber++;
          if(psalmNumber==172){psalmNumber=1};//reset to first psalm if we have reached the last psalm
          localStorage.setItem('psalmNumber', psalmNumber);
-         console.log("The Psalm Number is:"+psalmNumber);
+          localStorage.setItem("lastViewDate", today.toLocaleDateString())
      } 
 
 
@@ -78,7 +78,7 @@ for UI to work                    |
 
 /* Sliding Side Bar Javascript controls
 ========================*/
-
+ 
       $("#sidebar").mCustomScrollbar({
           theme: "minimal"
       });
@@ -226,28 +226,6 @@ function setPrayers(results){ // this is called by the Papa parse object below a
               }
           }
         }); 
-
-        
-        var audio = new Audio('{{site.url}}/sounds/quiet-thought-clip.m4a');
-        $("#start-timer").click(function(){ $("#prayer-timer").TimeCircles().start().addListener(function(unit, value, total){
-              
-          if (total==0){ 
-              audio.currentTime = 0;
-              audio.play();
-            }
-
-        },"all");});
-        $("#stop-timer").click(function(){ $("#prayer-timer").TimeCircles().stop(); 
-            if (audio) { audio.pause();}
-        });
-        $("#restart-timer").click(function(){ $("#prayer-timer").TimeCircles().restart(); }); 
-        $("#make-timer").click(function(){$("#prayer-timer").TimeCircles().rebuild(); }); 
-
-        $('#prayer-carousel').on('slid.bs.carousel', function () {
-        if ($('#prayer-timer-item').hasClass('active')){
-          $("#prayer-timer").TimeCircles().rebuild();
-        }
-      })
       // ./ end Timer Javascript
 
 
@@ -256,17 +234,17 @@ function setPrayers(results){ // this is called by the Papa parse object below a
       /* 
       set psalm numbers
       */
-     var $chapterNumber = psalmNumber;
-     var ps19BlockId = 1;
 
-     if (psalmNumber >= 119 && psalmNumber <= 140) {
+function populateDailyPsalm(psNumber){
+      let $chapterNumber = psNumber;
+      let ps19BlockId = 1;
+
+      if (psNumber >= 119 && psNumber <= 140) {
         $chapterNumber = 119;
-        ps19BlockId = psalmNumber - 119;
-     } else if (psalmNumber > 140) {
-        $chapterNumber = psalmNumber - 21;
-     }
-     console.log("The $chapterNumber is: "+ $chapterNumber);
-     console.log("The ps19BlockId is: "+ ps19BlockId);
+        ps19BlockId = psNumber - 119;
+      } else if (psNumber > 140) {
+        $chapterNumber = psNumber - 21;
+      }
 
       $.ajax({
       type: "GET",
@@ -490,8 +468,44 @@ function setPrayers(results){ // this is called by the Papa parse object below a
       error: function() {
       alert("The XML File could not be processed correctly.");
       }
-      });
-      // ./ Read and format XML 
+      }); // ./ Read and format XML 
+  }
+  populateDailyPsalm(psalmNumber);
+  
+
+/* Index page custom controls 
+==========================*/
+
+// Timer related controls
+    var audio = new Audio('{{site.url}}/sounds/quiet-thought-clip.m4a');
+
+    $("#start-timer").click(function(){ $("#prayer-timer").TimeCircles().start().addListener(function(unit, value, total){     
+      if (total==0){ 
+          audio.currentTime = 0;
+          audio.play();
+        }
+    },"all");});
+
+    $("#stop-timer").click(function(){ $("#prayer-timer").TimeCircles().stop(); 
+        if (audio) { audio.pause();}
+    });
+
+    $("#restart-timer").click(function(){ $("#prayer-timer").TimeCircles().restart(); }); 
+    $("#make-timer").click(function(){$("#prayer-timer").TimeCircles().rebuild(); }); 
+
+    $('#prayer-carousel').on('slid.bs.carousel', function () {
+      if ($('#prayer-timer-item').hasClass('active')){
+      $("#prayer-timer").TimeCircles().rebuild();
+    }
+    })
+
+//display psalm controls    
+    $("#psalm-select").change(function(){
+      populateDailyPsalm($(this).val()); // update the view
+      localStorage.setItem("psalmNumber",$(this).val());
+    });
+
+
 
 } // ./ Main Switch Function
 

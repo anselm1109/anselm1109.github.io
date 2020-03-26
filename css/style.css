@@ -49,7 +49,7 @@ body {
   }
 
   @media(max-width:35em){
-    .carousel-fullscreen .card, .content-wrap .card-body {
+    .carousel-fullscreen .card, .content-wrap .card {
         min-height: 93vh;
         min-width:100%;
         /*top: 8%;  
