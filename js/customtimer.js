@@ -207,7 +207,7 @@ function setPrayers(results){ // this is called by the Papa parse object below a
         $("#prayer-timer").TimeCircles({
           "start": false,
           "bg_width": 0.4,
-          "total_duration": 61,
+          "total_duration": 300,
           "fg_width": 0.04666666666666667,
           "time": {
               "Days": {
