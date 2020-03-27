@@ -27,7 +27,16 @@ h1,h2,h3,h4,h5,h6 {
     background-repeat: no-repeat; 
     background-size: cover;
 }
-
+.card-footer {
+    padding-top:0;
+    padding-bottom:0;
+}
+.card-header {
+    padding: 0.5rem 1.25rem 0rem 1.25rem;
+}
+.card-header h4 {
+    font-size:1rem
+}
 /* carousel fullscreen - vertically centered caption*/
 
 .carousel-fullscreen .card, .content-wrap .card {
