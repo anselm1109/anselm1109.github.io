@@ -75,6 +75,13 @@ Functions needed on every page    |
 for UI to work                    |
                                   |
 ===================================*/
+/* get page and search params
+==============================*/
+const prayersCsv = "{{site.url}}/prayers.csv";
+const page = window.location.pathname.slice(1).replace(".html","");
+const queryString = window.location.search; // see https://www.sitepoint.com/get-url-parameters-with-javascript/ for how to use this.
+const urlParams = new URLSearchParams(queryString);
+
 
 /* Sliding Side Bar Javascript controls
 ========================*/
@@ -95,6 +102,16 @@ for UI to work                    |
           $('a[aria-expanded=true]').attr('aria-expanded', 'false');
       });
 
+
+/* Side bar settings controls
+========================*/
+//set the paslm and store it for the future  
+$("#psalm-select").change(function(){
+  if(page=="" || page == "index"){
+    populateDailyPsalm($(this).val()); // update the view
+  }
+  localStorage.setItem("psalmNumber",$(this).val());
+});
 
 
 
@@ -118,12 +135,6 @@ called                            |
 
 
 
-/* get page and search params
-==============================*/
-const prayersCsv = "{{site.url}}/prayers.csv";
-const page = window.location.pathname.slice(1).replace(".html","");
-const queryString = window.location.search; // see https://www.sitepoint.com/get-url-parameters-with-javascript/ for how to use this.
-const urlParams = new URLSearchParams(queryString);
 
 
 
@@ -469,7 +480,7 @@ default: // or main page so
 
             $("#stop-timer").click(function(){ 
                 prayerTimer.get(0).pause(); 
-                if (audio) { audio.pause();}
+                  audio.pause();
             });
 
             $("#restart-timer").click(function(){ 
@@ -486,12 +497,7 @@ default: // or main page so
 
 
 
-        //set the paslm and store it for the future  
-            $("#psalm-select").change(function(){
-              populateDailyPsalm($(this).val()); // update the view
-              localStorage.setItem("psalmNumber",$(this).val());
-            });
-
+        
 
           
   
