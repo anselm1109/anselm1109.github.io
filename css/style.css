@@ -214,9 +214,22 @@ h1,h2,h3,h4,h5,h6 {
     color:#fff;
 }
 
-#sidebar ul li a:hover {
+#sidebar ul li a:hover, #sidebar ul li a[aria-expanded="true"] {
     color: #fff;
     background: rgba(255, 255, 255, 0.2);
+}
+
+#sidebar ul li a[aria-expanded="true"] .fa-angle-down {
+    display:inline;
+}
+#sidebar ul li a[aria-expanded="true"] .fa-angle-right {
+    display:none;
+}
+#sidebar ul li a[aria-expanded="false"] .fa-angle-down {
+    display:none;
+}
+#sidebar ul li a[aria-expanded="false"] .fa-angle-right {
+    display:inline;
 }
 
 a[data-toggle="collapse"] {
@@ -260,7 +273,7 @@ a.article:hover {
     background: #6d7fcc !important;
     color: #fff !important;
 }
-#psalm-select {
+#sidebar select {
     width:90%;
 
 }
