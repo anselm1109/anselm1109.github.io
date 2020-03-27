@@ -105,6 +105,7 @@ const urlParams = new URLSearchParams(queryString);
 
 /* Side bar settings controls
 ========================*/
+
 //set the paslm and store it for the future  
 $("#psalm-select").change(function(){
   if(page=="" || page == "index"){
@@ -112,6 +113,41 @@ $("#psalm-select").change(function(){
   }
   localStorage.setItem("psalmNumber",$(this).val());
 });
+
+//set silent prayer time and store it for the future  
+$("#silent-prayer-select").change(function(){
+  if(page=="" || page == "index"){
+    populateTimer($(this).val()); // update the view
+  }
+  localStorage.setItem("silentPrayerTime",$(this).val());
+});
+
+//set opening prayer
+$("#opening-prayer-select").change(function(){
+  if(page=="" || page == "index"){
+    populatePrayers($(this).val(), prayerOfIntentId, closingPrayerId);
+  }
+  localStorage.setItem("openingPrayerId",$(this).val());
+});
+
+//set  prayer of intent
+$("#prayer-of-intent-select").change(function(){
+  if(page=="" || page == "index"){
+    populatePrayers(openingPrayerId, $(this).val(), closingPrayerId);
+  }
+  localStorage.setItem("prayerOfIntentId",$(this).val());
+});
+
+// set closing prayer
+$("#closing-prayer-select").change(function(){
+  if(page=="" || page == "index"){
+    populatePrayers(openingPrayerId, prayerOfIntentId, $(this).val());
+  }
+  localStorage.setItem("closingPrayerId",$(this).val());
+});
+
+
+
 
 
 
@@ -161,7 +197,7 @@ case 'prayer': //display single prayer
           if (results.data[prayerId].tags != ""){
             let tags = results.data[prayerId].tags.split(",");
             if (tags.length > 0) {
-              tagsCode = "<strong>Tags:</strong> "
+              tagsCode = "Tags: "
               for (const i in tags) {
                 tagsCode += '<a class="badge badge-info" href="{{site.url}}/tag.html?tag='+tags[i]+'">'+tags[i]+'</a> ';
                 
@@ -210,9 +246,42 @@ break;
 /* we are on the main page so do all the magic
 =======================================*/   
 case 'index'://main page so do all the magic    
-default: // or main page so 
+case '': // or main page so 
+       
+
+        function populatePrayers(open,intent,close) {
+            
+            open=Number(open);
+            intent=Number(intent);
+            close=Number(close);
+
+          Papa.parse(prayersCsv, {
+            download: true,
+            header: true,
+            complete: function(results){
+              $("#opening-prayer-title").html(results.data[open].title);
+              $("#opening-prayer-content").html(results.data[open].content);
+              $("#opening-prayer-source").html("Source: " + '<a href="' + results.data[open].sourceLink + '" target="_blank">' + results.data[open].source + '</a>');
+
+              $("#prayer-of-intent-title").html(results.data[intent].title);
+              $("#prayer-of-intent-content").html(results.data[intent].content);
+              $("#prayer-of-intent-source").html("Source: " + '<a href="' + results.data[intent].sourceLink + '" target="_blank">' + results.data[intent].source + '</a>');
+
+              $("#closing-prayer-title").html(results.data[close].title);
+              $("#closing-prayer-content").html(results.data[close].content);
+              $("#closing-prayer-source").html("Source: " + '<a href="' + results.data[close].sourceLink + '" target="_blank">' + results.data[close].source + '</a>');
+            } 
+          });
+          
+          
+          //get prayer with id
+          //set $("#opening-prayer-title")
+          // set $("#opening-prayer-content")
+          // set $("#opening-prayer-source") to "Source: " + '<a href="' + sourceLink + '" target="_blank">' + SourceTitle + '</a>' 
+        }
 
         
+       
           /* Jump to Slide if param is set
            ================================= */
           var slideNumber = Number(urlParams.get("slide"));
@@ -220,8 +289,14 @@ default: // or main page so
             $("#prayer-carousel").carousel(slideNumber);
           }
 
+        /* populate the silent prayer timer with correct time
+        ================================= */
+        function populateTimer(prayerTime){
+            let timerFileName = "video/" + prayerTime + "mins.mp4";
+            $("#prayer-timer").get(0).src = timerFileName;
+        }
 
-
+          
         /* Daily Psalm javascript
         ================================= */
               /* 
@@ -463,7 +538,15 @@ default: // or main page so
               }
               }); // ./ Read and format XML 
           }
+
+
+
+
+
+          //Run these functions on home page load
+          populatePrayers(openingPrayerId,prayerOfIntentId,closingPrayerId)
           populateDailyPsalm(psalmNumber);
+          populateTimer(silentPrayerTime);
           
 
         /* Index page custom controls 

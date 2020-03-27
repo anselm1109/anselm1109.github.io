@@ -33,7 +33,7 @@
                 <li>
                     <p class="pt-0">Pick a Psalm you want to read. The next Psalm will automatically be displayed in about 24 hours.</p>
                     <select class="ml-auto mr-auto d-block custom-select" id="psalm-select">
-                    <option selected>Pick a Psalm</option>
+                    <option value="1" selected>Pick a Psalm</option>
                     {% for psalm in site.data.psalms %}
                     <option value="{{psalm.id}}">{{psalm.title}} 
                         {% if psalm.section %} 
@@ -55,11 +55,11 @@
                 <li>
                     <p class="pt-0">Pick a prayer to begin your time.</p>
                     <select name="opening-prayer-select" id="opening-prayer-select" class="ml-auto mr-auto d-block custom-select">
-                        <option selected>Opening Prayers</option>
+                        <option selected value="0">Opening Prayers</option>
                         {% assign prayers = site.data.prayers  %}
                         {% for prayer in prayers %}
                             {% if prayer.tags contains "opening" %}
-                            <option value="prayer.id">
+                            <option value="{{prayer.id}}">
                                 {{prayer.title}}
                             </option>
                             {% endif %}
@@ -80,11 +80,11 @@
             <ul class="collapse list-unstyled pb-4" id="prayers-of-intent-menu">
                 <li>
                     <p class="pt-0">Pick a prayer with which to begin your silence.</p>
-                    <select name="intent-prayer-select" id="intent-prayer-select" class="ml-auto mr-auto d-block custom-select">
-                        <option selected>Prayers of Intent</option>
+                    <select name="prayer-of-intent-select" id="prayer-of-intent-select" class="ml-auto mr-auto d-block custom-select">
+                        <option selected value="1">Prayers of Intent</option>
                         {% for prayer in prayers %}
                             {% if prayer.tags contains "intent" %}
-                            <option value="prayer.id">
+                            <option value="{{prayer.id}}">
                                 {{prayer.title}}
                             </option>
                             {% endif %}
@@ -92,39 +92,6 @@
                     </select>
                 </li>
             </ul>
-        </li>
-
-
-
-
-
-
-        <li>
-            <a href="#silent-prayer-time-menu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-angle-right"></i> <i class="fas fa-angle-down"></i> Silent Prayer Time</a>
-            <ul class="collapse list-unstyled pb-4" id="silent-prayer-time-menu">
-                <li>
-                    <p class="pt-0">Pick amount of silence</p>
-                    <select name="silent-prayer-select" id="silent-prayer-select" class="ml-auto mr-auto d-block custom-select">
-                        <option selected>Silence time </option>
-                            <option value="10mins">
-                               10 Minutes
-                            </option>
-                            <option value="15mins">
-                                15 Minutes
-                             </option>
-                             <option value="20mins">
-                                20 Minutes
-                             </option>
-                             <option value="25mins">
-                                25 Minutes
-                             </option>
-                             <option value="30mins">
-                                30 Minutes
-                             </option>
-                            
-                    </select>
-                </li>
-            </ul>    
         </li>
 
 
@@ -137,10 +104,10 @@
                 <li>
                     <p class="pt-0">Pick a prayer to end your time.</p>
                     <select name="closing-prayer-select" id="closing-prayer-select" class="ml-auto mr-auto d-block custom-select">
-                        <option selected>Closing prayers</option>
+                        <option selected value="2">Closing prayers</option>
                         {% for prayer in prayers %}
                             {% if prayer.tags contains "closing" %}
-                            <option value="prayer.id">
+                            <option value="{{prayer.id}}">
                                 {{prayer.title}}
                             </option>
                             {% endif %}
@@ -151,6 +118,38 @@
         </li>
 
 
+
+
+
+
+
+        <li>
+            <a href="#silent-prayer-time-menu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-angle-right"></i> <i class="fas fa-angle-down"></i> Silent Prayer Time</a>
+            <ul class="collapse list-unstyled pb-4" id="silent-prayer-time-menu">
+                <li>
+                    <p class="pt-0">Pick amount of silence</p>
+                    <select name="silent-prayer-select" id="silent-prayer-select" class="ml-auto mr-auto d-block custom-select">
+                        <option value="20" selected>Silence time </option>
+                            <option value="10">
+                               10 Minutes
+                            </option>
+                            <option value="15">
+                                15 Minutes
+                             </option>
+                             <option value="20">
+                                20 Minutes
+                             </option>
+                             <option value="25">
+                                25 Minutes
+                             </option>
+                             <option value="30">
+                                30 Minutes
+                             </option>
+                            
+                    </select>
+                </li>
+            </ul>    
+        </li>
 
 
     </ul>
