@@ -26,12 +26,13 @@
     </div>
 
     <ul class="list-unstyled components">
-        <p style="border-bottom: 1px solid #fff;">Settings</p>
+        <p style="border-bottom: 1px solid rgba(255,255,255,0.7);">Settings</p>
     
         <li><a href="#daily-psalm-menu" data-toggle="collapse" aria-expanded="false">Daily Psalm</a>
-           <ul class="collapse list-unstyled" id="daily-psalm-menu">
+           <ul class="collapse list-unstyled pb-4" id="daily-psalm-menu">
                 <li>
-                    <select class="ml-auto custom-select" id="psalm-select">
+                    <p class="pt-0">Pick a Psalm you want to read. The next Psalm will automatically be displayed in about 24 hours.</p>
+                    <select class="ml-auto mr-auto d-block custom-select" id="psalm-select">
                     <option selected>Pick a Psalm</option>
                     {% for psalm in site.data.psalms %}
                     <option value="{{psalm.id}}">{{psalm.title}} 
@@ -50,7 +51,7 @@
         
         <li>
             <a href="#opening-prayers-menu" data-toggle="collapse" aria-expanded="false">Opening Prayer</a>
-            <ul class="collapse list-unstyled" id="opening-prayers-menu">
+            <ul class="collapse list-unstyled pb-4" id="opening-prayers-menu">
                 {% assign prayers = site.data.prayers  %}
                 {% for prayer in prayers %}
                     {% if prayer.tags contains "opening" %}
@@ -69,7 +70,7 @@
 
         <li>
             <a href="#prayers-of-intent-menu" data-toggle="collapse" aria-expanded="false">Prayers of Intent</a>
-            <ul class="collapse list-unstyled" id="prayers-of-intent-menu">
+            <ul class="collapse list-unstyled pb-4" id="prayers-of-intent-menu">
                 {% for prayer in prayers %}
                     {% if prayer.tags contains "intent" %}
                     <li>
@@ -95,7 +96,7 @@
 
         <li>
             <a href="#closing-prayers-menu" data-toggle="collapse" aria-expanded="false">Closing Prayers</a>
-            <ul class="collapse list-unstyled" id="closing-prayers-menu">
+            <ul class="collapse list-unstyled pb-4" id="closing-prayers-menu">
                 {% for prayer in prayers %}
                     {% if prayer.tags contains "closing" %}
                     <li>
