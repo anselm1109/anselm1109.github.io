@@ -9,7 +9,7 @@
 	"theme_color" : "transparent",
 	"description" : "An app to help you, well, simply pray.",
 	"orientation" : "portrait",
-	"background_color" : "white",
+	"background_color" : "#ffffff",
 	"related_applications" : [],
 	"prefer_related_applications" : false,
 	"icons" : [
