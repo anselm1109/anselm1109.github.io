@@ -31,7 +31,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
   <script type="text/javascript" src="{{site.url}}/js/custom.js"></script>
   </body>
-  {% if page.customJs != nil %}
-  {%- include customjs.html -%}
-  {% endif %}
+  <script type="module">
+    import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+    
+    const el = document.createElement('pwa-update');
+    document.body.appendChild(el);
+    </script>
 </html>
