@@ -14,83 +14,47 @@
 	"prefer_related_applications" : false,
 	"icons" : [
 		{
-			"src": "https://anselm1109.github.io/favicon.png",
+			"src": "https://anselm1109.github.io/img/512icon.png",
 			"sizes": "512x512"
 		},
 		{
-			"src": "[Embedded]",
-			"sizes": "44x44"
-		},
-		{
-			"src": "[Embedded]",
+			"src": "https://anselm1109.github.io/img/48icon.png",
 			"sizes": "48x48"
 		},
 		{
-			"src": "[Embedded]",
-			"sizes": "1240x600"
-		},
-		{
-			"src": "[Embedded]",
+			"src": "https://anselm1109.github.io/img/300icon.png",
 			"sizes": "300x300"
 		},
 		{
-			"src": "[Embedded]",
+			"src": "https://anselm1109.github.io/img/150icon.png",
 			"sizes": "150x150"
 		},
 		{
-			"src": "[Embedded]",
+			"src": "https://anselm1109.github.io/img/88icon.png",
 			"sizes": "88x88"
 		},
 		{
-			"src": "[Embedded]",
+			"src": "https://anselm1109.github.io/img/24icon.png",
 			"sizes": "24x24"
 		},
 		{
-			"src": "[Embedded]",
-			"sizes": "50x50"
-		},
-		{
-			"src": "[Embedded]",
-			"sizes": "620x300"
-		},
-		{
-			"src": "[Embedded]",
+			"src": "https://anselm1109.github.io/img/192icon.png",
 			"sizes": "192x192"
 		},
 		{
-			"src": "[Embedded]",
+			"src": "https://anselm1109.github.io/img/144icon.png",
 			"sizes": "144x144"
 		},
 		{
-			"src": "[Embedded]",
+			"src": "https://anselm1109.github.io/img/96icon.png",
 			"sizes": "96x96"
 		},
 		{
-			"src": "[Embedded]",
-			"sizes": "72x72"
-		},
-		{
-			"src": "[Embedded]",
-			"sizes": "36x36"
-		},
-		{
-			"src": "[Embedded]",
-			"sizes": "1024x1024"
-		},
-		{
-			"src": "[Embedded]",
-			"sizes": "180x180"
-		},
-		{
-			"src": "[Embedded]",
+			"src": "https://anselm1109.github.io/img/152icon.png",
 			"sizes": "152x152"
 		},
 		{
-			"src": "[Embedded]",
-			"sizes": "120x120"
-		},
-		{
-			"src": "[Embedded]",
+			"src": "https://anselm1109.github.io/img/76icon.png",
 			"sizes": "76x76"
 		}],
 	"url" : "https://anselm1109.github.io/",
