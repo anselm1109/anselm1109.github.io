@@ -4,22 +4,22 @@ $(document).ready(function () {
 /* Local Storage
 ============================*/
 /* 
-variables that need stored
-  psalmNumber
-  lastViewDate (only update psalm # if a different day)
-  openingPrayerId
-  prayerOfIntentId
-  silentPrayerTime
-  closingPrayerId
 
-
-  === functions:
-  getSetting() gets the localstorage variable
-  updateSetting() updates the variable
-
+create array of prayers here. 
 
   
 */
+
+
+const prayersArr = [
+  {% assign prayers = site.data.prayers %}
+  {% for prayer in prayers %}
+    [  
+    `{{prayer.title}}`,`{{prayer.source}}`,`{{prayer.sourceLink}}`,`{{prayer.tags}}`,`{{prayer.content}}`
+    ],
+  {% endfor %}
+];
+
 var psalmNumber, lastViewDate, openingPrayerId, prayerOfIntentId, silentPrayerTime, closingPrayerId;
 const today = new Date();
 const oneDay = 1000*60*60*22; //22 hours instead of 24 just to make sure each morning is a new psalm
@@ -77,7 +77,7 @@ for UI to work                    |
 ===================================*/
 /* get page and search params
 ==============================*/
-const prayersCsv = "{{site.url}}/prayers.csv";
+//const prayersCsv = "{{site.url}}/prayers.csv";
 const page = window.location.pathname.slice(1).replace(".html","");
 const queryString = window.location.search; // see https://www.sitepoint.com/get-url-parameters-with-javascript/ for how to use this.
 const urlParams = new URLSearchParams(queryString);
@@ -124,26 +124,29 @@ $("#silent-prayer-select").change(function(){
 
 //set opening prayer
 $("#opening-prayer-select").change(function(){
+  let id = Number($(this).val())
   if(page=="" || page == "index"){
-    populatePrayers($(this).val(), prayerOfIntentId, closingPrayerId);
+    populatePrayers("opening-prayer",id);
   }
-  localStorage.setItem("openingPrayerId",$(this).val());
+  localStorage.setItem("openingPrayerId",id);
 });
 
 //set  prayer of intent
 $("#prayer-of-intent-select").change(function(){
+  let id = Number($(this).val())
   if(page=="" || page == "index"){
-    populatePrayers(openingPrayerId, $(this).val(), closingPrayerId);
+    populatePrayers("prayer-of-intent",id);
   }
-  localStorage.setItem("prayerOfIntentId",$(this).val());
+  localStorage.setItem("prayerOfIntentId",id);
 });
 
 // set closing prayer
 $("#closing-prayer-select").change(function(){
+  let id = Number($(this).val())
   if(page=="" || page == "index"){
-    populatePrayers(openingPrayerId, prayerOfIntentId, $(this).val());
+    populatePrayers("closing-prayer",id);
   }
-  localStorage.setItem("closingPrayerId",$(this).val());
+  localStorage.setItem("closingPrayerId",id);
 });
 
 
@@ -190,12 +193,12 @@ case 'prayer': //display single prayer
     var numberOfPrayers=0;
 
 
-    function setPrayers(results){ // this is called by the Papa parse object below after it parses the csv file
-          numberOfPrayers = Object.keys(results.data).length;
+    function setPrayers(){ // this is called by the Papa parse object below after it parses the csv file
+          numberOfPrayers = prayersArr.length;
           //make tags into links if tags exist
           let tagsCode = "";
-          if (results.data[prayerId].tags != ""){
-            let tags = results.data[prayerId].tags.split(",");
+          if (prayersArr[prayerId][3] != ""){
+            let tags = prayersArr[prayerId][3].split(",");
             if (tags.length > 0) {
               tagsCode = "Tags: "
               for (const i in tags) {
@@ -207,22 +210,22 @@ case 'prayer': //display single prayer
           
           //Set source code if there is a source in the CSV
           let sourceCode = "";
-          if (results.data[prayerId].source != "") {
-              sourceCode = "Source:&nbsp;" + '<a href="' + results.data[prayerId].sourceLink + '">' + results.data[prayerId].source + '</a>';
+          if (prayersArr[prayerId][1] != "") {
+              sourceCode = "Source:&nbsp;" + '<a href="' + prayersArr[prayerId][2] + '">' + prayersArr[prayerId][1] + '</a>';
           }
 
-        $("#prayer-title").html(results.data[prayerId].title);
+        $("#prayer-title").html(prayersArr[prayerId][0]);
         $("#prayer-tags").html(tagsCode);
-        $("#prayer-content").html(results.data[prayerId].content);
+        $("#prayer-content").html(prayersArr[prayerId][4]);
         $("#prayer-source").html(sourceCode);
     }
-
-    // parse CSV file and call the setPrayers Function above
+    setPrayers();
+    /* parse CSV file and call the setPrayers Function above
         Papa.parse(prayersCsv, {
           download: true,
           header: true,
           complete: function(results){setPrayers(results);} //Have to do this complicated thing so that I can access global variables
-        });
+        });*/
 
     // make prev and next buttons on main nav switch between prayers   
         $("#next").click(function(){
@@ -249,36 +252,21 @@ case 'index'://main page so do all the magic
 case '': // or main page so 
        
 
-        function populatePrayers(open,intent,close) {
-            
-            open=Number(open);
-            intent=Number(intent);
-            close=Number(close);
 
-          Papa.parse(prayersCsv, {
-            download: true,
-            header: true,
-            complete: function(results){
-              $("#opening-prayer-title").html(results.data[open].title);
-              $("#opening-prayer-content").html(results.data[open].content);
-              $("#opening-prayer-source").html("Source: " + '<a href="' + results.data[open].sourceLink + '" target="_blank">' + results.data[open].source + '</a>');
 
-              $("#prayer-of-intent-title").html(results.data[intent].title);
-              $("#prayer-of-intent-content").html(results.data[intent].content);
-              $("#prayer-of-intent-source").html("Source: " + '<a href="' + results.data[intent].sourceLink + '" target="_blank">' + results.data[intent].source + '</a>');
 
-              $("#closing-prayer-title").html(results.data[close].title);
-              $("#closing-prayer-content").html(results.data[close].content);
-              $("#closing-prayer-source").html("Source: " + '<a href="' + results.data[close].sourceLink + '" target="_blank">' + results.data[close].source + '</a>');
-            } 
-          });
-          
-          
-          //get prayer with id
-          //set $("#opening-prayer-title")
-          // set $("#opening-prayer-content")
-          // set $("#opening-prayer-source") to "Source: " + '<a href="' + sourceLink + '" target="_blank">' + SourceTitle + '</a>' 
-        }
+/* Populate the prayers accordingly
+========================*/
+
+        function populatePrayers(prayerCard,prayerId) {
+           prayerCard="#"+prayerCard;
+            $(prayerCard+"-title").html(prayersArr[prayerId][0]);
+            $(prayerCard+"-content").html(prayersArr[prayerId][4]);
+            $(prayerCard+"-source").html("Source: " + '<a href="' + prayersArr[prayerId][2] + '" target="_blank">' + prayersArr[prayerId][1] + '</a>'); 
+                 
+        } 
+    
+    
 
         
        
@@ -544,7 +532,9 @@ case '': // or main page so
 
 
           //Run these functions on home page load
-          populatePrayers(openingPrayerId,prayerOfIntentId,closingPrayerId)
+          populatePrayers("opening-prayer",openingPrayerId);
+          populatePrayers("closing-prayer",closingPrayerId);
+          populatePrayers("prayer-of-intent",prayerOfIntentId);
           populateDailyPsalm(psalmNumber);
           populateTimer(silentPrayerTime);
           
