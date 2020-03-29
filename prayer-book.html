@@ -17,36 +17,119 @@ title: 'Simply Pray | Prayer Book'
                         <img src="{{site.url}}/img/logo_gradient.png" width="100" />
                         <h2 class="card-title pt-1" style="font-size: 20px; font-weight: 200; color: #3143A2;">Prayer Book</h2> 
                     </div>
+
+                    {% assign prayers = site.data.prayers %}
+                    <div class="container mb-4 pb-2 pl-0 pr-0 border border-primary rounded">
+                        <h5 class="mb-1 bg-primary text-white p-2">Show prayers Prayers tagged with: </h5>
+                        
+                        <ul class="nav nav-pills pl-2 pr-2" id="pills-tab" role="tablist">  
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-show-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">Anything</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-opening-tab" data-toggle="pill" href="#pills-opening" role="tab" aria-controls="pills-opening" aria-selected="false">Opening</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-closing-tab" data-toggle="pill" href="#pills-closing" role="tab" aria-controls="pills-closing" aria-selected="false">Closing</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-intent-tab" data-toggle="pill" href="#pills-intent" role="tab" aria-controls="pills-intent" aria-selected="false">Intent</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                      <div class="tab-content" id="pills-tabContent">
+
+                        <!-- Show all prayers -->
+                        <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+
+                            <ul class="list-unstyled">
+                                {% for prayer in prayers %}
+                                     <li class="border-bottom mb-4">
+                                        <h5><a href="{{site.url}}/prayer.html?prayerId={{prayer.id}}">{{prayer.title}}</a></h5>
+                                        <p class="pl-3 mb-4">
+                                            {{prayer.content | strip_html | truncatewords: 25, '...'}} 
+                                            <a href="{{site.url}}/prayer.html?prayerId={{prayer.id}}">Read more.</a>
+                                        </p>
+                                    </li>
+                                {% endfor %}
+                             </ul>
+
+                        </div>
+
+
+
+                        <!-- Show opening prayers -->
+                        <div class="tab-pane fade" id="pills-opening" role="tabpanel" aria-labelledby="pills-opening-tab">
+                            <ul class="list-unstyled">
+                                {% for prayer in prayers %}
+                                    {% if prayer.tags contains "opening" %}
+                                    <li class="border-bottom mb-4">
+                                        <h5><a href="{{site.url}}/prayer.html?prayerId={{prayer.id}}">{{prayer.title}}</a></h5>
+                                        <p class="pl-3 mb-4">
+                                            {{prayer.content | strip_html | truncatewords: 25, '...'}} 
+                                            <a href="{{site.url}}/prayer.html?prayerId={{prayer.id}}">Read more.</a>
+                                        </p>
+                                    </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                       
+                        
+
+
+                        <!-- Show Closing prayers -->
+                        <div class="tab-pane fade" id="pills-closing" role="tabpanel" aria-labelledby="pills-closing-tab">
+                            <ul class="list-unstyled">
+                                {% for prayer in prayers %}
+                                    {% if prayer.tags contains "closing" %}
+                                    <li class="border-bottom mb-4">
+                                        <h5><a href="{{site.url}}/prayer.html?prayerId={{prayer.id}}">{{prayer.title}}</a></h5>
+                                        <p class="pl-3 mb-4">
+                                            {{prayer.content | strip_html | truncatewords: 25, '...'}} 
+                                            <a href="{{site.url}}/prayer.html?prayerId={{prayer.id}}">Read more.</a>
+                                        </p>
+                                    </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        
+
+
+                        
+                        <!-- Show Intent prayers -->
+                        <div class="tab-pane fade" id="pills-intent" role="tabpanel" aria-labelledby="pills-intent-tab">
+                            <ul class="list-unstyled">
+                                {% for prayer in prayers %}
+                                    {% if prayer.tags contains "intent" %}
+                                    <li class="border-bottom mb-4">
+                                        <h5><a href="{{site.url}}/prayer.html?prayerId={{prayer.id}}">{{prayer.title}}</a></h5>
+                                        <p class="pl-3 mb-4">
+                                            {{prayer.content | strip_html | truncatewords: 25, '...'}} 
+                                            <a href="{{site.url}}/prayer.html?prayerId={{prayer.id}}">Read more.</a>
+                                        </p>
+                                    </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                      </div>
                     
-                    <h4>Tag name</h4>
-                    <ul>
-                        <li><h5><a href="#">Prayer name</a></h5>
-                            <p>
-                                A sample line of text ....
-                            </p>
-                        </li>
-                        <li><h5>
-                            <a href="#">Prayer name</a>
-                        </h5>
-                            <p>
-                                A sample line of text ....
-                            </p>
-                        </li>
-                        <li><h5>
-                            <a href="#">Prayer name</a>
-                        </h5>
-                            <p>
-                                A sample line of text ....
-                            </p>
+
+                 
                     
-                        </li>
-                    </ul>
+                    
+                    
+                        
                
                 </div>      
             </div>
-            <div class="card-footer d-flex">
-                <a class="ml-auto" href="{{site.url}}/credits.html">credits&nbsp;</a>
-            </div>
+ 
         </div><!-- ./ Card -->
     
    

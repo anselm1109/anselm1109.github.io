@@ -32,20 +32,16 @@ customJs: pwabuilder-sw-register
                                 <div class="text-left">
                                 <p><strong style="font-weight: 900;">How to use:</strong></p>
                                 <ul>
-                                    <li>Click or tap the right side of the screen to begin praying. 
+                                    <li>Click or tap the right button below to begin praying. 
                                     </li>
-                                    <li>Click the gear icon to change the prayers and starting Psalm.
+                                    <li>Use the gear icon to change prayers, time, and starting Psalm.
                                      </li>
-                                    <li>Settings are stored locally. Completely clear your browser's cache to remove them. 
-                                    </li>
                                     <li>The daily Psalm will change every 22 hours or so. 
-                                    </li>
-                                    <li>The Prayer Book is only kinda working. Expect bugs.
                                     </li>
                                 </ul>
                                 <p class="note note-info"><strong>Please note: </strong>In order for the prayer timer to work you must leave your phone or computer screen on.
                                 </p>
-                                
+                                <p><a href="{{site.url}}/credits.html">Site credits</a></p>
                                 </div>
                             </div>
                             </div>
@@ -66,8 +62,9 @@ customJs: pwabuilder-sw-register
             <div class="carousel-item" id="opening-prayer-item">
                         <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
                                 <div class="card"> <!-- Card -->
-                                    <div class="card-header"><h4>Opening Prayer</h4></div>
+                                    <div class="card-header"></div>
                                     <div class="card-body text-center"> 
+                                        <h4 class="text-primary">Opening Prayer</h4>
                                         <h5 class="card-title" id="opening-prayer-title">The Lord's Prayer</h5>
                                         <!-- Text -->
                                         <div class="card-text" id="opening-prayer-content">
@@ -85,11 +82,7 @@ customJs: pwabuilder-sw-register
                                             and the power and the glory<br>
                                             forever and ever. Amen<br>
                                         </div>
-                                     
-                                    </div>
-                                    <div class="card-footer d-flex">
-                                        <span id="opening-prayer-source"></span>
-                                        <a class="ml-auto" href="{{site.url}}/credits.html">credits </a>
+                                        <div class="text-left pt-5" id="opening-prayer-source"></div>
                                     </div>
                                 </div><!-- ./ Card -->
                             </div><!-- ./ flex box card container -->
@@ -108,20 +101,14 @@ customJs: pwabuilder-sw-register
             <div class="carousel-item" id="daily-reading-item">
                 <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
                 <div class="card"> <!-- Card -->
-                    <div class="card-header" >
-                        <h4 class="mr-auto">Daily Psalm</h4>
-                        
-                    </div>
                     <div class="card-body"> 
+                        <h4 class="text-primary text-center">Daily Psalm</h4>
                         <!-- Text -->
                         <div class="card-text" id="daily-psalm">
                             
                             <!--embed type="text/html" src="http://read.csbible.com/?book=psalms&chapter=6" style="width:95%; height:400px;"-->
                         </div>
-                    </div>
-                    <div class="card-footer d-flex">
                         Source:&nbsp;<a href="https://read.csbible.com/">CSB Bible</a>
-                        <a class="ml-auto" href="{{site.url}}/credits.html">credits </a>
                     </div>
                 </div> <!-- ./ Card -->
                 </div><!-- ./ flex box card container -->
@@ -141,8 +128,8 @@ customJs: pwabuilder-sw-register
             <div class="carousel-item" id="prayer-of-intent-item">
                 <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
                 <div class="card"> <!-- Card -->
-                    <div class="card-header"><h4>Prayer of Intent</h4></div>
-                    <div class="card-body"> 
+                    <div class="card-body text-center">
+                        <h4 class="text-primary text-primary">Prayer of Intent</h4> 
                         <h5 class="card-title" id="prayer-of-intent-title">Prayer of Intent for Centering Prayer</h5>
                         <!-- Text -->
                         <div class="card-text" id="prayer-of-intent-content">
@@ -154,10 +141,8 @@ customJs: pwabuilder-sw-register
                             which we will gently pray when we engage with our thoughts,<br>
                             be a sign and symbol of our intention to consent to Your Divine Presence and Action within.<br>
                         </div>
-                    </div>
-                    <div class="card-footer d-flex">
-                        <span id="prayer-of-intent-source">Source: <a href="http://www.centeriowa.org/prayer-groups/vestibule-prayers"> COCI</a></span>
-                        <a class="ml-auto" href="{{site.url}}/credits.html">credits </a>
+                        <div class="text-left pt-5" id="prayer-of-intent-source">Source: <a href="http://www.centeriowa.org/prayer-groups/vestibule-prayers"> COCI</a></div>
+                        
                     </div>
                   </div><!-- ./ Card -->
                 </div><!-- ./ flex box card container -->
@@ -177,8 +162,8 @@ customJs: pwabuilder-sw-register
             <div class="carousel-item" id="prayer-timer-item">
                 <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
                     <div class="card"> <!-- Card -->
-                        <div class="card-header"><h4>Prayer Timer</h4></div>
                         <div class="card-body text-center"> 
+                            <h4 class="text-primary">Prayer Timer</h4>
                             <!-- Text -->
                             <div class="card-text">
                                 <video id="prayer-timer">
@@ -190,10 +175,6 @@ customJs: pwabuilder-sw-register
                                 <button id="restart-timer" class="btn blue-gradient">restart</button>
                     
                             </div>
-                        </div>
-                        <div class="card-footer d-flex">
-                            &nbsp;
-                            <a class="ml-auto" href="{{site.url}}/credits.html">credits </a>
                         </div>
                       </div><!-- ./ Card -->
                 </div><!-- ./ flex box card container -->
@@ -214,8 +195,8 @@ customJs: pwabuilder-sw-register
             <div class="carousel-item" id="closing-prayer-item">
                 <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
                     <div class="card"> <!-- Card -->
-                        <div class="card-header"><h4>Closing Prayer</h4></div>
-                        <div class="card-body"> 
+                        <div class="card-body text-center">
+                            <h4 class="text-primary">Closing Prayer</h4> 
                             <h5 class="card-title" id="closing-prayer-title">Psalm 25:4-5</h5>
                             <!-- Text -->
                             <div class="card-text" id="closing-prayer-content">
@@ -238,10 +219,7 @@ customJs: pwabuilder-sw-register
                                     </verse>
                                 </ul></div>
                             </div>
-                        </div>
-                        <div class="card-footer d-flex">
-                            <span id="closing-prayer-source"></span>
-                            <a class="ml-auto" href="{{site.url}}/credits.html">credits </a>
+                            <div class="text-left pt-5" id="closing-prayer-source"></div>
                         </div>
                       </div><!-- ./ Card -->
                 </div><!-- ./ flex box card container -->

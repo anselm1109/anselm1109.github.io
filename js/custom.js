@@ -11,6 +11,7 @@ create array of prayers here.
 */
 
 
+
 const prayersArr = [
   {% assign prayers = site.data.prayers %}
   {% for prayer in prayers %}
