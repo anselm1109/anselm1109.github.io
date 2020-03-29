@@ -166,19 +166,9 @@ below                             |
 
 /* ================================
                                   |
-Main switch statement for to run  |
-different code depending on page  | 
-called                            |
+Main switch statement for routing |
                                   |
 ===================================*/
-
-
-
-
-
-
-
-
 
 
 
@@ -230,17 +220,23 @@ case 'prayer': //display single prayer
     // make prev and next buttons on main nav switch between prayers   
         $("#next").click(function(){
           if(Number(prayerId)>=(numberOfPrayers-1)){prayerId = numberOfPrayers-1}else{prayerId=prayerId+1}
-          window.location.assign("{{site.url}}/prayer.html?prayerId="+prayerId);
+          setPrayers();
+          return false;
         });
         $("#prev").click(function(){
           if (prayerId=="0"){prayerId = 0;}else{prayerId=prayerId-1;}
-          window.location.assign("{{site.url}}/prayer.html?prayerId="+prayerId);
+          setPrayers(); 
+          return false;
         });
 break;
-/* end prayers.html code
+/* end prayers.html code*/
+
+/* prayer book home page
 =========================*/
+case 'prayer-book':
 
 
+break;
 
 case 'tags': //display list of prayers tagged with parameter
 
