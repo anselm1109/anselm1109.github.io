@@ -25,15 +25,16 @@
         <h3><img src="{{site.url}}/img/logo_white.png" style="height:25px"/> Simply Pray</h3>
     </div>
 
-    <ul class="list-unstyled components testclass accordion"> 
+
+    <ul class="list-unstyled accordion" role="tablist" id="side-accordion"> 
         <p style="border-bottom: 1px solid rgba(255,255,255,0.7);">Settings</p>
     
         <li><a href="#daily-psalm-menu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-angle-right"></i> <i class="fas fa-angle-down"></i> Daily Psalm</a>
-           <ul class="collapse list-unstyled pb-4" id="daily-psalm-menu">
+           <ul class="collapse list-unstyled pb-4" role="tabpanel" data-parent="#side-accordion" id="daily-psalm-menu">
                 <li>
                     <p class="pt-0">Pick a Psalm you want to read. The next Psalm will automatically be displayed in about 24 hours.</p>
                     <select class="ml-auto mr-auto d-block custom-select" id="psalm-select">
-                    <option value="1" selected>Pick a Psalm</option>
+                    <option value="1" selected>---Select---</option>
                     {% for psalm in site.data.psalms %}
                     <option value="{{psalm.id}}">{{psalm.title}} 
                         {% if psalm.section %} 
@@ -51,11 +52,11 @@
         
         <li>
             <a href="#opening-prayers-menu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-angle-right"></i> <i class="fas fa-angle-down"></i> Opening Prayer</a>
-            <ul class="collapse list-unstyled pb-4" id="opening-prayers-menu">
+            <ul class="collapse list-unstyled pb-4" role="tabpanel" data-parent="#side-accordion" id="opening-prayers-menu">
                 <li>
                     <p class="pt-0">Pick a prayer to begin your time.</p>
                     <select name="opening-prayer-select" id="opening-prayer-select" class="ml-auto mr-auto d-block custom-select">
-                        <option selected value="0">Opening Prayers</option>
+                        <option selected value="0">---Select---</option>
                         {% assign prayers = site.data.prayers  %}
                         {% for prayer in prayers %}
                             {% if prayer.tags contains "opening" %}
@@ -77,11 +78,11 @@
 
         <li>
             <a href="#prayers-of-intent-menu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-angle-right"></i> <i class="fas fa-angle-down"></i> Prayer of Intent</a>
-            <ul class="collapse list-unstyled pb-4" id="prayers-of-intent-menu">
+            <ul class="collapse list-unstyled pb-4" role="tabpanel" data-parent="#side-accordion" id="prayers-of-intent-menu">
                 <li>
                     <p class="pt-0">Pick a prayer with which to begin your silence.</p>
                     <select name="prayer-of-intent-select" id="prayer-of-intent-select" class="ml-auto mr-auto d-block custom-select">
-                        <option selected value="1">Prayers of Intent</option>
+                        <option selected value="1">---Select---</option>
                         {% for prayer in prayers %}
                             {% if prayer.tags contains "intent" %}
                             <option value="{{prayer.id}}">
@@ -100,7 +101,7 @@
 
         <li>
             <a href="#closing-prayers-menu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-angle-right"></i> <i class="fas fa-angle-down"></i> Closing Prayers</a>
-            <ul class="collapse list-unstyled pb-4" id="closing-prayers-menu">
+            <ul class="collapse list-unstyled pb-4" role="tabpanel" data-parent="#side-accordion" id="closing-prayers-menu">
                 <li>
                     <p class="pt-0">Pick a prayer to end your time.</p>
                     <select name="closing-prayer-select" id="closing-prayer-select" class="ml-auto mr-auto d-block custom-select">
@@ -125,7 +126,7 @@
 
         <li>
             <a href="#silent-prayer-time-menu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-angle-right"></i> <i class="fas fa-angle-down"></i> Silent Prayer Time</a>
-            <ul class="collapse list-unstyled pb-4" id="silent-prayer-time-menu">
+            <ul class="collapse list-unstyled pb-4" role="tabpanel" data-parent="#side-accordion" id="silent-prayer-time-menu">
                 <li>
                     <p class="pt-0">Pick amount of silence</p>
                     <select name="silent-prayer-select" id="silent-prayer-select" class="ml-auto mr-auto d-block custom-select">
