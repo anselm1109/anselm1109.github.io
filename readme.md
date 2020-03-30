@@ -1,7 +1,9 @@
 
+![Simply Pray](https://anselm1109.github.io/img/192Icon.png)
+
 # Simply Pray
 
-Simply pray is a small web app created to help me in my practice of Centering Prayer. 
+Simply Pray is a small web app created to help me in my practice of Centering Prayer. 
 
 ## How it works.
 Simply click or tap on the right side of the screen or on the right arrow in the nav bar to be guided through 5 screens
