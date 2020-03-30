@@ -214,7 +214,7 @@ h1,h2,h3,h4,h5,h6 {
     font-size: 0.8em;
 }
 
-#sidebar ul li ul {
+#sidebar ul li div {
     border-bottom: 1px solid rgba(255,255,255,0.7);
 }
 
