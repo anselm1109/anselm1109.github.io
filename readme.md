@@ -1,33 +1,22 @@
----
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
-layout: home
----
+# Simply Pray
 
-## Basic Features
+Simply pray is a small web app created to help me in my practice of Centering Prayer. 
 
-- Select any number predefined prayers
-- Select readings to read
-- Yearly read through the psalms
-- Select amount of time for centering prayer/meditation
-- Select ending sound
+## How it works.
+Simply click or tap on the right side of the screen or on the right arrow in the nav bar to be guided through 5 screens
 
-## Advanced features
+1. An opening prayer
+2. A daily reading from the Psalms
+3. A Prayer of intent to begin your time of silent / Centering prayer
+4. A timer that ends with a quiet piano music
+5. A closing prayer. 
 
-- provide own prayers and have them saved.
-- rearrange order of prayers and readings
+## Other features
+1. You can change which prayers display on each of those pages as well as the amount of time for silence.
+2. There is a ruidimentary prayer book included. This will allow you to browse all the prayers available.
+3. On mobile the app can be added to your phone's homescreen and it will function very much like a native app. 
 
-## Version 1 Flow
-
-1. Show the Lord's Prayer
-2. Reading from Psalms
-3. Intro to Centering prayer prayer
-4. Timer with pleasant ending sound
-5. Closing prayer
-
-## resources
-
-- Circle timer <http://git.wimbarelds.nl/TimeCircles/readme.php>
-- How to use local storage: <https://blog.logrocket.com/the-complete-guide-to-using-localstorage-in-javascript-apps-ba44edb53a36/>
-- Nice little PWA template using a javascript templating engine: <https://github.com/zuixjs/zuix-html-pwa>
+## Things to know. 
+* This app runs entirely in your browser. Nothing is sent / saved / synced to the cloud
+* The prayer time is a video, this prevents screens from going to sleep. On mobile devices you also need to not lock your screen as this will pause the timer. 
