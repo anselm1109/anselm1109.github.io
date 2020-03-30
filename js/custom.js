@@ -193,7 +193,7 @@ case 'prayer': //display single prayer
             if (tags.length > 0) {
               tagsCode = "Tags: "
               for (const i in tags) {
-                tagsCode += '<a class="badge badge-info" href="{{site.url}}/tag.html?tag='+tags[i]+'">'+tags[i]+'</a> ';
+                tagsCode += '<a class="badge badge-primary" href="{{site.url}}/tag.html?tag='+tags[i]+'">'+tags[i]+'</a> ';
                 
               }
             }
@@ -219,12 +219,12 @@ case 'prayer': //display single prayer
         });*/
 
     // make prev and next buttons on main nav switch between prayers   
-        $("#next").click(function(){
+        $("#next, #prayer-next").click(function(){
           if(Number(prayerId)>=(numberOfPrayers-1)){prayerId = numberOfPrayers-1}else{prayerId=prayerId+1}
           setPrayers();
           return false;
         });
-        $("#prev").click(function(){
+        $("#prev, #prayer-prev").click(function(){
           if (prayerId=="0"){prayerId = 0;}else{prayerId=prayerId-1;}
           setPrayers(); 
           return false;
