@@ -27,3 +27,4 @@ Simply click or tap on the right side of the screen or on the right arrow in the
 - [ ] Users can add a page with links to custom readings
 - [ ] Users insert additional pages for more prayers in prayer flow.
 - [ ] Users add custom prayers 
+- [ ] Make prayer book more helpful somehow
