@@ -1,5 +1,5 @@
 
-<div style="text-align:center">![Simply Pray](https://anselm1109.github.io/img/192Icon.png)</div>
+<div style="text-align:center;"> ![Simply Pray](https://anselm1109.github.io/img/192Icon.png) </div>
 
 # Simply Pray
 
