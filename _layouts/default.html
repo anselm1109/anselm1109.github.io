@@ -33,6 +33,7 @@
   {% if page.customJs != nil %}
     {%- include customJs.html -%}
   {% endif %}
+  {{ page.scripts }}
   </body>
 </html>
 
