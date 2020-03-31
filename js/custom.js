@@ -11,7 +11,6 @@ create array of prayers here.
 */
 
 
-
 const prayersArr = [
   {% assign prayers = site.data.prayers %}
   {% for prayer in prayers %}
@@ -22,6 +21,7 @@ const prayersArr = [
 ];
 
 var psalmNumber, lastViewDate, openingPrayerId, prayerOfIntentId, silentPrayerTime, closingPrayerId;
+var darkModeState = "false";
 const today = new Date();
 const oneDay = 1000*60*60*22; //22 hours instead of 24 just to make sure each morning is a new psalm
 
@@ -41,6 +41,7 @@ if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
   localStorage.setItem('prayerOfIntentId', prayerOfIntentId);
   localStorage.setItem('silentPrayerTime', silentPrayerTime);
   localStorage.setItem('closingPrayerId', closingPrayerId);
+  localStorage.setItem('darkMode', darkModeState);
 
 
 } else { // there are locally stored variables already so read those 
@@ -51,6 +52,7 @@ if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
   prayerOfIntentId = localStorage.getItem('prayerOfIntentId'); 
   silentPrayerTime = localStorage.getItem('silentPrayerTime');
   closingPrayerId = localStorage.getItem('closingPrayerId');
+  darkModeState = localStorage.getItem('darkMode');
 
   let dayDiff = (today.getTime() - lastViewDate.getTime())/oneDay;
 
@@ -76,6 +78,44 @@ Functions needed on every page    |
 for UI to work                    |
                                   |
 ===================================*/
+
+
+/* Toggle Dark Mode
+=================================*/
+
+//functions that set the appropriate classes
+function darkMode () {
+  $(".card, .card-text").addClass("text-white black");
+  $(".note").removeClass('note-info').addClass("note-dark");
+}
+function lightMode () {
+  $(".card, .card-text").removeClass("text-white black");
+  $(".note").removeClass('note-dark').addClass("note-info");
+}
+
+/* Enable the dark mode toggle button in sidebar settings*/
+$("#darkModeSwitch").change(function(){
+  if($( this ).is(':checked')) {
+    darkMode();
+    localStorage.setItem("darkMode", "true");
+} else {
+    lightMode();  // unchecked
+    localStorage.setItem("darkMode", "false");
+}
+});
+
+//On page load check for the status of darkModeStatus and set the toggle and classes accordingly.
+if (darkModeState == "true") {
+  darkMode();
+  $("#darkModeSwitch").prop('checked', true);
+ 
+} else {
+  lightMode();
+  $("#darkModeSwitch").prop('checked', false);
+}
+
+
+
 /* get page and search params
 ==============================*/
 //const prayersCsv = "{{site.url}}/prayers.csv";
