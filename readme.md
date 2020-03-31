@@ -22,3 +22,9 @@ Simply click or tap on the right side of the screen or on the right arrow in the
 ## Things to know. 
 * This app runs entirely in your browser. Nothing is sent / saved / synced to the cloud
 * The prayer time is a video, this prevents screens from going to sleep. On mobile devices you also need to not lock your screen as this will pause the timer. 
+
+## Roadmap of advanced features
+- [ ] Users can add a page with links to custom readings
+- [ ] Users insert additional pages for more prayers in prayer flow.
+- [ ] Users add custom prayers 
+- [ ] Make prayer book more helpful somehow
