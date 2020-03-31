@@ -80,41 +80,6 @@ for UI to work                    |
 ===================================*/
 
 
-/* Toggle Dark Mode
-=================================*/
-
-//functions that set the appropriate classes
-function darkMode () {
-  $(".card, .card-text").addClass("text-white black");
-  $(".note").removeClass('note-info').addClass("note-dark");
-}
-function lightMode () {
-  $(".card, .card-text").removeClass("text-white black");
-  $(".note").removeClass('note-dark').addClass("note-info");
-}
-
-/* Enable the dark mode toggle button in sidebar settings*/
-$("#darkModeSwitch").change(function(){
-  if($( this ).is(':checked')) {
-    darkMode();
-    localStorage.setItem("darkMode", "true");
-} else {
-    lightMode();  // unchecked
-    localStorage.setItem("darkMode", "false");
-}
-});
-
-//On page load check for the status of darkModeStatus and set the toggle and classes accordingly.
-if (darkModeState == "true") {
-  darkMode();
-  $("#darkModeSwitch").prop('checked', true);
- 
-} else {
-  lightMode();
-  $("#darkModeSwitch").prop('checked', false);
-}
-
-
 
 /* get page and search params
 ==============================*/
@@ -123,6 +88,14 @@ const page = window.location.pathname.slice(1).replace(".html","");
 const queryString = window.location.search; // see https://www.sitepoint.com/get-url-parameters-with-javascript/ for how to use this.
 const urlParams = new URLSearchParams(queryString);
 
+
+
+
+/* ================================
+                                  |
+Side Bar controls and settings    |
+                                  |
+===================================*/
 
 /* Sliding Side Bar Javascript controls
 ========================*/
@@ -143,9 +116,6 @@ const urlParams = new URLSearchParams(queryString);
           $('a[aria-expanded=true]').attr('aria-expanded', 'false');
       });
 
-
-/* Side bar settings controls
-========================*/
 
 //set the paslm and store it for the future  
 $("#psalm-select").change(function(){
@@ -191,16 +161,44 @@ $("#closing-prayer-select").change(function(){
 });
 
 
+/* Toggle Dark Mode 
+=================================*/
+
+//functions that set the appropriate dark or light classes
+function darkMode () {
+  $(".card, .card-text").addClass("text-white black");
+  $(".note").removeClass('note-info').addClass("note-dark");
+}
+function lightMode () {
+  $(".card, .card-text").removeClass("text-white black");
+  $(".note").removeClass('note-dark').addClass("note-info");
+}
+
+/* Enable the dark mode toggle button in sidebar settings*/
+$("#darkModeSwitch").change(function(){
+  if($( this ).is(':checked')) {
+    darkMode();
+    localStorage.setItem("darkMode", "true");
+} else {
+    lightMode();  // unchecked
+    localStorage.setItem("darkMode", "false");
+}
+});
+
+//On page load check for the status of darkModeStatus and set the toggle and classes accordingly.
+if (darkModeState == "true") {
+  darkMode();
+  $("#darkModeSwitch").prop('checked', true);
+ 
+} else {
+  lightMode();
+  $("#darkModeSwitch").prop('checked', false);
+}
 
 
 
 
-/* ================================
-                                  |
-Generic Functions used by code    |
-below                             |
-                                  |
-===================================*/
+
 
 
 
