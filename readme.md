@@ -22,3 +22,11 @@ Simply click or tap on the right side of the screen or on the right arrow in the
 ## Things to know. 
 * This app runs entirely in your browser. Nothing is sent / saved / synced to the cloud
 * The prayer time is a video, this prevents screens from going to sleep. On mobile devices you also need to not lock your screen as this will pause the timer. 
+
+## New Features I might want to implement
+- [ ] Dark mode to preserve battery life
+- [ ] A Prayers for ourselves and others page after the silent prayer timer. This page would allow users to put a custom list of people/things to pray for onn it. 
+- [ ] Users can add a page with links to custom readings
+- [ ] Users insert additional pages for more prayers in prayer flow.
+- [ ] Users add custom prayers 
+- [ ] Make prayer book more helpful somehow.
