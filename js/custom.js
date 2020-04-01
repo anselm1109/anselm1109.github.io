@@ -165,33 +165,39 @@ $("#closing-prayer-select").change(function(){
 =================================*/
 
 //functions that set the appropriate dark or light classes
-function darkMode () {
+function darkModeOn () {
   $(".card, .card-text").addClass("text-white black");
   $(".note").removeClass('note-info').addClass("note-dark");
+  //change timer to dark timer
+  let timerFileName = "video/" + silentPrayerTime + "minsDark.mp4";
+  $("#prayer-timer").get(0).src = timerFileName;
 }
-function lightMode () {
+function lightModeOn () {
   $(".card, .card-text").removeClass("text-white black");
   $(".note").removeClass('note-dark').addClass("note-info");
+  //change timer to light timer
+  let timerFileName = "video/" + silentPrayerTime + "mins.mp4";
+  $("#prayer-timer").get(0).src = timerFileName;
 }
 
 /* Enable the dark mode toggle button in sidebar settings*/
 $("#darkModeSwitch").change(function(){
   if($( this ).is(':checked')) {
-    darkMode();
+    darkModeOn();
     localStorage.setItem("darkMode", "true");
 } else {
-    lightMode();  // unchecked
+    lightModeOn();  // unchecked
     localStorage.setItem("darkMode", "false");
 }
 });
 
 //On page load check for the status of darkModeStatus and set the toggle and classes accordingly.
 if (darkModeState == "true") {
-  darkMode();
+  darkModeOn();
   $("#darkModeSwitch").prop('checked', true);
  
 } else {
-  lightMode();
+  lightModeOn();
   $("#darkModeSwitch").prop('checked', false);
 }
 
@@ -270,6 +276,11 @@ case 'prayer': //display single prayer
 break;
 /* end prayers.html code*/
 
+
+
+
+
+
 /* prayer book home page
 =========================*/
 case 'prayer-book':
@@ -277,11 +288,24 @@ case 'prayer-book':
 
 break;
 
+
+
+
+
+
+
+/* tags page
+=========================*/
 case 'tags': //display list of prayers tagged with parameter
 
 break;
 
-/* we are on the main page so do all the magic
+
+
+
+
+
+/* Main index.html page
 =======================================*/   
 case 'index'://main page so do all the magic    
 case '': // or main page so 
@@ -303,7 +327,6 @@ case '': // or main page so
     
     
 
-        
        
           /* Jump to Slide if param is set
            ================================= */
@@ -312,12 +335,26 @@ case '': // or main page so
             $("#prayer-carousel").carousel(slideNumber);
           }
 
+
+
         /* populate the silent prayer timer with correct time
         ================================= */
         function populateTimer(prayerTime){
-            let timerFileName = "video/" + prayerTime + "mins.mp4";
+            // prayerTime is a basic number either 10 15 20 25 or 30
+            // light mode filename is format 20Mins.mp4 | Dark mode file name is 20minsDark.mp4
+            let darkFile = ""
+            if (darkModeState === "true" ) {
+               darkFile = "Dark";
+            } else {
+               darkFile = "";
+            }
+            
+            let timerFileName = "video/" + prayerTime + "mins" + darkFile + ".mp4";
             $("#prayer-timer").get(0).src = timerFileName;
         }
+
+
+
 
           
         /* Daily Psalm javascript

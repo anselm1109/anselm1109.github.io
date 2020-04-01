@@ -8,10 +8,6 @@
 .carousel-fullscreen .card .card-body::-webkit-scrollbar-thumb, .content-wrap .card-body::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, .5);
   }
-#video-fix {
-    color: #fff;
-    background: #fff;
-}
 #sidebar {
     color: #fff;
 }
@@ -40,14 +36,19 @@ a.article:hover {
     background: #6d7fcc !important;
     color: #fff !important;
 }
-
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: #ccc; 
+    background-color: #3d5c7d;
+}
 
 
 
 /* ./ Colors */
 
 
-
+.timer-btn {
+    border-radius: 10px;
+}
 
 
 /* carousel fullscreen */
