@@ -20,7 +20,7 @@ const prayersArr = [
   {% endfor %}
 ];
 
-var psalmNumber, lastViewDate, openingPrayerId, prayerOfIntentId, silentPrayerTime, closingPrayerId;
+var psalmNumber, lastViewDate, openingPrayerId, prayerOfIntentId, silentPrayerTime, closingPrayerId, verseRefs, versesInline;
 var darkModeState = "false";
 const today = new Date();
 const oneDay = 1000*60*60*22; //22 hours instead of 24 just to make sure each morning is a new psalm
@@ -34,6 +34,8 @@ if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
   prayerOfIntentId = 1; 
   silentPrayerTime = 20;
   closingPrayerId = 2;
+  verseRefs = "true";
+  versesInline = "false";
 
   localStorage.setItem('lastViewDate', lastViewDate);
   localStorage.setItem('psalmNumber', psalmNumber);
@@ -42,6 +44,8 @@ if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
   localStorage.setItem('silentPrayerTime', silentPrayerTime);
   localStorage.setItem('closingPrayerId', closingPrayerId);
   localStorage.setItem('darkMode', darkModeState);
+  localStorage.setItem('verseRefs', verseRefs);
+  localStorage.setItem('versesInline', versesInline)
 
 
 } else { // there are locally stored variables already so read those 
@@ -53,6 +57,8 @@ if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
   silentPrayerTime = localStorage.getItem('silentPrayerTime');
   closingPrayerId = localStorage.getItem('closingPrayerId');
   darkModeState = localStorage.getItem('darkMode');
+  verseRefs = localStorage.getItem('verseRefs');
+  versesInline = localStorage.getItem('versesInline');
 
   let dayDiff = (today.getTime() - lastViewDate.getTime())/oneDay;
 
@@ -181,22 +187,22 @@ $("#closing-prayer-select").change(function(){
 function darkModeOn () {
   $(".card, .card-text").addClass("text-white black");
   $(".note").removeClass('note-info').addClass("note-dark");
+  $(".navbar").removeClass('nav-blue-gradient').addClass("nav-dark-gradient");
   //change timer to dark timer
   if(page=="" || page == "index"){
+    darkModeState = "true";
     populateTimer(silentPrayerTime); // update the view
   }
-  //let timerFileName = "video/" + silentPrayerTime + "minsDark.mp4";
-  //$("#prayer-timer").get(0).src = timerFileName;
 }
 function lightModeOn () {
   $(".card, .card-text").removeClass("text-white black");
   $(".note").removeClass('note-dark').addClass("note-info");
+  $(".navbar").removeClass('nav-dark-gradient').addClass("nav-blue-gradient");
   //change timer to light timer
   if(page=="" || page == "index"){
+    darkModeState = "false";
     populateTimer(silentPrayerTime); // update the view
   }
-  //let timerFileName = "video/" + silentPrayerTime + "mins.mp4";
-  //$("#prayer-timer").get(0).src = timerFileName;
 }
 
 /* Enable the dark mode toggle button in sidebar settings*/
@@ -222,9 +228,60 @@ if (darkModeState == "true") {
 
 
 
+/* Toggles for Psalm reading 
+=================================*/
 
 
+function toggleVerseRefs (setval) {
+  if (setval=="true") {
+    $(".bible-chapter").removeClass('hide-verse-refs');
+    console.log("verseRefs = true");
+  } else {
+    $(".bible-chapter").addClass('hide-verse-refs');
+    console.log("verseRefs = false");
+  }
+}
 
+function toggleVersesInline (setval) {
+  if (setval=="true") {
+    $(".bible-chapter").addClass('verses-inline');
+  } else {
+    $(".bible-chapter").removeClass('verses-inline');
+  }
+}
+
+
+/* Enable the verse refes toggle button in sidebar settings*/
+$("#VerseRefsSwitch").change(function(){
+  if($( this ).is(':checked')) {
+    toggleVerseRefs("true");
+    localStorage.setItem("verseRefs", "true");
+} else {
+  toggleVerseRefs("false");
+  localStorage.setItem("verseRefs", "false");
+}
+});
+
+/* Enable the versesInlineSwitch toggle button in sidebar settings*/
+$("#versesInlineSwitch").change(function(){
+  if($( this ).is(':checked')) {
+    toggleVersesInline("true");
+    localStorage.setItem("versesInline", "true");
+} else {
+  toggleVersesInline("false");
+  localStorage.setItem("versesInline", "false");
+}
+});
+
+//On page load check for the status of versesInline and verseRefs and set the toggle accordingly.
+
+// 
+  var verseRefsBool = (verseRefs == "true");
+  $("#VerseRefsSwitch").prop('checked', verseRefsBool);
+
+  
+  var versesInlineBool = (versesInline == "true");
+  $("#versesInlineSwitch").prop('checked', versesInlineBool);
 
 
 
@@ -424,8 +481,20 @@ case '': // or main page so
               ==========================*/
                   chapter.each(function () {
                     var $thisChapter = $(this);
+                    
+                    // set the classes for inline and verserefs
+                    var classes = ""; 
+                    if(verseRefs=="false") {
+                      
+                      classes += " hide-verse-refs ";
+                      console.log(classes); 
+                    }
+                    if(versesInline=="true") {
+                      classes += " verses-inline ";
+                    }
 
-                    $chapterHTML += '<div class="bible-chapter" data-chapter="' + $thisChapter.attr('display') + '">';
+
+                    $chapterHTML += '<div class="bible-chapter' + classes + '" data-chapter="' + $thisChapter.attr('display') + '">';
 
                     if ($mainText.attr('data-current-book-title') === 'Psalms') {
                       $chapterHTML += '<h4>Psalm ' + $thisChapter.attr('display') + '</h4>';
@@ -614,7 +683,7 @@ case '': // or main page so
           populatePrayers("prayer-of-intent",prayerOfIntentId);
           populateDailyPsalm(psalmNumber);
           populateTimer(silentPrayerTime);
-          
+       
 
         /* Index page custom controls 
         ==========================*/

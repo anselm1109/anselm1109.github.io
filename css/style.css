@@ -2,9 +2,9 @@
 ---
 /* Colors 
 ========================= */
-/*.card .card-body, .card .card-body .card-text  {
-    color:#212121;
-}*/
+.card .card-body, .card .card-body .card-text  {
+    color:#151d47;
+}
 .carousel-fullscreen .card .card-body::-webkit-scrollbar-thumb, .content-wrap .card-body::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, .5);
   }
@@ -40,8 +40,12 @@ a.article:hover {
     border-color: #ccc; 
     background-color: #3d5c7d;
 }
-
-
+.nav-blue-gradient {
+    background: linear-gradient(40deg, #45cafc, #303f9f) !important;
+}
+.nav-dark-gradient {
+    background: linear-gradient(40deg, #000000, #3d3e40) !important;
+}
 
 /* ./ Colors */
 
@@ -144,19 +148,13 @@ h1,h2,h3,h4,h5,h6 {
   }
 
 
-  /* Prayer timer styles and black line fix 
+  /* Prayer timer styles 
 ==============================*/
 #prayer-timer {
     width: 100%;
     max-width: 320px;
 }
-#video-fix {
-    content: ".";
-    display: block;
-    position: relative;
-    top:-9px;
-    height:5px;
-}
+
 
 
   /* Prayer pages styles
@@ -175,7 +173,14 @@ h1,h2,h3,h4,h5,h6 {
     padding-left:0;
 }
 
-
+/* this class alows user to show verses without line breaks*/
+.verses-inline li {
+    display:inline;
+}
+/* this class allows user to hide verse refrences*/
+.hide-verse-refs .verse-ref {
+    display:none;
+}
 
 
 
@@ -295,4 +300,7 @@ ul.CTAs a {
 #sidebar select {
     width:90%;
 
+}
+#sidebar .custom-switch label {
+    font-size: 0.8rem;
 }
