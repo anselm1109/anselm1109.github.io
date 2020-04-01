@@ -11,7 +11,6 @@ create array of prayers here.
 */
 
 
-
 const prayersArr = [
   {% assign prayers = site.data.prayers %}
   {% for prayer in prayers %}
@@ -22,6 +21,7 @@ const prayersArr = [
 ];
 
 var psalmNumber, lastViewDate, openingPrayerId, prayerOfIntentId, silentPrayerTime, closingPrayerId;
+var darkModeState = "false";
 const today = new Date();
 const oneDay = 1000*60*60*22; //22 hours instead of 24 just to make sure each morning is a new psalm
 
@@ -41,6 +41,7 @@ if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
   localStorage.setItem('prayerOfIntentId', prayerOfIntentId);
   localStorage.setItem('silentPrayerTime', silentPrayerTime);
   localStorage.setItem('closingPrayerId', closingPrayerId);
+  localStorage.setItem('darkMode', darkModeState);
 
 
 } else { // there are locally stored variables already so read those 
@@ -51,6 +52,7 @@ if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
   prayerOfIntentId = localStorage.getItem('prayerOfIntentId'); 
   silentPrayerTime = localStorage.getItem('silentPrayerTime');
   closingPrayerId = localStorage.getItem('closingPrayerId');
+  darkModeState = localStorage.getItem('darkMode');
 
   let dayDiff = (today.getTime() - lastViewDate.getTime())/oneDay;
 
@@ -76,6 +78,23 @@ Functions needed on every page    |
 for UI to work                    |
                                   |
 ===================================*/
+/* populate the silent prayer timer with correct time
+        ================================= */
+        function populateTimer(prayerTime){
+          // prayerTime is a basic number either 10 15 20 25 or 30
+          // light mode filename is format 20Mins.mp4 | Dark mode file name is 20minsDark.mp4
+          let darkFile = ""
+          if (darkModeState === "true" ) {
+             darkFile = "Dark";
+          } else {
+             darkFile = "";
+          }
+          
+          let timerFileName = "video/" + prayerTime + "mins" + darkFile + ".mp4";
+          $("#prayer-timer").get(0).src = timerFileName;
+      }
+
+
 /* get page and search params
 ==============================*/
 //const prayersCsv = "{{site.url}}/prayers.csv";
@@ -84,6 +103,14 @@ const queryString = window.location.search; // see https://www.sitepoint.com/get
 const urlParams = new URLSearchParams(queryString);
 
 
+
+
+/* ================================
+                                  |
+Side Bar controls and settings    |
+                                  |
+===================================*/
+
 /* Sliding Side Bar Javascript controls
 ========================*/
  
@@ -91,21 +118,17 @@ const urlParams = new URLSearchParams(queryString);
           theme: "minimal"
       });
 
-      $('#dismiss, .overlay').on('click', function () {
+      $('#dismiss').on('click', function () {
           $('#sidebar').removeClass('active');
-        //  $('.overlay').removeClass('active');
       });
 
       $('#sidebarCollapse').on('click', function () {
           $('#sidebar').addClass('active');
-        //  $('.overlay').addClass('active');
+       
           $('.collapse.in').toggleClass('in');
           $('a[aria-expanded=true]').attr('aria-expanded', 'false');
       });
 
-
-/* Side bar settings controls
-========================*/
 
 //set the paslm and store it for the future  
 $("#psalm-select").change(function(){
@@ -151,16 +174,56 @@ $("#closing-prayer-select").change(function(){
 });
 
 
+/* Toggle Dark Mode 
+=================================*/
+
+//functions that set the appropriate dark or light classes
+function darkModeOn () {
+  $(".card, .card-text").addClass("text-white black");
+  $(".note").removeClass('note-info').addClass("note-dark");
+  //change timer to dark timer
+  if(page=="" || page == "index"){
+    populateTimer(silentPrayerTime); // update the view
+  }
+  //let timerFileName = "video/" + silentPrayerTime + "minsDark.mp4";
+  //$("#prayer-timer").get(0).src = timerFileName;
+}
+function lightModeOn () {
+  $(".card, .card-text").removeClass("text-white black");
+  $(".note").removeClass('note-dark').addClass("note-info");
+  //change timer to light timer
+  if(page=="" || page == "index"){
+    populateTimer(silentPrayerTime); // update the view
+  }
+  //let timerFileName = "video/" + silentPrayerTime + "mins.mp4";
+  //$("#prayer-timer").get(0).src = timerFileName;
+}
+
+/* Enable the dark mode toggle button in sidebar settings*/
+$("#darkModeSwitch").change(function(){
+  if($( this ).is(':checked')) {
+    darkModeOn();
+    localStorage.setItem("darkMode", "true");
+} else {
+    lightModeOn();  // unchecked
+    localStorage.setItem("darkMode", "false");
+}
+});
+
+//On page load check for the status of darkModeStatus and set the toggle and classes accordingly.
+if (darkModeState == "true") {
+  darkModeOn();
+  $("#darkModeSwitch").prop('checked', true);
+ 
+} else {
+  lightModeOn();
+  $("#darkModeSwitch").prop('checked', false);
+}
 
 
 
 
-/* ================================
-                                  |
-Generic Functions used by code    |
-below                             |
-                                  |
-===================================*/
+
 
 
 
@@ -232,6 +295,11 @@ case 'prayer': //display single prayer
 break;
 /* end prayers.html code*/
 
+
+
+
+
+
 /* prayer book home page
 =========================*/
 case 'prayer-book':
@@ -239,11 +307,24 @@ case 'prayer-book':
 
 break;
 
+
+
+
+
+
+
+/* tags page
+=========================*/
 case 'tags': //display list of prayers tagged with parameter
 
 break;
 
-/* we are on the main page so do all the magic
+
+
+
+
+
+/* Main index.html page
 =======================================*/   
 case 'index'://main page so do all the magic    
 case '': // or main page so 
@@ -265,7 +346,6 @@ case '': // or main page so
     
     
 
-        
        
           /* Jump to Slide if param is set
            ================================= */
@@ -274,12 +354,12 @@ case '': // or main page so
             $("#prayer-carousel").carousel(slideNumber);
           }
 
-        /* populate the silent prayer timer with correct time
-        ================================= */
-        function populateTimer(prayerTime){
-            let timerFileName = "video/" + prayerTime + "mins.mp4";
-            $("#prayer-timer").get(0).src = timerFileName;
-        }
+
+
+        
+
+
+
 
           
         /* Daily Psalm javascript
