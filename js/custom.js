@@ -78,7 +78,21 @@ Functions needed on every page    |
 for UI to work                    |
                                   |
 ===================================*/
-
+/* populate the silent prayer timer with correct time
+        ================================= */
+        function populateTimer(prayerTime){
+          // prayerTime is a basic number either 10 15 20 25 or 30
+          // light mode filename is format 20Mins.mp4 | Dark mode file name is 20minsDark.mp4
+          let darkFile = ""
+          if (darkModeState === "true" ) {
+             darkFile = "Dark";
+          } else {
+             darkFile = "";
+          }
+          
+          let timerFileName = "video/" + prayerTime + "mins" + darkFile + ".mp4";
+          $("#prayer-timer").get(0).src = timerFileName;
+      }
 
 
 /* get page and search params
@@ -104,14 +118,13 @@ Side Bar controls and settings    |
           theme: "minimal"
       });
 
-      $('#dismiss, .overlay').on('click', function () {
+      $('#dismiss').on('click', function () {
           $('#sidebar').removeClass('active');
-        //  $('.overlay').removeClass('active');
       });
 
       $('#sidebarCollapse').on('click', function () {
           $('#sidebar').addClass('active');
-        //  $('.overlay').addClass('active');
+       
           $('.collapse.in').toggleClass('in');
           $('a[aria-expanded=true]').attr('aria-expanded', 'false');
       });
@@ -169,15 +182,21 @@ function darkModeOn () {
   $(".card, .card-text").addClass("text-white black");
   $(".note").removeClass('note-info').addClass("note-dark");
   //change timer to dark timer
-  let timerFileName = "video/" + silentPrayerTime + "minsDark.mp4";
-  $("#prayer-timer").get(0).src = timerFileName;
+  if(page=="" || page == "index"){
+    populateTimer(silentPrayerTime); // update the view
+  }
+  //let timerFileName = "video/" + silentPrayerTime + "minsDark.mp4";
+  //$("#prayer-timer").get(0).src = timerFileName;
 }
 function lightModeOn () {
   $(".card, .card-text").removeClass("text-white black");
   $(".note").removeClass('note-dark').addClass("note-info");
   //change timer to light timer
-  let timerFileName = "video/" + silentPrayerTime + "mins.mp4";
-  $("#prayer-timer").get(0).src = timerFileName;
+  if(page=="" || page == "index"){
+    populateTimer(silentPrayerTime); // update the view
+  }
+  //let timerFileName = "video/" + silentPrayerTime + "mins.mp4";
+  //$("#prayer-timer").get(0).src = timerFileName;
 }
 
 /* Enable the dark mode toggle button in sidebar settings*/
@@ -337,21 +356,7 @@ case '': // or main page so
 
 
 
-        /* populate the silent prayer timer with correct time
-        ================================= */
-        function populateTimer(prayerTime){
-            // prayerTime is a basic number either 10 15 20 25 or 30
-            // light mode filename is format 20Mins.mp4 | Dark mode file name is 20minsDark.mp4
-            let darkFile = ""
-            if (darkModeState === "true" ) {
-               darkFile = "Dark";
-            } else {
-               darkFile = "";
-            }
-            
-            let timerFileName = "video/" + prayerTime + "mins" + darkFile + ".mp4";
-            $("#prayer-timer").get(0).src = timerFileName;
-        }
+        
 
 
 
