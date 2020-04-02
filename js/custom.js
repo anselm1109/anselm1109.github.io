@@ -22,12 +22,20 @@ const prayersArr = [
 
 var psalmNumber, lastViewDate, openingPrayerId, prayerOfIntentId, silentPrayerTime, closingPrayerId, verseRefs, versesInline;
 var darkModeState = "false";
-var personalPrayers = "";
+var personalPrayers = "Personal prayers go here";
 var displayPersonalPrayers = "false";
 const today = new Date();
 const oneDay = 1000*60*60*22; //22 hours instead of 24 just to make sure each morning is a new psalm
 
 //check for stored variables
+if(!localStorage.getItem('personalPrayers')){
+  localStorage.setItem('personalPrayers',personalPrayers);
+} else {
+  personalPrayers=localStorage.getItem('personalPrayers');
+}
+
+
+
 if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
 
   lastViewDate = today.toLocaleDateString();
@@ -48,11 +56,10 @@ if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
   localStorage.setItem('darkMode', darkModeState);
   localStorage.setItem('verseRefs', verseRefs);
   localStorage.setItem('versesInline', versesInline);
-  localStorage.setItem('personalPrayers', personalPrayers);
   localStorage.setItem('displayPersonalPrayers', displayPersonalPrayers);
 
 
-} else { // there are locally stored variables already so read those 
+} else { // there is a locally stored psalm already so read those 
 
   lastViewDate = new Date(localStorage.getItem('lastViewDate'));
   psalmNumber = localStorage.getItem('psalmNumber');
@@ -63,7 +70,6 @@ if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
   darkModeState = localStorage.getItem('darkMode');
   verseRefs = localStorage.getItem('verseRefs');
   versesInline = localStorage.getItem('versesInline');
-  personalPrayers = localStorage.getItem('personalPrayers');
   displayPersonalPrayers = localStorage.getItem('displayPersonalPrayers');
 
   let dayDiff = (today.getTime() - lastViewDate.getTime())/oneDay;
