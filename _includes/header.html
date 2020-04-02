@@ -166,19 +166,29 @@
             <div class="pb-2">
             <ul class="collapse list-unstyled" role="tabpanel" data-parent="#side-accordion" id="other-settings-menu">
                 <li class="pl-3">
+                   
+                    <p class="pb-0 pt-1 mt-3 border-top border-white">Dark Mode?</p>
                     <div class="custom-control custom-switch">
                         <input type="checkbox" class="custom-control-input" id="darkModeSwitch" name="darkModeSwitch">
-                        <label class="custom-control-label" for="darkModeSwitch">Toggle Dark Mode</label>
+                        <label class="custom-control-label" for="darkModeSwitch">Off / On</label>
                     </div>
+
                     <p class="pb-0 pt-1 mt-3 border-top border-white">Daily Psalm Options</p>
                     <div class="custom-control custom-switch">
                         <input type="checkbox" class="custom-control-input" id="VerseRefsSwitch" name="VerseRefsSwitch" checked>
-                        <label class="custom-control-label" for="VerseRefsSwitch">Show Psalm verse references</label>
+                        <label class="custom-control-label" for="VerseRefsSwitch">Show verse numbers</label>
                     </div>
                     <div class="custom-control custom-switch">
                         <input type="checkbox" class="custom-control-input" id="versesInlineSwitch" name="versesInlineSwitch" checked>
-                        <label class="custom-control-label" for="versesInlineSwitch">Show verses on new lines</label>
+                        <label class="custom-control-label" for="versesInlineSwitch">Remove verse line breaks</label>
                     </div>
+
+                    <p class="pb-0 pt-1 mt-3 border-top border-white">Display Personal Prayers Page Before Closing Prayer?</p>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="personalPrayersSwitch" name="personalPrayersSwitch" checked>
+                        <label class="custom-control-label" for="personalPrayersSwitch">Off / On</label>
+                    </div>
+                    <span><a href="{{site.url}}/personal-prayers.html">Edit personal prayer list</a></span>
                 </li>
             </ul>
         </div>    

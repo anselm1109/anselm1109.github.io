@@ -1,0 +1,61 @@
+---
+layout: default
+title: 'Simply Pray | Create Personal Prayers'
+---
+
+<div class="content-wrap">
+    <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
+
+
+
+
+        <div class="card"> <!-- Card -->
+            <div class="card-body"> 
+                <div class="card-text">
+                    
+                    <div class="text-center">
+                        <img src="{{site.url}}/img/logo_gradient.png" width="100" />
+                        <h2 class="card-title pt-1" style="font-size: 20px; font-weight: 200; color: #3143A2;">Create Personal Prayers</h2> 
+                    </div>
+
+                    
+                    <!--Textarea with icon prefix-->
+                    <div class="md-form amber-textarea active-amber-textarea">
+                        <i class="fas fa-pencil-alt prefix"></i>
+                        <textarea id="personal-prayers-textarea" class="md-textarea form-control" style="padding-top: 2rem;" rows="3"></textarea>
+                        <label for="personal-prayers-textarea">Write your personal prayers below. Put each prayer on a new line.</label>
+                    </div>
+
+
+                    <button type="button" class="btn btn-primary" id="personal-prayers-save">Save</button>
+
+                 
+                    
+                    <div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="true">
+                        <div class="toast-header">
+                          <svg class=" rounded mr-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                            preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+                            <rect fill="#007aff" width="100%" height="100%" /></svg>
+                          <strong class="mr-auto">Simply Pray</strong>
+                          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="toast-body">
+                          Your prayers have been saved.
+                        </div>
+                      </div>
+                    
+                        
+               
+                </div>      
+            </div>
+ 
+        </div><!-- ./ Card -->
+    
+   
+
+
+
+    </div> <!-- ./ flex box card container -->
+</div> <!-- ./ content-wrap-->

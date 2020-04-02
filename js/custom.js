@@ -22,6 +22,8 @@ const prayersArr = [
 
 var psalmNumber, lastViewDate, openingPrayerId, prayerOfIntentId, silentPrayerTime, closingPrayerId, verseRefs, versesInline;
 var darkModeState = "false";
+var personalPrayers = "";
+var displayPersonalPrayers = "false";
 const today = new Date();
 const oneDay = 1000*60*60*22; //22 hours instead of 24 just to make sure each morning is a new psalm
 
@@ -45,7 +47,9 @@ if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
   localStorage.setItem('closingPrayerId', closingPrayerId);
   localStorage.setItem('darkMode', darkModeState);
   localStorage.setItem('verseRefs', verseRefs);
-  localStorage.setItem('versesInline', versesInline)
+  localStorage.setItem('versesInline', versesInline);
+  localStorage.setItem('personalPrayers', personalPrayers);
+  localStorage.setItem('displayPersonalPrayers', displayPersonalPrayers);
 
 
 } else { // there are locally stored variables already so read those 
@@ -59,6 +63,8 @@ if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
   darkModeState = localStorage.getItem('darkMode');
   verseRefs = localStorage.getItem('verseRefs');
   versesInline = localStorage.getItem('versesInline');
+  personalPrayers = localStorage.getItem('personalPrayers');
+  displayPersonalPrayers = localStorage.getItem('displayPersonalPrayers');
 
   let dayDiff = (today.getTime() - lastViewDate.getTime())/oneDay;
 
@@ -84,6 +90,15 @@ Functions needed on every page    |
 for UI to work                    |
                                   |
 ===================================*/
+/* get page and search params
+==============================*/
+//const prayersCsv = "{{site.url}}/prayers.csv";
+const page = window.location.pathname.slice(1).replace(".html","");
+const queryString = window.location.search; // see https://www.sitepoint.com/get-url-parameters-with-javascript/ for how to use this.
+const urlParams = new URLSearchParams(queryString);
+
+
+
 /* populate the silent prayer timer with correct time
         ================================= */
         function populateTimer(prayerTime){
@@ -101,12 +116,7 @@ for UI to work                    |
       }
 
 
-/* get page and search params
-==============================*/
-//const prayersCsv = "{{site.url}}/prayers.csv";
-const page = window.location.pathname.slice(1).replace(".html","");
-const queryString = window.location.search; // see https://www.sitepoint.com/get-url-parameters-with-javascript/ for how to use this.
-const urlParams = new URLSearchParams(queryString);
+
 
 
 
@@ -180,12 +190,18 @@ $("#closing-prayer-select").change(function(){
 });
 
 
+
+
+
+
+
 /* Toggle Dark Mode 
 =================================*/
 
 //functions that set the appropriate dark or light classes
 function darkModeOn () {
   $(".card, .card-text").addClass("text-white black");
+  $('textarea').addClass('text-white');
   $(".note").removeClass('note-info').addClass("note-dark");
   $(".navbar").removeClass('nav-blue-gradient').addClass("nav-dark-gradient");
   //change timer to dark timer
@@ -196,6 +212,7 @@ function darkModeOn () {
 }
 function lightModeOn () {
   $(".card, .card-text").removeClass("text-white black");
+  $('textarea').removeClass('text-white');
   $(".note").removeClass('note-dark').addClass("note-info");
   $(".navbar").removeClass('nav-dark-gradient').addClass("nav-blue-gradient");
   //change timer to light timer
@@ -228,17 +245,17 @@ if (darkModeState == "true") {
 
 
 
-/* Toggles for Psalm reading 
+/* Toggles for Psalm reading verse numbers and line breaks
 =================================*/
 
 
 function toggleVerseRefs (setval) {
   if (setval=="true") {
     $(".bible-chapter").removeClass('hide-verse-refs');
-    console.log("verseRefs = true");
+   
   } else {
     $(".bible-chapter").addClass('hide-verse-refs');
-    console.log("verseRefs = false");
+    
   }
 }
 
@@ -276,12 +293,93 @@ $("#versesInlineSwitch").change(function(){
 //On page load check for the status of versesInline and verseRefs and set the toggle accordingly.
 
 // 
-  var verseRefsBool = (verseRefs == "true");
+  const verseRefsBool = (verseRefs == "true");
   $("#VerseRefsSwitch").prop('checked', verseRefsBool);
 
   
-  var versesInlineBool = (versesInline == "true");
+  const versesInlineBool = (versesInline == "true");
   $("#versesInlineSwitch").prop('checked', versesInlineBool);
+
+
+
+/* ================================
+                                  |
+Prayers for self and others code  |
+                                  |
+===================================*/
+
+/* on personal-prayers.html only : save the textarea content to local storage
+======================================================*/
+if (page == "personal-prayers") {
+  $("#personal-prayers-textarea").val(localStorage.getItem("personalPrayers").replace(/%%/g,"\n"));
+
+
+  $("#personal-prayers-save").click(function(){
+      localStorage.setItem('personalPrayers',$("#personal-prayers-textarea").val().replace(/\r?\n/g,"%%"));
+      $('.toast').toast('show');
+  });
+}
+
+
+
+/* Get personal prayers and write code on index.html
+======================================================*/
+function togglePersonalPrayers(){
+  let slideHtml = "";
+  if (personalPrayers != null && displayPersonalPrayers == "true") {
+    let personalPrayersArr = personalPrayers.split("%%");
+    let personalPrayersHtml = '<ul>';
+    personalPrayersArr.forEach(element => {
+      personalPrayersHtml += "<li>" + element + "</li>";
+    });
+    personalPrayersHtml += '</ul>';
+    
+    
+    slideHtml = `
+    <div class="carousel-item" id="personal-prayers">
+                            <div class="d-flex justify-content-center flexbox-card-container">
+                                    <div class="card"> 
+                                        
+                                        <div class="card-body "> 
+                                            <h4 class="text-primary text-center">Personal Prayers</h4>                             
+                                            <div class="card-text" id="personal-prayer-content">
+                                                ${personalPrayersHtml}
+                                            </div>
+                                            <div class="text-left pt-5 source" id="personal-prayer-source"><a href="{{site.url}}/personal-prayers.html">Edit these prayers</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                </div>
+    `;
+    $("#prayer-timer-item").after(slideHtml);
+  } else {
+      if ($('#personal-prayers').length){
+        window.location.reload();
+      }
+  }
+
+
+} 
+togglePersonalPrayers(); //run on page load
+
+// enable the toggle switch for personal prayer
+$("#personalPrayersSwitch").change(function(){
+  if($( this ).is(':checked')){
+    displayPersonalPrayers = "true";
+    togglePersonalPrayers();
+    localStorage.setItem('displayPersonalPrayers', 'true');
+  } else {
+    displayPersonalPrayers = "false";
+    togglePersonalPrayers();
+    localStorage.setItem('displayPersonalPrayers', 'false');
+  }
+});
+
+if (displayPersonalPrayers == "true") {
+  $("#personalPrayersSwitch").prop('checked', true);
+} else {
+  $("#personalPrayersSwitch").prop('checked', false);
+}
 
 
 
@@ -487,7 +585,7 @@ case '': // or main page so
                     if(verseRefs=="false") {
                       
                       classes += " hide-verse-refs ";
-                      console.log(classes); 
+                      
                     }
                     if(versesInline=="true") {
                       classes += " verses-inline ";
