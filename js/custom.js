@@ -35,9 +35,10 @@ var storage = {
   verseRefs: "true",
   versesInline: "false",
   psalmNumber: 1,
-  lastViewDate: today.toLocaleDateString(),
+  lastViewDate: today.getTime()
 }
 
+//storage.lastViewDate = today.toLocaleDateString();
 
 // check all local storage variables and set to default if they don't exist;
 
@@ -52,14 +53,15 @@ for (let value of Object.entries(storage)) {
 // If psalm not saved in local storage start at one or dispaly the next psalm ever 22 hours
 // there is a locally stored psalm already so read those 
 
-  let storedDate = new Date(storage.lastViewDate);
-  let dayDiff = (today.getTime() - storedDate.getTime())/oneDay;
+  //let storedDate = new Date(storage.lastViewDate);
+  let dayDiff = (today.getTime() - storage.lastViewDate)/oneDay;
+  console.log("stored date= " + storage.lastViewDate + " today= "+today.getTime() +" dayDiff= "+dayDiff);
      // more than 22 hours have passed since lastViewDate? Increase psalmNumber by 1 and update last view date
     if (dayDiff>1) {  
          storage.psalmNumber++;
          if(storage.psalmNumber==172){storage.psalmNumber=1};//reset to first psalm if we have reached the last psalm
          localStorage.setItem('psalmNumber', storage.psalmNumber);
-          localStorage.setItem("lastViewDate", today.toLocaleDateString())
+          localStorage.setItem("lastViewDate", today.getTime())
      } 
 
 

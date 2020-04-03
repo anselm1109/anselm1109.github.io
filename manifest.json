@@ -11,9 +11,6 @@
 	"orientation" : "portrait",
 	"background_color" : "#ffffff",
 	"related_applications" : [],
-	"serviceworker": {
-		"src": "./pwabuilder-sw.js"
-	  },
 	"prefer_related_applications" : false,
 	"icons" : [
 		{
