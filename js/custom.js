@@ -55,13 +55,13 @@ for (let value of Object.entries(storage)) {
 
   //let storedDate = new Date(storage.lastViewDate);
   let dayDiff = (today.getTime() - storage.lastViewDate)/oneDay;
-  console.log("stored date= " + storage.lastViewDate + " today= "+today.getTime() +" dayDiff= "+dayDiff);
+  console.log("dayDiff= "+dayDiff);
      // more than 22 hours have passed since lastViewDate? Increase psalmNumber by 1 and update last view date
     if (dayDiff>1) {  
          storage.psalmNumber++;
-         if(storage.psalmNumber==172){storage.psalmNumber=1};//reset to first psalm if we have reached the last psalm
+           if(storage.psalmNumber==172){storage.psalmNumber=1};//reset to first psalm if we have reached the last psalm
          localStorage.setItem('psalmNumber', storage.psalmNumber);
-          localStorage.setItem("lastViewDate", today.getTime())
+         localStorage.setItem("lastViewDate", today.getTime())
      } 
 
 
