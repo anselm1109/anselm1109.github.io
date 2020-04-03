@@ -14,62 +14,62 @@
 	"prefer_related_applications" : false,
 	"icons" : [
 		{
-			"src": "https://anselm1109.github.io/img/512icon.png",
+			"src": "https://anselm1109.github.io/img/512Icon.png",
 			"sizes": "512x512",
 			"type": "image/png"
 		},
 		{
-            "src": "https://anselm1109.github.io/img/72icon.png",
+            "src": "https://anselm1109.github.io/img/72Icon.png",
             "sizes": "72x72",
             "type": "image/png"
         },
 		{
-			"src": "https://anselm1109.github.io/img/48icon.png",
+			"src": "https://anselm1109.github.io/img/48Icon.png",
 			"sizes": "48x48",
 			"type": "image/png"
 		},
 		{
-			"src": "https://anselm1109.github.io/img/300icon.png",
+			"src": "https://anselm1109.github.io/img/300Icon.png",
 			"sizes": "300x300",
 			"type": "image/png"
 		},
 		{
-			"src": "https://anselm1109.github.io/img/150icon.png",
+			"src": "https://anselm1109.github.io/img/150Icon.png",
 			"sizes": "150x150",
 			"type": "image/png"
 		},
 		{
-			"src": "https://anselm1109.github.io/img/88icon.png",
+			"src": "https://anselm1109.github.io/img/88Icon.png",
 			"sizes": "88x88",
 			"type": "image/png"
 		},
 		{
-			"src": "https://anselm1109.github.io/img/24icon.png",
+			"src": "https://anselm1109.github.io/img/24Icon.png",
 			"sizes": "24x24",
 			"type": "image/png"
 		},
 		{
-			"src": "https://anselm1109.github.io/img/192icon.png",
+			"src": "https://anselm1109.github.io/img/192Icon.png",
 			"sizes": "192x192",
 			"type": "image/png"
 		},
 		{
-			"src": "https://anselm1109.github.io/img/96icon.png",
+			"src": "https://anselm1109.github.io/img/96Icon.png",
 			"sizes": "96x96",
 			"type": "image/png"
 		},
 		{
-			"src": "https://anselm1109.github.io/img/152icon.png",
+			"src": "https://anselm1109.github.io/img/152Icon.png",
 			"sizes": "152x152",
 			"type": "image/png"
 		},
 		{
-            "src": "https://anselm1109.github.io/img/168icon.png",
+            "src": "https://anselm1109.github.io/img/168Icon.png",
             "sizes": "168x168",
             "type": "image/png"
         },
 		{
-			"src": "https://anselm1109.github.io/img/76icon.png",
+			"src": "https://anselm1109.github.io/img/76Icon.png",
 			"sizes": "76x76",
 			"type": "image/png"
 		}],
