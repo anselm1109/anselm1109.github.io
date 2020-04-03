@@ -20,70 +20,48 @@ const prayersArr = [
   {% endfor %}
 ];
 
-var psalmNumber, lastViewDate, openingPrayerId, prayerOfIntentId, silentPrayerTime, closingPrayerId, verseRefs, versesInline;
-var darkModeState = "false";
-var personalPrayers = "Personal prayers go here";
-var displayPersonalPrayers = "false";
+
 const today = new Date();
 const oneDay = 1000*60*60*22; //22 hours instead of 24 just to make sure each morning is a new psalm
 
-//check for stored variables
-if(!localStorage.getItem('personalPrayers')){
-  localStorage.setItem('personalPrayers',personalPrayers);
-} else {
-  personalPrayers=localStorage.getItem('personalPrayers');
+var storage = {
+  personalPrayers: "Personal prayers go here", 
+  openingPrayerId: 0, 
+  prayerOfIntentId: 1, 
+  silentPrayerTime: 20,
+  closingPrayerId:2,
+  darkModeState: "false",
+  displayPersonalPrayers: "false",
+  verseRefs: "true",
+  versesInline: "false",
+  psalmNumber: 1,
+  lastViewDate: today.toLocaleDateString(),
 }
 
 
+// check all local storage variables and set to default if they don't exist;
 
-if (!localStorage.getItem('psalmNumber')){ // no stored psalm so set defaults
+for (let value of Object.entries(storage)) {
+   if(localStorage.getItem(value[0])===null || localStorage.getItem(value[0])===undefined || localStorage.getItem(value[0])==='') {
+      localStorage.setItem(value[0],value[1]);    
+   } else {
+     storage[value[0]]=localStorage.getItem(value[0]);
+   }
+}
 
-  lastViewDate = today.toLocaleDateString();
-  psalmNumber = 1;
-  openingPrayerId = 0;
-  prayerOfIntentId = 1; 
-  silentPrayerTime = 20;
-  closingPrayerId = 2;
-  verseRefs = "true";
-  versesInline = "false";
+// If psalm not saved in local storage start at one or dispaly the next psalm ever 22 hours
+// there is a locally stored psalm already so read those 
 
-  localStorage.setItem('lastViewDate', lastViewDate);
-  localStorage.setItem('psalmNumber', psalmNumber);
-  localStorage.setItem('openingPrayerId', openingPrayerId);
-  localStorage.setItem('prayerOfIntentId', prayerOfIntentId);
-  localStorage.setItem('silentPrayerTime', silentPrayerTime);
-  localStorage.setItem('closingPrayerId', closingPrayerId);
-  localStorage.setItem('darkMode', darkModeState);
-  localStorage.setItem('verseRefs', verseRefs);
-  localStorage.setItem('versesInline', versesInline);
-  localStorage.setItem('displayPersonalPrayers', displayPersonalPrayers);
-
-
-} else { // there is a locally stored psalm already so read those 
-
-  lastViewDate = new Date(localStorage.getItem('lastViewDate'));
-  psalmNumber = localStorage.getItem('psalmNumber');
-  openingPrayerId = localStorage.getItem('openingPrayerId');
-  prayerOfIntentId = localStorage.getItem('prayerOfIntentId'); 
-  silentPrayerTime = localStorage.getItem('silentPrayerTime');
-  closingPrayerId = localStorage.getItem('closingPrayerId');
-  darkModeState = localStorage.getItem('darkMode');
-  verseRefs = localStorage.getItem('verseRefs');
-  versesInline = localStorage.getItem('versesInline');
-  displayPersonalPrayers = localStorage.getItem('displayPersonalPrayers');
-
-  let dayDiff = (today.getTime() - lastViewDate.getTime())/oneDay;
-
-    // more than 20 hours have passed since lastViewDate? Increase psalmNumber by 1 and update last view date
+  let storedDate = new Date(storage.lastViewDate);
+  let dayDiff = (today.getTime() - storedDate.getTime())/oneDay;
+     // more than 22 hours have passed since lastViewDate? Increase psalmNumber by 1 and update last view date
     if (dayDiff>1) {  
-         psalmNumber++;
-         if(psalmNumber==172){psalmNumber=1};//reset to first psalm if we have reached the last psalm
-         localStorage.setItem('psalmNumber', psalmNumber);
+         storage.psalmNumber++;
+         if(storage.psalmNumber==172){storage.psalmNumber=1};//reset to first psalm if we have reached the last psalm
+         localStorage.setItem('psalmNumber', storage.psalmNumber);
           localStorage.setItem("lastViewDate", today.toLocaleDateString())
      } 
 
-
-}
 
 
 
@@ -111,7 +89,7 @@ const urlParams = new URLSearchParams(queryString);
           // prayerTime is a basic number either 10 15 20 25 or 30
           // light mode filename is format 20Mins.mp4 | Dark mode file name is 20minsDark.mp4
           let darkFile = ""
-          if (darkModeState === "true" ) {
+          if (storage.darkModeState === "true" ) {
              darkFile = "Dark";
           } else {
              darkFile = "";
@@ -212,8 +190,8 @@ function darkModeOn () {
   $(".navbar").removeClass('nav-blue-gradient').addClass("nav-dark-gradient");
   //change timer to dark timer
   if(page=="" || page == "index"){
-    darkModeState = "true";
-    populateTimer(silentPrayerTime); // update the view
+    storage.darkModeState = "true";
+    populateTimer(storage.silentPrayerTime); // update the view
   }
 }
 function lightModeOn () {
@@ -223,8 +201,8 @@ function lightModeOn () {
   $(".navbar").removeClass('nav-dark-gradient').addClass("nav-blue-gradient");
   //change timer to light timer
   if(page=="" || page == "index"){
-    darkModeState = "false";
-    populateTimer(silentPrayerTime); // update the view
+    storage.darkModeState = "false";
+    populateTimer(storage.silentPrayerTime); // update the view
   }
 }
 
@@ -232,15 +210,15 @@ function lightModeOn () {
 $("#darkModeSwitch").change(function(){
   if($( this ).is(':checked')) {
     darkModeOn();
-    localStorage.setItem("darkMode", "true");
+    localStorage.setItem("darkModeState", "true");
 } else {
     lightModeOn();  // unchecked
-    localStorage.setItem("darkMode", "false");
+    localStorage.setItem("darkModeState", "false");
 }
 });
 
 //On page load check for the status of darkModeStatus and set the toggle and classes accordingly.
-if (darkModeState == "true") {
+if (storage.darkModeState == "true") {
   darkModeOn();
   $("#darkModeSwitch").prop('checked', true);
  
@@ -299,11 +277,11 @@ $("#versesInlineSwitch").change(function(){
 //On page load check for the status of versesInline and verseRefs and set the toggle accordingly.
 
 // 
-  const verseRefsBool = (verseRefs == "true");
+  const verseRefsBool = (storage.verseRefs == "true");
   $("#VerseRefsSwitch").prop('checked', verseRefsBool);
 
   
-  const versesInlineBool = (versesInline == "true");
+  const versesInlineBool = (storage.versesInline == "true");
   $("#versesInlineSwitch").prop('checked', versesInlineBool);
 
 
@@ -332,8 +310,8 @@ if (page == "personal-prayers") {
 ======================================================*/
 function togglePersonalPrayers(){
   let slideHtml = "";
-  if (personalPrayers != null && displayPersonalPrayers == "true") {
-    let personalPrayersArr = personalPrayers.split("%%");
+  if (storage.personalPrayers != null && storage.displayPersonalPrayers == "true") {
+    let personalPrayersArr = storage.personalPrayers.split("%%");
     let personalPrayersHtml = '<ul>';
     personalPrayersArr.forEach(element => {
       personalPrayersHtml += "<li>" + element + "</li>";
@@ -371,17 +349,17 @@ togglePersonalPrayers(); //run on page load
 // enable the toggle switch for personal prayer
 $("#personalPrayersSwitch").change(function(){
   if($( this ).is(':checked')){
-    displayPersonalPrayers = "true";
+    storage.displayPersonalPrayers = "true";
     togglePersonalPrayers();
     localStorage.setItem('displayPersonalPrayers', 'true');
   } else {
-    displayPersonalPrayers = "false";
+    storage.displayPersonalPrayers = "false";
     togglePersonalPrayers();
     localStorage.setItem('displayPersonalPrayers', 'false');
   }
 });
 
-if (displayPersonalPrayers == "true") {
+if (storage.displayPersonalPrayers == "true") {
   $("#personalPrayersSwitch").prop('checked', true);
 } else {
   $("#personalPrayersSwitch").prop('checked', false);
@@ -408,7 +386,7 @@ case 'prayer': //display single prayer
     var numberOfPrayers=0;
 
 
-    function setPrayers(){ // this is called by the Papa parse object below after it parses the csv file
+    function setPrayers(){ 
           numberOfPrayers = prayersArr.length;
           //make tags into links if tags exist
           let tagsCode = "";
@@ -435,12 +413,7 @@ case 'prayer': //display single prayer
         $("#prayer-source").html(sourceCode);
     }
     setPrayers();
-    /* parse CSV file and call the setPrayers Function above
-        Papa.parse(prayersCsv, {
-          download: true,
-          header: true,
-          complete: function(results){setPrayers(results);} //Have to do this complicated thing so that I can access global variables
-        });*/
+  
 
     // make prev and next buttons on main nav switch between prayers   
         $("#next, #prayer-next").click(function(){
@@ -588,12 +561,12 @@ case '': // or main page so
                     
                     // set the classes for inline and verserefs
                     var classes = ""; 
-                    if(verseRefs=="false") {
+                    if(storage.verseRefs=="false") {
                       
                       classes += " hide-verse-refs ";
                       
                     }
-                    if(versesInline=="true") {
+                    if(storage.versesInline=="true") {
                       classes += " verses-inline ";
                     }
 
@@ -782,11 +755,11 @@ case '': // or main page so
 
 
           //Run these functions on home page load
-          populatePrayers("opening-prayer",openingPrayerId);
-          populatePrayers("closing-prayer",closingPrayerId);
-          populatePrayers("prayer-of-intent",prayerOfIntentId);
-          populateDailyPsalm(psalmNumber);
-          populateTimer(silentPrayerTime);
+          populatePrayers("opening-prayer",storage.openingPrayerId);
+          populatePrayers("closing-prayer",storage.closingPrayerId);
+          populatePrayers("prayer-of-intent",storage.prayerOfIntentId);
+          populateDailyPsalm(storage.psalmNumber);
+          populateTimer(storage.silentPrayerTime);
        
 
         /* Index page custom controls 
