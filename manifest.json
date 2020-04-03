@@ -3,7 +3,7 @@
 	"lang" : "English",
 	"name" : "Simply Pray",
 	"scope" : "/",
-	"display" : "standalone",
+	"display" : "fullscreen",
 	"start_url" : "https://anselm1109.github.io/",
 	"short_name" : "Simply Pray",
 	"theme_color" : "transparent",
@@ -11,6 +11,9 @@
 	"orientation" : "portrait",
 	"background_color" : "#ffffff",
 	"related_applications" : [],
+	"serviceworker": {
+		"src": "./pwabuilder-sw.js"
+	  },
 	"prefer_related_applications" : false,
 	"icons" : [
 		{
