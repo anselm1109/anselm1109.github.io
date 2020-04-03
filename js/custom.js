@@ -185,7 +185,7 @@ $("#closing-prayer-select").change(function(){
 //functions that set the appropriate dark or light classes
 function darkModeOn () {
   $(".card, .card-text").addClass("text-white black");
-  $('textarea').addClass('text-white');
+  $('textarea, .card-title, .source').addClass('text-white');
   $(".note").removeClass('note-info').addClass("note-dark");
   $(".navbar").removeClass('nav-blue-gradient').addClass("nav-dark-gradient");
   //change timer to dark timer
@@ -196,7 +196,7 @@ function darkModeOn () {
 }
 function lightModeOn () {
   $(".card, .card-text").removeClass("text-white black");
-  $('textarea').removeClass('text-white');
+  $('textarea, card-title, .source').removeClass('text-white');
   $(".note").removeClass('note-dark').addClass("note-info");
   $(".navbar").removeClass('nav-dark-gradient').addClass("nav-blue-gradient");
   //change timer to light timer
