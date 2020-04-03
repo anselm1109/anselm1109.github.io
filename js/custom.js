@@ -312,6 +312,9 @@ if (page == "personal-prayers") {
 ======================================================*/
 function togglePersonalPrayers(){
   let slideHtml = "";
+  let darkModeClasses = "":
+
+
   if (storage.personalPrayers != null && storage.displayPersonalPrayers == "true") {
     let personalPrayersArr = storage.personalPrayers.split("%%");
     let personalPrayersHtml = '<ul>';
@@ -319,12 +322,17 @@ function togglePersonalPrayers(){
       personalPrayersHtml += "<li>" + element + "</li>";
     });
     personalPrayersHtml += '</ul>';
-    
+  
+    if (storage.darkModeState=="true") {
+      darkModeClasses=" text-white black ";
+    }
+
+
     
     slideHtml = `
     <div class="carousel-item" id="personal-prayers">
                             <div class="d-flex justify-content-center flexbox-card-container">
-                                    <div class="card"> 
+                                    <div class="card ${darkModeClasses}"> 
                                         
                                         <div class="card-body "> 
                                             <h4 class="text-primary text-center">Personal Prayers</h4>                             
