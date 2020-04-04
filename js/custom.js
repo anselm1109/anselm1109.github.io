@@ -390,7 +390,7 @@ case 'prayer': //display single prayer
     var prayerId = Number(urlParams.get("prayerId"));
     var numberOfPrayers=0;
 
-
+    // populate all the divs and such on the page with the correct information from the prayer array
     function setPrayers(){ 
           numberOfPrayers = prayersArr.length;
           //make tags into links if tags exist
@@ -416,11 +416,15 @@ case 'prayer': //display single prayer
         $("#prayer-tags").html(tagsCode);
         $("#prayer-content").html(prayersArr[prayerId][4]);
         $("#prayer-source").html(sourceCode);
+        $(".set-prayer").each(function(){
+          $( this ).data("prayerCard",$(this).attr("data-prayer"));
+        });
+        $(".set-prayer").data("prayerId",prayerId);
     }
-    setPrayers();
+    setPrayers(); //makes the above function run on first page load
   
 
-    // make prev and next buttons on main nav switch between prayers   
+    // make prev and next buttons on main nav switch between prayers without having to reload the page
         $("#next, #prayer-next").click(function(){
           if(Number(prayerId)>=(numberOfPrayers-1)){prayerId = numberOfPrayers-1}else{prayerId=prayerId+1}
           setPrayers();
@@ -431,6 +435,16 @@ case 'prayer': //display single prayer
           setPrayers(); 
           return false;
         });
+
+    //Update localStorage based on link click of set prayers to divs
+    $(".set-prayer").click(function(){
+      localStorage.setItem($( this ).data("prayerCard"),$( this ).data("prayerId"));
+      console.log("localStorage " + $( this ).data("prayerCard") + " was set to " + $( this ).data("prayerId"));
+    });
+
+
+
+
 break;
 /* end prayers.html code*/
 
