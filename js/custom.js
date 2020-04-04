@@ -38,7 +38,6 @@ var storage = {
   lastViewDate: today.getTime()
 }
 
-//storage.lastViewDate = today.toLocaleDateString();
 
 // check all local storage variables and set to default if they don't exist;
 
@@ -55,7 +54,6 @@ for (let value of Object.entries(storage)) {
 
   //let storedDate = new Date(storage.lastViewDate);
   let dayDiff = (today.getTime() - storage.lastViewDate)/oneDay;
-  console.log("dayDiff= "+dayDiff);
      // more than 22 hours have passed since lastViewDate? Increase psalmNumber by 1 and update last view date
     if (dayDiff>1) {  
          storage.psalmNumber++;
@@ -125,9 +123,9 @@ Side Bar controls and settings    |
       });
 
       $('#sidebarCollapse').on('click', function () {
-          $('#sidebar').addClass('active');
+          $('#sidebar').toggleClass('active');
        
-          $('.collapse.in').toggleClass('in');
+        //  $('.collapse.in').toggleClass('in');
           $('a[aria-expanded=true]').attr('aria-expanded', 'false');
       });
 
@@ -186,10 +184,8 @@ $("#closing-prayer-select").change(function(){
 
 //functions that set the appropriate dark or light classes
 function darkModeOn () {
-  $(".card, .card-text").addClass("text-white black");
-  $('textarea, .card-title, .source').addClass('text-white');
-  $(".note").removeClass('note-info').addClass("note-dark");
-  $(".navbar").removeClass('nav-blue-gradient').addClass("nav-dark-gradient");
+  darkMode("true")
+  localStorage.setItem("darkModeState", "true");
   //change timer to dark timer
   if(page=="" || page == "index"){
     storage.darkModeState = "true";
@@ -197,11 +193,10 @@ function darkModeOn () {
   }
 }
 function lightModeOn () {
-  $(".card, .card-text").removeClass("text-white black");
-  $('textarea, card-title, .source').removeClass('text-white');
-  $(".note").removeClass('note-dark').addClass("note-info");
-  $(".navbar").removeClass('nav-dark-gradient').addClass("nav-blue-gradient");
-  //change timer to light timer
+  darkMode("false");
+  localStorage.setItem("darkModeState", "false");
+
+  //change timer to light timer*/
   if(page=="" || page == "index"){
     storage.darkModeState = "false";
     populateTimer(storage.silentPrayerTime); // update the view
@@ -212,10 +207,8 @@ function lightModeOn () {
 $("#darkModeSwitch").change(function(){
   if($( this ).is(':checked')) {
     darkModeOn();
-    localStorage.setItem("darkModeState", "true");
 } else {
     lightModeOn();  // unchecked
-    localStorage.setItem("darkModeState", "false");
 }
 });
 
@@ -323,16 +316,16 @@ function togglePersonalPrayers(){
     });
     personalPrayersHtml += '</ul>';
   
-    if (storage.darkModeState=="true") {
-      darkModeClasses=" text-white black ";
-    }
+    //if (storage.darkModeState=="true") {
+    //  darkModeClasses=" text-white black ";
+    //}
 
 
     
     slideHtml = `
     <div class="carousel-item" id="personal-prayers">
                             <div class="d-flex justify-content-center flexbox-card-container">
-                                    <div class="card ${darkModeClasses}"> 
+                                    <div class="card"> 
                                         
                                         <div class="card-body "> 
                                             <h4 class="text-primary text-center">Personal Prayers</h4>                             
@@ -440,28 +433,6 @@ break;
 /* end prayers.html code*/
 
 
-
-
-
-
-/* prayer book home page
-=========================*/
-case 'prayer-book':
-
-
-break;
-
-
-
-
-
-
-
-/* tags page
-=========================*/
-case 'tags': //display list of prayers tagged with parameter
-
-break;
 
 
 
@@ -808,11 +779,9 @@ case '': // or main page so
           
   
 
-
+break;
 
 } // ./ Main Switch Function
-
-
 
 
 }); // ./ $(document).ready(function ()

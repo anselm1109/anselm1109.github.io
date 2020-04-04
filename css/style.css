@@ -2,10 +2,11 @@
 ---
 :root {
   --theme-bg-color: white;
+  --theme-note-bg-color: #e4f2f5;
   --theme-text-color: #151d47;
-  --theme-bg-color: black;
-  --theme-text-color: white;
-}
+  --theme-nav-gradient: linear-gradient(40deg, #45cafc, #303f9f);
+    /* linear-gradient(40deg, #000000, #3d3e40) !important;*/
+} 
 
 /* Colors 
 ========================= */
@@ -14,8 +15,15 @@
     background:var(--theme-bg-color);
 }
 .note-info {
-    background-color: #e4f2f5;
+    background-color: var(--theme-note-bg-color);
+    color: var(--theme-text-color);
     border-color: #2492a5;
+}
+textarea, .card-title, .source {
+    color: var(--theme-text-color);
+}
+.nav-gradient {
+    background: var(--theme-nav-gradient);
 }
 
 .carousel-fullscreen .card .card-body::-webkit-scrollbar-thumb, .content-wrap .card-body::-webkit-scrollbar-thumb {
@@ -32,10 +40,10 @@
     color:#fff;
 }
 
-#sidebar ul li a:hover, #sidebar ul li a[aria-expanded="true"] {
+/*#sidebar ul li a:hover, #sidebar ul li a[aria-expanded="true"] {
     color: #fff;
     background: rgba(255, 255, 255, 0.2);
-}
+}*/
 #sidebar ul ul a {
     /*background: #6d7fcc;*/
     color:#fff;
@@ -53,12 +61,7 @@ a.article:hover {
     border-color: #ccc; 
     background-color: #3d5c7d;
 }
-.nav-blue-gradient {
-    background: linear-gradient(40deg, #45cafc, #303f9f) !important;
-}
-.nav-dark-gradient {
-    background: linear-gradient(40deg, #000000, #3d3e40) !important;
-}
+
 
 /* ./ Colors */
 
@@ -256,11 +259,12 @@ h1,h2,h3,h4,h5,h6 {
     padding: 10px;
     font-size: 0.8em;
 }
-
-#sidebar ul li a {
+#sidebar ul>li {
     padding: 10px;
-    font-size: 1.1em;
-    display: block;
+}
+#sidebar ul li a {
+    padding: 0px;
+    font-size: 1em;
 }
 #sidebar ul li ul li a {
     padding: 0;
@@ -269,9 +273,7 @@ h1,h2,h3,h4,h5,h6 {
     text-decoration: underline;
 }
 
-#sidebar ul li a:hover, #sidebar ul li a[aria-expanded="true"] {
-    background: rgba(255, 255, 255, 0.2);
-}
+
 #sidebar ul li ul li a:hover, #sidebar ul li ul li a[aria-expanded="true"] {
     background: none;
 }
