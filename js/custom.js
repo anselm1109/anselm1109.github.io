@@ -326,13 +326,15 @@ function togglePersonalPrayers(){
     <div class="carousel-item" id="personal-prayers">
                             <div class="d-flex justify-content-center flexbox-card-container">
                                     <div class="card"> 
-                                        
                                         <div class="card-body "> 
-                                            <h4 class="text-primary text-center">Personal Prayers</h4>                             
+                                            <div class="card-title">
+                                              <h4 class="text-primary text-center">Personal Prayers</h4>     
+                                            </div>                        
                                             <div class="card-text" id="personal-prayer-content">
                                                 ${personalPrayersHtml}
+                                                <div class="pt-5 source" id="personal-prayer-source"><a href="{{site.url}}/personal-prayers.html">Edit these prayers</a></div>
                                             </div>
-                                            <div class="text-left pt-5 source" id="personal-prayer-source"><a href="{{site.url}}/personal-prayers.html">Edit these prayers</a></div>
+                                            
                                         </div>
                                     </div>
                                 </div>

@@ -11,13 +11,14 @@ title: 'Simply Pray | Prayer Book'
 
         <div class="card"> <!-- Card -->
             <div class="card-body"> 
+                <div class="card-title">
+                    <img src="{{site.url}}/img/logo_gradient.png" width="100" />
+                    <h2 class="pt-1">Prayer Book</h2> 
+                </div>
+                
                 <div class="card-text">
                     
-                    <div class="text-center">
-                        <img src="{{site.url}}/img/logo_gradient.png" width="100" />
-                        <h2 class="card-title pt-1" style="font-size: 20px; font-weight: 200; color: #3143A2;">Prayer Book</h2> 
-                    </div>
-
+                
                     {% assign prayers = site.data.prayers %}
                     <div class="container mb-4 pb-2 pl-0 pr-0 border border-primary rounded">
                         <h5 class="mb-1 bg-primary text-white p-2">Show prayers Prayers tagged with: </h5>
