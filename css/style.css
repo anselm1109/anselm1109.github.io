@@ -3,14 +3,21 @@
 :root {
   --theme-bg-color: white;
   --theme-text-color: #151d47;
+  --theme-bg-color: black;
+  --theme-text-color: white;
 }
 
 /* Colors 
 ========================= */
 .card .card-body, .card .card-body .card-text  {
     color:var(--theme-text-color);
-    background:car(--theme-bg-color);
+    background:var(--theme-bg-color);
 }
+.note-info {
+    background-color: #e4f2f5;
+    border-color: #2492a5;
+}
+
 .carousel-fullscreen .card .card-body::-webkit-scrollbar-thumb, .content-wrap .card-body::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, .5);
   }

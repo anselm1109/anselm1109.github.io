@@ -312,7 +312,7 @@ if (page == "personal-prayers") {
 ======================================================*/
 function togglePersonalPrayers(){
   let slideHtml = "";
-  let darkModeClasses = "":
+  let darkModeClasses = "";
 
 
   if (storage.personalPrayers != null && storage.displayPersonalPrayers == "true") {
