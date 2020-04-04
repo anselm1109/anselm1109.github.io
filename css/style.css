@@ -1,9 +1,14 @@
 ---
 ---
+:root {
+  --theme-bg-color: white;
+  --theme-text-color: #151d47;
+}
+
 /* Colors 
 ========================= */
 .card .card-body, .card .card-body .card-text  {
-    color:#151d47;
+    color:car(--theme-text-color);
 }
 .carousel-fullscreen .card .card-body::-webkit-scrollbar-thumb, .content-wrap .card-body::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, .5);
