@@ -72,7 +72,11 @@ a.article:hover {
 
 /* ./ Colors */
 
-
+.toast {
+    position: absolute;
+    top:0;
+    right:0;
+}
 .btn {
     border-radius: 10px;
 }

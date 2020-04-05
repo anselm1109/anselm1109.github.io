@@ -281,23 +281,7 @@ $("#versesInlineSwitch").change(function(){
 
 
 
-/* ================================
-                                  |
-Prayers for self and others code  |
-                                  |
-===================================*/
 
-/* on personal-prayers.html only : save the textarea content to local storage
-======================================================*/
-if (page == "personal-prayers") {
-  $("#personal-prayers-textarea").val(localStorage.getItem("personalPrayers").replace(/%%/g,"\n"));
-
-
-  $("#personal-prayers-save").click(function(){
-      localStorage.setItem('personalPrayers',$("#personal-prayers-textarea").val().replace(/\r?\n/g,"%%"));
-      $('.toast').toast('show');
-  });
-}
 
 
 
@@ -440,6 +424,7 @@ case 'prayer': //display single prayer
     $(".set-prayer").click(function(){
       localStorage.setItem($( this ).data("prayerCard"),$( this ).data("prayerId"));
       console.log("localStorage " + $( this ).data("prayerCard") + " was set to " + $( this ).data("prayerId"));
+      $('.toast').toast('show');
     });
 
 
@@ -449,6 +434,28 @@ break;
 /* end prayers.html code*/
 
 
+
+case "personal-prayers":
+/* ================================
+                                  |
+Prayers for self and others code  |
+                                  |
+===================================*/
+
+/* on personal-prayers.html only : save the textarea content to local storage
+======================================================*/
+
+  $("#personal-prayers-textarea").val(localStorage.getItem("personalPrayers").replace(/%%/g,"\n"));
+
+
+  $("#personal-prayers-save").click(function(){
+      localStorage.setItem('personalPrayers',$("#personal-prayers-textarea").val().replace(/\r?\n/g,"%%"));
+      $('.toast').toast('show');
+  });
+
+
+
+break;
 
 
 
