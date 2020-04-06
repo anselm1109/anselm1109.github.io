@@ -354,7 +354,19 @@ togglePersonalPrayers(); //run on page load
             $("#prayer-carousel").carousel(slideNumber);
           }
 
+          $('#prayer-carousel').on('slide.bs.carousel', function (e) {
+            let url = "{{site.ulr}}/?slide="+e.to;
+            history.pushState({url}, null, url);
+          })
 
+
+         /* $('.carousel-control-prev').click(function(){
+            $("#myCarousel").carousel("prev");
+            history.pushState(null, null, "{{site.ulr}}/?slide="+);
+          });
+          $('.carousel-control-next').click(function(){
+            $("#myCarousel").carousel("next");
+          });*/
 
         
 
