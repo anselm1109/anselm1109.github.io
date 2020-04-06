@@ -639,6 +639,9 @@ togglePersonalPrayers(); //run on page load
           populatePrayers("prayer-of-intent",storage.prayerOfIntentId);
           populateDailyPsalm(storage.psalmNumber);
           populateTimer(storage.silentPrayerTime);
+          if (storage.showStartScreen=="false") {
+            $("#prayer-carousel").carousel(1);
+          }
        
 
         /* Index page custom controls 
