@@ -43,6 +43,7 @@ var storage = {
   psalmChangeTime1: '5',
   psalmChangeTime2: 'none',
   psalmChangeCount: 0,
+  showStartScreen: "true",
   setStore: function (kee,val) {
    localStorage.setItem(kee,val);
     this[kee] = val;
@@ -859,22 +860,22 @@ $(".bible-chapter").removeClass('verses-inline');
 /* Enable the verse refes toggle button in sidebar settings*/
 $("#VerseRefsSwitch").change(function(){
 if($( this ).is(':checked')) {
-toggleVerseRefs("true");
-localStorage.setItem("verseRefs", "true");
+  toggleVerseRefs("true");
+  storage.setStore("verseRefs", "true");
 } else {
-toggleVerseRefs("false");
-localStorage.setItem("verseRefs", "false");
+  toggleVerseRefs("false");
+  storage.setStore("verseRefs", "false");
 }
 });
 
 /* Enable the versesInlineSwitch toggle button in sidebar settings*/
 $("#versesInlineSwitch").change(function(){
-if($( this ).is(':checked')) {
-toggleVersesInline("true");
-localStorage.setItem("versesInline", "true");
+  if($( this ).is(':checked')) {
+  toggleVersesInline("true");
+  storage.setStore("versesInline", "true");
 } else {
-toggleVersesInline("false");
-localStorage.setItem("versesInline", "false");
+  toggleVersesInline("false");
+  storage.setStore("versesInline", "false");
 }
 });
 
@@ -898,13 +899,11 @@ $("#versesInlineSwitch").prop('checked', versesInlineBool);
 // enable the toggle switch for personal prayer
 $("#personalPrayersSwitch").change(function(){
 if($( this ).is(':checked')){
-storage.displayPersonalPrayers = "true";
-togglePersonalPrayers();
-localStorage.setItem('displayPersonalPrayers', 'true');
+  storage.setStore('displayPersonalPrayers', 'true');
+  togglePersonalPrayers();
 } else {
-storage.displayPersonalPrayers = "false";
-togglePersonalPrayers();
-localStorage.setItem('displayPersonalPrayers', 'false');
+  storage.setStore('displayPersonalPrayers', 'false');
+  togglePersonalPrayers();
 }
 });
 
@@ -914,7 +913,18 @@ $("#personalPrayersSwitch").prop('checked', true);
 $("#personalPrayersSwitch").prop('checked', false);
 }
 
-
+$("#showStartScreenSwitch").change(function(){
+  if($( this ).is(':checked')) {
+    storage.setStore("showStartScreen", "true");
+  } else {
+    storage.setStore("showStartScreen", "false");
+  }
+  });
+if (storage.showStartScreen == "true") {
+  $("#showStartScreenSwitch").prop('checked', true);
+  } else {
+  $("#showStartScreenSwitch").prop('checked', false);
+  }
 // ./ Sidebar settings
 
 
