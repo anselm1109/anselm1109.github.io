@@ -476,3 +476,16 @@ input[type=checkbox], input[type=radio] {
           transform: rotate(360deg);
       }
   }
+  #loader-text {
+    color:#fff;
+    position: absolute;
+    width: 100%;
+    height:100vh; 
+  }
+  .loader-container {
+    width: 100%; 
+    z-index: 5000; 
+    height: 100vh; 
+    position: absolute; 
+    display:flex;
+  }
