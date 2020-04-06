@@ -360,7 +360,7 @@ ul.CTAs a {
     transition: background 0.3s ease;
 }
 .switch label input[type="checkbox"]:checked+.lever {
-    background-color: #dccfe2;
+    background-color: #ddddcc;
 }
 .switch label .lever:after {
     position: absolute;
