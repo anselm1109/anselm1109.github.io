@@ -265,8 +265,8 @@ h1,h2,h3,h4,h5,h6 {
     border-bottom: 1px solid #47748b;
 }
 
-#sidebar ul p {
-    padding: 10px;
+#sidebar ul p, #sidebar ul label {
+    
     font-size: 0.8em;
 }
 #sidebar ul>li {
@@ -337,4 +337,64 @@ ul.CTAs a {
 }
 #sidebar .custom-switch label {
     font-size: 0.8rem;
+}
+
+/* side bar material switches
+================*/
+
+.switch label {
+    cursor: pointer;
+}
+.switch label .lever {
+    position: relative;
+    display: inline-block;
+    margin: 0 1rem;
+    margin-right: .625rem;
+    vertical-align: middle;
+    content: "";
+    background-color: #818181;
+    border-radius: .9375rem;
+    width: 2.5rem;
+    height: .9375rem;
+    -webkit-transition: background 0.3s ease;
+    transition: background 0.3s ease;
+}
+.switch label input[type="checkbox"]:checked+.lever {
+    background-color: #dccfe2;
+}
+.switch label .lever:after {
+    position: absolute;
+    top: -.1875rem;
+    left: -.3125rem;
+    display: inline-block;
+    content: "";
+    background-color: #f1f1f1;
+    border-radius: 1.3125rem;
+    -webkit-box-shadow: 0 0.0625rem 0.1875rem 0.0625rem rgba(0,0,0,0.4);
+    box-shadow: 0 0.0625rem 0.1875rem 0.0625rem rgba(0,0,0,0.4);
+    width: 1.3125rem;
+    height: 1.3125rem;
+    -webkit-transition: left 0.3s ease,background 0.3s ease,-webkit-box-shadow 1s ease;
+    transition: left 0.3s ease,background 0.3s ease,-webkit-box-shadow 1s ease;
+    transition: left 0.3s ease,background 0.3s ease,box-shadow 1s ease;
+    transition: left 0.3s ease,background 0.3s ease,box-shadow 1s ease,-webkit-box-shadow 1s ease;
+}
+.switch label input[type="checkbox"]:checked+.lever:after {
+    left: 1.5rem;
+    background-color: #45cafc;
+}
+.switch label input[type="checkbox"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+}
+input[type=checkbox], input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
 }

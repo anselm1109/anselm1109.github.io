@@ -27,15 +27,14 @@
 
 
     <ul class="list-unstyled accordion" role="tablist" id="side-accordion"> 
-        <p style="border-bottom: 1px solid rgba(255,255,255,0.7);">Settings</p>
+        <p style="border-bottom: 1px solid rgba(255,255,255,0.7);" class="pl-3">Settings</p>
     
         <li><a href="#daily-psalm-menu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-angle-right"></i> <i class="fas fa-angle-down"></i> Daily Psalm</a>
            <div class="pb-2">
             <ul class="collapse list-unstyled" role="tabpanel" data-parent="#side-accordion" id="daily-psalm-menu">
                 <li>
-                    <p class="pt-0">Pick a Psalm you want to read. The next Psalm will automatically be displayed in about 24 hours.</p>
-                    <select class="ml-auto mr-auto d-block custom-select" id="psalm-select">
-                    <option value="1" selected>---Select---</option>
+                    <p class="pt-0">Pick a Psalm you want to read.</p>
+                    <select class="d-block" id="psalm-select">
                     {% for psalm in site.data.psalms %}
                     <option value="{{psalm.id}}">{{psalm.title}} 
                         {% if psalm.section %} 
@@ -43,6 +42,40 @@
                         {% endif %} </option>
                     {% endfor %}
                     </select>
+
+
+                    <p class="mt-4 pb-0">Select the times when you want the next Psalm to be displayed.</p>
+                    <p class="mb-0 pb-0">Morning</p>
+                     <select class="d-block" id="psalm-change-time1">
+                       <option value="3">3 am</option>
+                       <option value="4">4 am</option>
+                       <option value="5">5 am</option>
+                       <option value="6">6 am</option>
+                       <option value="7">7 am</option>
+                       <option value="8">8 am</option>
+                       <option value="9">9 am</option>
+                       <option value="10">10 am</option>
+                       <option value="11">11 am</option>
+                     </select>
+                     
+                     <p class="mt-4 mb-0 pb-0">Afternoon <span>(optional)</span></p>
+                     <select class="d-block" id="psalm-change-time2">
+                       <option value="none" selected>None</option>
+                       <option value="12">12 pm</option>
+                       <option value="13">1 pm</option>
+                       <option value="14">2 pm</option>
+                       <option value="15">3 pm</option>
+                       <option value="16">4 pm</option>
+                       <option value="17">5 pm</option>
+                       <option value="18">6 pm</option>
+                       <option value="19">7 pm</option>
+                       <option value="20">8 pm</option>
+                       <option value="21">9 pm</option>
+                       <option value="22">10 pm</option>
+                       <option value="23">11 pm</option>
+                     </select>
+
+
                 </li>
            </ul>
         </div>
@@ -57,8 +90,7 @@
             <ul class="collapse list-unstyled" role="tabpanel" data-parent="#side-accordion" id="opening-prayers-menu">
                 <li>
                     <p class="pt-0">Pick a prayer to begin your time.</p>
-                    <select name="opening-prayer-select" id="opening-prayer-select" class="ml-auto mr-auto d-block custom-select">
-                        <option selected value="0">---Select---</option>
+                    <select name="opening-prayer-select" id="opening-prayer-select" class="d-block ">
                         {% assign prayers = site.data.prayers  %}
                         {% for prayer in prayers %}
                             {% if prayer.tags contains "opening" %}
@@ -85,8 +117,7 @@
             <ul class="collapse list-unstyled" role="tabpanel" data-parent="#side-accordion" id="prayers-of-intent-menu">
                 <li>
                     <p class="pt-0">Pick a prayer with which to begin your silence.</p>
-                    <select name="prayer-of-intent-select" id="prayer-of-intent-select" class="ml-auto mr-auto d-block custom-select">
-                        <option selected value="1">---Select---</option>
+                    <select name="prayer-of-intent-select" id="prayer-of-intent-select" class="d-block ">
                         {% for prayer in prayers %}
                             {% if prayer.tags contains "intent" %}
                             <option value="{{prayer.id}}">
@@ -110,8 +141,7 @@
             <ul class="collapse list-unstyled" role="tabpanel" data-parent="#side-accordion" id="closing-prayers-menu">
                 <li>
                     <p class="pt-0">Pick a prayer to end your time.</p>
-                    <select name="closing-prayer-select" id="closing-prayer-select" class="ml-auto mr-auto d-block custom-select">
-                        <option selected value="2">Closing prayers</option>
+                    <select name="closing-prayer-select" id="closing-prayer-select" class="d-block ">
                         {% for prayer in prayers %}
                             {% if prayer.tags contains "closing" %}
                             <option value="{{prayer.id}}">
@@ -137,8 +167,7 @@
             <ul class="collapse list-unstyled" role="tabpanel" data-parent="#side-accordion" id="silent-prayer-time-menu">
                 <li>
                     <p class="pt-0">Pick amount of silence</p>
-                    <select name="silent-prayer-select" id="silent-prayer-select" class="ml-auto mr-auto d-block custom-select">
-                        <option value="20" selected>Silence time </option>
+                    <select name="silent-prayer-select" id="silent-prayer-select" class="d-block ">
                             <option value="10">
                                10 Minutes
                             </option>
@@ -167,27 +196,54 @@
             <ul class="collapse list-unstyled" role="tabpanel" data-parent="#side-accordion" id="other-settings-menu">
                 <li class="pl-3">
                    
-                    <p class="pb-0 pt-1 mt-3 border-top border-white">Dark Mode?</p>
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="darkModeSwitch" name="darkModeSwitch">
-                        <label class="custom-control-label" for="darkModeSwitch">Off / On</label>
+                   
+                    <p class="pb-0 mb-0 mt-2">
+                        Dark Mode:
+                    </p>
+                    <div class="switch">
+                        <label>
+                          Off
+                          <input type="checkbox" id="darkModeSwitch" name="darkModeSwitch">
+                          <span class="lever"></span> On
+                        </label>
                     </div>
 
-                    <p class="pb-0 pt-1 mt-3 border-top border-white">Daily Psalm Options</p>
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="VerseRefsSwitch" name="VerseRefsSwitch" checked>
-                        <label class="custom-control-label" for="VerseRefsSwitch">Show verse numbers</label>
-                    </div>
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="versesInlineSwitch" name="versesInlineSwitch" checked>
-                        <label class="custom-control-label" for="versesInlineSwitch">Remove verse line breaks</label>
+                   
+                    <p class="pb-0 mb-0 mt-3">
+                        Show Psalm verse numbers:
+                    </p>
+                    <div class="switch">
+                        <label>
+                          Off
+                          <input type="checkbox" id="VerseRefsSwitch" name="VerseRefsSwitch" checked>
+                          <span class="lever"></span> On
+                        </label>
                     </div>
 
-                    <p class="pb-0 pt-1 mt-3 border-top border-white">Display Personal Prayers Page Before Closing Prayer?</p>
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="personalPrayersSwitch" name="personalPrayersSwitch" checked>
-                        <label class="custom-control-label" for="personalPrayersSwitch">Off / On</label>
+                    <p class="pb-0 mb-0 mt-3">
+                        Show Psalm verses on newline:
+                    </p>    
+                    <div class="switch">
+                        <label>
+                          Off
+                          <input type="checkbox" id="versesInlineSwitch" name="versesInlineSwitch" checked>
+                          <span class="lever"></span> On
+                        </label>
                     </div>
+                    
+
+                    
+                    <p class="pb-0 mb-0 mt-3">
+                        Show personal prayer list after time of silence:
+                    </p>
+                    <div class="switch">
+                        <label>
+                          Off
+                          <input type="checkbox" id="personalPrayersSwitch" name="personalPrayersSwitch" checked>
+                          <span class="lever"></span> On
+                        </label>
+                    </div>
+                
                     <span><a href="{{site.url}}/personal-prayers.html">Edit personal prayer list</a></span>
                 </li>
             </ul>

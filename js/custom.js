@@ -21,7 +21,9 @@ const prayersArr = [
 ];
 
 
-const today = new Date();
+const now = moment();
+
+const today = new Date();// this can be removed later
 const oneDay = 1000*60*60*22; //22 hours instead of 24 just to make sure each morning is a new psalm
 
 var storage = {
@@ -35,38 +37,31 @@ var storage = {
   verseRefs: "true",
   versesInline: "false",
   psalmNumber: 1,
-  lastViewDate: today.getTime()
+  lastPsalmChange: now.toISOString(true),
+  psalmChangeTime1: '5',
+  psalmChangeTime2: 'none',
+  psalmChangeCount: 0,
+  setStore: function (kee,val) {
+   localStorage.setItem(kee,val);
+    this[kee] = val;
+  },
 }
 
+ 
 
 // check all local storage variables and set to default if they don't exist;
 
 for (let value of Object.entries(storage)) {
+  if (value[0]!="setStore") {//prevent my object's method from being over written
    if(localStorage.getItem(value[0])===null || localStorage.getItem(value[0])===undefined || localStorage.getItem(value[0])==='') {
       localStorage.setItem(value[0],value[1]);    
-   } else {
+   } else { // since localStorage does exist set the storage object properties to those values
      storage[value[0]]=localStorage.getItem(value[0]);
    }
+  }
 }
 
-// If psalm not saved in local storage start at one or dispaly the next psalm ever 22 hours
-// there is a locally stored psalm already so read those 
 
-  //let storedDate = new Date(storage.lastViewDate);
-  let dayDiff = (today.getTime() - storage.lastViewDate)/oneDay;
-     // more than 22 hours have passed since lastViewDate? Increase psalmNumber by 1 and update last view date
-    if (dayDiff>1) {  
-         storage.psalmNumber++;
-           if(storage.psalmNumber==172){storage.psalmNumber=1};//reset to first psalm if we have reached the last psalm
-         localStorage.setItem('psalmNumber', storage.psalmNumber);
-         localStorage.setItem("lastViewDate", today.getTime())
-     } 
-
-
-
-
-
-  
  
 /* ================================
                                   |
@@ -103,256 +98,6 @@ const urlParams = new URLSearchParams(queryString);
 
 
 
-
-
-/* ================================
-                                  |
-Side Bar controls and settings    |
-                                  |
-===================================*/
-
-/* Sliding Side Bar Javascript controls
-========================*/
- 
-      $("#sidebar").mCustomScrollbar({
-          theme: "minimal"
-      });
-
-      $('#dismiss').on('click', function () {
-          $('#sidebar').removeClass('active');
-      });
-
-      $('#sidebarCollapse').on('click', function () {
-          $('#sidebar').toggleClass('active');
-       
-        //  $('.collapse.in').toggleClass('in');
-          $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-      });
-
-
-//set the paslm and store it for the future  
-$("#psalm-select").change(function(){
-  if(page=="" || page == "index"){
-    populateDailyPsalm($(this).val()); // update the view
-  }
-  localStorage.setItem("psalmNumber",$(this).val());
-});
-
-//set silent prayer time and store it for the future  
-$("#silent-prayer-select").change(function(){
-  if(page=="" || page == "index"){
-    populateTimer($(this).val()); // update the view
-  }
-  localStorage.setItem("silentPrayerTime",$(this).val());
-});
-
-//set opening prayer
-$("#opening-prayer-select").change(function(){
-  let id = Number($(this).val())
-  if(page=="" || page == "index"){
-    populatePrayers("opening-prayer",id);
-  }
-  localStorage.setItem("openingPrayerId",id);
-});
-
-//set  prayer of intent
-$("#prayer-of-intent-select").change(function(){
-  let id = Number($(this).val())
-  if(page=="" || page == "index"){
-    populatePrayers("prayer-of-intent",id);
-  }
-  localStorage.setItem("prayerOfIntentId",id);
-});
-
-// set closing prayer
-$("#closing-prayer-select").change(function(){
-  let id = Number($(this).val())
-  if(page=="" || page == "index"){
-    populatePrayers("closing-prayer",id);
-  }
-  localStorage.setItem("closingPrayerId",id);
-});
-
-
-
-
-
-
-
-/* Toggle Dark Mode 
-=================================*/
-
-//functions that set the appropriate dark or light classes
-function darkModeOn () {
-  darkMode("true")
-  localStorage.setItem("darkModeState", "true");
-  //change timer to dark timer
-  if(page=="" || page == "index"){
-    storage.darkModeState = "true";
-    populateTimer(storage.silentPrayerTime); // update the view
-  }
-}
-function lightModeOn () {
-  darkMode("false");
-  localStorage.setItem("darkModeState", "false");
-
-  //change timer to light timer*/
-  if(page=="" || page == "index"){
-    storage.darkModeState = "false";
-    populateTimer(storage.silentPrayerTime); // update the view
-  }
-}
-
-/* Enable the dark mode toggle button in sidebar settings*/
-$("#darkModeSwitch").change(function(){
-  if($( this ).is(':checked')) {
-    darkModeOn();
-} else {
-    lightModeOn();  // unchecked
-}
-});
-
-//On page load check for the status of darkModeStatus and set the toggle and classes accordingly.
-if (storage.darkModeState == "true") {
-  darkModeOn();
-  $("#darkModeSwitch").prop('checked', true);
- 
-} else {
-  lightModeOn();
-  $("#darkModeSwitch").prop('checked', false);
-}
-
-
-
-/* Toggles for Psalm reading verse numbers and line breaks
-=================================*/
-
-
-function toggleVerseRefs (setval) {
-  if (setval=="true") {
-    $(".bible-chapter").removeClass('hide-verse-refs');
-   
-  } else {
-    $(".bible-chapter").addClass('hide-verse-refs');
-    
-  }
-}
-
-function toggleVersesInline (setval) {
-  if (setval=="true") {
-    $(".bible-chapter").addClass('verses-inline');
-  } else {
-    $(".bible-chapter").removeClass('verses-inline');
-  }
-}
-
-
-/* Enable the verse refes toggle button in sidebar settings*/
-$("#VerseRefsSwitch").change(function(){
-  if($( this ).is(':checked')) {
-    toggleVerseRefs("true");
-    localStorage.setItem("verseRefs", "true");
-} else {
-  toggleVerseRefs("false");
-  localStorage.setItem("verseRefs", "false");
-}
-});
-
-/* Enable the versesInlineSwitch toggle button in sidebar settings*/
-$("#versesInlineSwitch").change(function(){
-  if($( this ).is(':checked')) {
-    toggleVersesInline("true");
-    localStorage.setItem("versesInline", "true");
-} else {
-  toggleVersesInline("false");
-  localStorage.setItem("versesInline", "false");
-}
-});
-
-//On page load check for the status of versesInline and verseRefs and set the toggle accordingly.
-
-// 
-  const verseRefsBool = (storage.verseRefs == "true");
-  $("#VerseRefsSwitch").prop('checked', verseRefsBool);
-
-  
-  const versesInlineBool = (storage.versesInline == "true");
-  $("#versesInlineSwitch").prop('checked', versesInlineBool);
-
-
-
-
-
-
-
-/* Get personal prayers and write code on index.html
-======================================================*/
-function togglePersonalPrayers(){
-  let slideHtml = "";
-  let darkModeClasses = "";
-
-
-  if (storage.personalPrayers != null && storage.displayPersonalPrayers == "true") {
-    let personalPrayersArr = storage.personalPrayers.split("%%");
-    let personalPrayersHtml = '<ul>';
-    personalPrayersArr.forEach(element => {
-      personalPrayersHtml += "<li>" + element + "</li>";
-    });
-    personalPrayersHtml += '</ul>';
-  
-    //if (storage.darkModeState=="true") {
-    //  darkModeClasses=" text-white black ";
-    //}
-
-
-    
-    slideHtml = `
-    <div class="carousel-item" id="personal-prayers">
-                            <div class="d-flex justify-content-center flexbox-card-container">
-                                    <div class="card"> 
-                                        <div class="card-body "> 
-                                            <div class="card-title">
-                                              <h4 class="text-primary text-center">Personal Prayers</h4>     
-                                            </div>                        
-                                            <div class="card-text" id="personal-prayer-content">
-                                                ${personalPrayersHtml}
-                                                <div class="pt-5 source" id="personal-prayer-source"><a href="{{site.url}}/personal-prayers.html">Edit these prayers</a></div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                </div>
-    `;
-    $("#prayer-timer-item").after(slideHtml);
-  } else {
-      if ($('#personal-prayers').length){
-        window.location.reload();
-      }
-  }
-
-
-} 
-togglePersonalPrayers(); //run on page load
-
-// enable the toggle switch for personal prayer
-$("#personalPrayersSwitch").change(function(){
-  if($( this ).is(':checked')){
-    storage.displayPersonalPrayers = "true";
-    togglePersonalPrayers();
-    localStorage.setItem('displayPersonalPrayers', 'true');
-  } else {
-    storage.displayPersonalPrayers = "false";
-    togglePersonalPrayers();
-    localStorage.setItem('displayPersonalPrayers', 'false');
-  }
-});
-
-if (storage.displayPersonalPrayers == "true") {
-  $("#personalPrayersSwitch").prop('checked', true);
-} else {
-  $("#personalPrayersSwitch").prop('checked', false);
-}
 
 
 
@@ -462,12 +207,127 @@ break;
 
 
 
-/* Main index.html page
-=======================================*/   
+/* ============================================================
+                                                              |
+Index page functions                                          |
+                                                              |
+==============================================================*/  
 case 'index'://main page so do all the magic    
 case '': // or main page so 
-       
 
+
+
+
+
+/* ================================
+                                  |
+Change the psalm per users        |
+settings                          |
+                                  |
+===================================*/
+
+var psalmChangeTime1 = false;
+var psalmChangeTime2 = false;
+function nextPsalm(changeCount){
+       // add one to psalm number
+      if(Number(storage.psalmNumber)==171){ //reset to first psalm if we have reached the last psalm
+          storage.setStore('psalmNumber', "1");
+        } else {
+          storage.setStore('psalmNumber', Number(storage.psalmNumber)+1);
+        }
+      storage.setStore("lastPsalmChange", now.toISOString(true),);
+      storage.setStore("psalmChangeCount", changeCount);
+}
+
+
+if (storage.psalmChangeTime1 != "none") { // make psalmChangeTime1 today at the right hour 
+   psalmChangeTime1 = moment(now).hour(storage.psalmChangeTime1).minute(0).second(0).millisecond(0);
+}
+
+if (storage.psalmChangeTime2 != "none") { // make psalmChangeTime2 today at the right hour
+   psalmChangeTime2 = moment(now).hour(storage.psalmChangeTime2).minute(0).second(0).millisecond(0);
+} 
+
+
+// if now is the next day after the last psalm update && psalmChangeTime1 is set && now is after today at the hour of psalmChange time 1
+if (now.isAfter(storage.lastPsalmChange, 'day')){ //its the next day after last update
+    storage.setStore("psalmChangeCount", "0");
+}
+
+
+
+if (now.isAfter(psalmChangeTime1) && Number(storage.psalmChangeCount) == 0) {
+    // now is a new day 
+    if (now.isAfter(psalmChangeTime2)) { // now is after the second psalm change time
+      nextPsalm("2");
+    } else { // now is after first psalm change time
+      nextPsalm("1");
+      console.log("First change happened!");
+    }
+    
+}
+
+if (now.isAfter(psalmChangeTime2) && Number(storage.psalmChangeCount) == 1) {
+    nextPsalm("2");
+}
+
+
+
+
+
+
+
+
+
+/* Get personal prayers and write code on index.html
+======================================================*/
+function togglePersonalPrayers(){
+  let slideHtml = "";
+  let darkModeClasses = "";
+
+
+  if (storage.personalPrayers != null && storage.displayPersonalPrayers == "true") {
+    let personalPrayersArr = storage.personalPrayers.split("%%");
+    let personalPrayersHtml = '<ul>';
+    personalPrayersArr.forEach(element => {
+      personalPrayersHtml += "<li>" + element + "</li>";
+    });
+    personalPrayersHtml += '</ul>';
+  
+    //if (storage.darkModeState=="true") {
+    //  darkModeClasses=" text-white black ";
+    //}
+
+
+    
+    slideHtml = `
+    <div class="carousel-item" id="personal-prayers">
+                            <div class="d-flex justify-content-center flexbox-card-container">
+                                    <div class="card"> 
+                                        <div class="card-body "> 
+                                            <div class="card-title">
+                                              <h4 class="text-primary text-center">Personal Prayers</h4>     
+                                            </div>                        
+                                            <div class="card-text" id="personal-prayer-content">
+                                                ${personalPrayersHtml}
+                                                <div class="pt-5 source" id="personal-prayer-source"><a href="{{site.url}}/personal-prayers.html">Edit these prayers</a></div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                </div>
+    `;
+    $("#prayer-timer-item").after(slideHtml);
+  } else {
+      if ($('#personal-prayers').length){
+        window.location.reload();
+      }
+  }
+
+
+} 
+togglePersonalPrayers(); //run on page load
 
 
 
@@ -805,6 +665,241 @@ case '': // or main page so
 break;
 
 } // ./ Main Switch Function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================================
+                                  |
+Side Bar controls and settings    |
+                                  |
+===================================*/
+
+/* Sliding Side Bar Javascript controls
+========================*/
+ 
+$("#sidebar").mCustomScrollbar({
+  theme: "minimal"
+});
+
+$('#dismiss').on('click', function () {
+  $('#sidebar').removeClass('active');
+});
+
+$('#sidebarCollapse').on('click', function () {
+  $('#sidebar').toggleClass('active');
+
+//  $('.collapse.in').toggleClass('in');
+  $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+});
+
+
+//set the paslm and store it for the future  
+$("#psalm-select").change(function(){
+if(page=="" || page == "index"){
+populateDailyPsalm($(this).val()); // update the view
+}
+storage.setStore("psalmNumber",$(this).val());
+});
+$("#psalm-change-time1").change(function(){
+storage.setStore("psalmChangeTime1",$(this).val());
+});
+$("#psalm-change-time2").change(function(){
+storage.setStore("psalmChangeTime2",$(this).val());
+});
+
+
+// make select boxs match what is stored
+$("#psalm-select").val(storage.psalmNumber).attr('selected','selected');
+$("#psalm-change-time1").val(storage.psalmChangeTime1).attr('selected','selected');
+$("#psalm-change-time2").val(storage.psalmChangeTime2).attr('selected','selected');
+$("#silent-prayer-select").val(storage.silentPrayerTime).attr('selected','selected');
+$("#opening-prayer-select").val(storage.openingPrayerId).attr('selected','selected');
+$("#prayer-of-intent-select").val(storage.prayerOfIntentId).attr('selected','selected');
+$("#closing-prayer-select").val(storage.closingPrayerId).attr('selected','selected');
+
+
+//set silent prayer time and store it for the future  
+$("#silent-prayer-select").change(function(){
+if(page=="" || page == "index"){
+populateTimer($(this).val()); // update the view
+}
+storage.setStore("silentPrayerTime",$(this).val());
+});
+
+//set opening prayer
+$("#opening-prayer-select").change(function(){
+let id = Number($(this).val())
+if(page=="" || page == "index"){
+populatePrayers("opening-prayer",id);
+}
+storage.setStore("openingPrayerId",id);
+});
+
+//set  prayer of intent
+$("#prayer-of-intent-select").change(function(){
+let id = Number($(this).val())
+if(page=="" || page == "index"){
+populatePrayers("prayer-of-intent",id);
+}
+storage.setStore("prayerOfIntentId",id);
+});
+
+// set closing prayer
+$("#closing-prayer-select").change(function(){
+let id = Number($(this).val())
+if(page=="" || page == "index"){
+populatePrayers("closing-prayer",id);
+}
+storage.setStore("closingPrayerId",id);
+});
+
+
+
+
+
+
+
+/* Toggle Dark Mode 
+=================================*/
+
+//functions that set the appropriate dark or light classes
+function darkModeOn () {
+darkMode("true")
+localStorage.setItem("darkModeState", "true");
+//change timer to dark timer
+if(page=="" || page == "index"){
+storage.darkModeState = "true";
+populateTimer(storage.silentPrayerTime); // update the view
+}
+}
+function lightModeOn () {
+darkMode("false");
+storage.setStore("darkModeState", "false");
+
+//change timer to light timer*/
+if(page=="" || page == "index"){
+populateTimer(storage.silentPrayerTime); // update the view
+}
+}
+
+/* Enable the dark mode toggle button in sidebar settings*/
+$("#darkModeSwitch").change(function(){
+if($( this ).is(':checked')) {
+darkModeOn();
+} else {
+lightModeOn();  // unchecked
+}
+});
+
+//On page load check for the status of darkModeStatus and set the toggle and classes accordingly.
+if (storage.darkModeState == "true") {
+darkModeOn();
+$("#darkModeSwitch").prop('checked', true);
+
+} else {
+lightModeOn();
+$("#darkModeSwitch").prop('checked', false);
+}
+
+
+
+/* Toggles for Psalm reading verse numbers and line breaks
+=================================*/
+
+
+function toggleVerseRefs (setval) {
+if (setval=="true") {
+$(".bible-chapter").removeClass('hide-verse-refs');
+
+} else {
+$(".bible-chapter").addClass('hide-verse-refs');
+
+}
+}
+
+function toggleVersesInline (setval) {
+if (setval=="true") {
+$(".bible-chapter").addClass('verses-inline');
+} else {
+$(".bible-chapter").removeClass('verses-inline');
+}
+}
+
+
+/* Enable the verse refes toggle button in sidebar settings*/
+$("#VerseRefsSwitch").change(function(){
+if($( this ).is(':checked')) {
+toggleVerseRefs("true");
+localStorage.setItem("verseRefs", "true");
+} else {
+toggleVerseRefs("false");
+localStorage.setItem("verseRefs", "false");
+}
+});
+
+/* Enable the versesInlineSwitch toggle button in sidebar settings*/
+$("#versesInlineSwitch").change(function(){
+if($( this ).is(':checked')) {
+toggleVersesInline("true");
+localStorage.setItem("versesInline", "true");
+} else {
+toggleVersesInline("false");
+localStorage.setItem("versesInline", "false");
+}
+});
+
+//On page load check for the status of versesInline and verseRefs and set the toggle accordingly.
+
+// 
+const verseRefsBool = (storage.verseRefs == "true");
+$("#VerseRefsSwitch").prop('checked', verseRefsBool);
+
+
+const versesInlineBool = (storage.versesInline == "true");
+$("#versesInlineSwitch").prop('checked', versesInlineBool);
+
+
+
+
+
+
+
+
+// enable the toggle switch for personal prayer
+$("#personalPrayersSwitch").change(function(){
+if($( this ).is(':checked')){
+storage.displayPersonalPrayers = "true";
+togglePersonalPrayers();
+localStorage.setItem('displayPersonalPrayers', 'true');
+} else {
+storage.displayPersonalPrayers = "false";
+togglePersonalPrayers();
+localStorage.setItem('displayPersonalPrayers', 'false');
+}
+});
+
+if (storage.displayPersonalPrayers == "true") {
+$("#personalPrayersSwitch").prop('checked', true);
+} else {
+$("#personalPrayersSwitch").prop('checked', false);
+}
+
+
+// ./ Sidebar settings
 
 
 }); // ./ $(document).ready(function ()
