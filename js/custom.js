@@ -1,5 +1,9 @@
 ---
 ---
+$(window).on('load', function () {
+  $('.loader-container').fadeOut('slow');
+});
+
 $(document).ready(function () {
 /* Local Storage
 ============================*/
@@ -23,8 +27,6 @@ const prayersArr = [
 
 const now = moment();
 
-const today = new Date();// this can be removed later
-const oneDay = 1000*60*60*22; //22 hours instead of 24 just to make sure each morning is a new psalm
 
 var storage = {
   personalPrayers: "Personal prayers go here", 
@@ -709,16 +711,18 @@ $('#sidebarCollapse').on('click', function () {
 
 //set the paslm and store it for the future  
 $("#psalm-select").change(function(){
-if(page=="" || page == "index"){
-populateDailyPsalm($(this).val()); // update the view
-}
-storage.setStore("psalmNumber",$(this).val());
+  if(page=="" || page == "index"){
+  populateDailyPsalm($(this).val()); // update the view
+  }
+  storage.setStore("psalmNumber",$(this).val());
+  storage.setStore("lastPsalmChange",now.toISOString(true));
 });
+
 $("#psalm-change-time1").change(function(){
-storage.setStore("psalmChangeTime1",$(this).val());
+  storage.setStore("psalmChangeTime1",$(this).val());
 });
 $("#psalm-change-time2").change(function(){
-storage.setStore("psalmChangeTime2",$(this).val());
+  storage.setStore("psalmChangeTime2",$(this).val());
 });
 
 
@@ -903,3 +907,4 @@ $("#personalPrayersSwitch").prop('checked', false);
 
 
 }); // ./ $(document).ready(function ()
+
