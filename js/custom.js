@@ -1,8 +1,6 @@
 ---
 ---
-$(window).on('load', function () {
-  $('.loader-container').fadeOut('slow');
-});
+
 
 $(document).ready(function () {
 /* Local Storage
@@ -933,3 +931,7 @@ if (storage.showStartScreen == "true") {
 
 }); // ./ $(document).ready(function ()
 
+//$(window).on('load', function () {
+$(document).ready(function () {
+  $('.loader-container').fadeOut('slow');
+});
