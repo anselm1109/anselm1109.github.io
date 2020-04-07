@@ -932,5 +932,5 @@ if (storage.showStartScreen == "true") {
 }); // ./ $(document).ready(function ()
 
 $(window).on('load', function () {
-  $('.loader-container').delay(600).fadeOut('slow');
+  $('.loader-container').delay(800).fadeOut('slow');
 });
