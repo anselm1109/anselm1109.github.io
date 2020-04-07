@@ -345,31 +345,7 @@ togglePersonalPrayers(); //run on page load
     
     
 
-       
-          /* Jump to Slide if param is set
-           ================================= */
-          var slideNumber = Number(urlParams.get("slide"));
-          if ($.isNumeric(slideNumber)) {
-            $("#prayer-carousel").carousel(slideNumber);
-          }
-
-          $('#prayer-carousel').on('slide.bs.carousel', function (e) {
-            let url = "{{site.ulr}}/?slide="+e.to;
-            history.pushState({url}, null, url);
-          })
-
-
-         /* $('.carousel-control-prev').click(function(){
-            $("#myCarousel").carousel("prev");
-            history.pushState(null, null, "{{site.ulr}}/?slide="+);
-          });
-          $('.carousel-control-next').click(function(){
-            $("#myCarousel").carousel("next");
-          });*/
-
-        
-
-
+   
 
 
           
@@ -637,9 +613,29 @@ togglePersonalPrayers(); //run on page load
           populatePrayers("prayer-of-intent",storage.prayerOfIntentId);
           populateDailyPsalm(storage.psalmNumber);
           populateTimer(storage.silentPrayerTime);
-          if (storage.showStartScreen=="false") {
-            $("#prayer-carousel").carousel(1);
-          }
+          
+
+           /* Jump to Slide if param is set
+           ================================= */
+           var slideNumber = Number(urlParams.get("slide"));
+
+           // This function sets the slide number and enables the back button on the index.html page
+           //
+           if ($.isNumeric(slideNumber)) { // this ensures that I've got a number or nothing.
+              if (storage.showStartScreen=="false" && slideNumber === 0) {
+                $("#prayer-carousel").carousel(1);
+              } else {
+              $("#prayer-carousel").carousel(slideNumber);
+              }
+           } 
+           
+ 
+           $('#prayer-carousel').on('slide.bs.carousel', function (e) {
+             let url = "{{site.ulr}}/?slide="+e.to;
+             history.pushState({url}, null, url);
+           })
+
+
        
 
         /* Index page custom controls 
@@ -932,5 +928,5 @@ if (storage.showStartScreen == "true") {
 }); // ./ $(document).ready(function ()
 
 $(window).on('load', function () {
-  $('.loader-container').delay(800).fadeOut('slow');
+  $('.loader-container').delay(500).fadeOut('slow');
 });

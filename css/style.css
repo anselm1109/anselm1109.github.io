@@ -142,6 +142,15 @@ h1,h2,h3,h4,h5,h6 {
     font-weight: 300;
 }
 
+.carousel-fade .carousel-item {
+    -webkit-transition-duration: .2s;
+    transition-duration: .2s;
+}
+.carousel-item {
+    transition: -webkit-transform .2s ease-in-out;
+    transition: transform .2s ease-in-out;
+    transition: transform .2s ease-in-out,-webkit-transform .2s ease-in-out;
+}
 
 /* always show scrollbars */
 
