@@ -621,16 +621,17 @@ togglePersonalPrayers(); //run on page load
 
            // This function sets the slide number and enables the back button on the index.html page
            //
+           const prayerCarousel = $("#prayer-carousel");
            if ($.isNumeric(slideNumber)) { // this ensures that I've got a number or nothing.
               if (storage.showStartScreen=="false" && slideNumber === 0) {
-                $("#prayer-carousel").carousel(1);
+                prayerCarousel.carousel(1);
               } else {
-              $("#prayer-carousel").carousel(slideNumber);
+                prayerCarousel.carousel(slideNumber);
               }
            } 
            
  
-           $('#prayer-carousel').on('slide.bs.carousel', function (e) {
+           prayerCarousel.on('slide.bs.carousel', function (e) {
              let url = "{{site.ulr}}/?slide="+e.to;
              history.pushState({url}, null, url);
            })
@@ -698,17 +699,17 @@ Side Bar controls and settings    |
 
 /* Sliding Side Bar Javascript controls
 ========================*/
- 
-$("#sidebar").mCustomScrollbar({
+ const sideBar = $("#sidebar");
+ sideBar.mCustomScrollbar({
   theme: "minimal"
 });
 
 $('#dismiss').on('click', function () {
-  $('#sidebar').removeClass('active');
+  sideBar.removeClass('active');
 });
 
 $('#sidebarCollapse').on('click', function () {
-  $('#sidebar').toggleClass('active');
+  sideBar.toggleClass('active');
 
 //  $('.collapse.in').toggleClass('in');
   $('a[aria-expanded=true]').attr('aria-expanded', 'false');
@@ -716,7 +717,15 @@ $('#sidebarCollapse').on('click', function () {
 
 
 //set the paslm and store it for the future  
-$("#psalm-select").change(function(){
+const $psalmSelect = $("#psalm-select");
+const $psalmChangeTime1 =$("#psalm-change-time1");
+const $psalmChangeTime2 = $("#psalm-change-time2");
+const $silentPrayerSelect = $("#silent-prayer-select"); 
+const $openingPrayerSelect = $("#opening-prayer-select");
+const $prayerOfIntentSelect = $("#prayer-of-intent-select");
+const $closingPrayerSelect = $("#closing-prayer-select")
+
+$psalmSelect.change(function(){
   if(page=="" || page == "index"){
   populateDailyPsalm($(this).val()); // update the view
   }
@@ -724,26 +733,26 @@ $("#psalm-select").change(function(){
   storage.setStore("lastPsalmChange",now.toISOString(true));
 });
 
-$("#psalm-change-time1").change(function(){
+$psalmChangeTime1.change(function(){
   storage.setStore("psalmChangeTime1",$(this).val());
 });
-$("#psalm-change-time2").change(function(){
+$psalmChangeTime2.change(function(){
   storage.setStore("psalmChangeTime2",$(this).val());
 });
 
 
 // make select boxs match what is stored
-$("#psalm-select").val(storage.psalmNumber).attr('selected','selected');
-$("#psalm-change-time1").val(storage.psalmChangeTime1).attr('selected','selected');
-$("#psalm-change-time2").val(storage.psalmChangeTime2).attr('selected','selected');
-$("#silent-prayer-select").val(storage.silentPrayerTime).attr('selected','selected');
-$("#opening-prayer-select").val(storage.openingPrayerId).attr('selected','selected');
-$("#prayer-of-intent-select").val(storage.prayerOfIntentId).attr('selected','selected');
-$("#closing-prayer-select").val(storage.closingPrayerId).attr('selected','selected');
+$psalmSelect.val(storage.psalmNumber).attr('selected','selected');
+$psalmChangeTime1.val(storage.psalmChangeTime1).attr('selected','selected');
+$psalmChangeTime2.val(storage.psalmChangeTime2).attr('selected','selected');
+$silentPrayerSelect.val(storage.silentPrayerTime).attr('selected','selected');
+$openingPrayerSelect.val(storage.openingPrayerId).attr('selected','selected');
+$prayerOfIntentSelect.val(storage.prayerOfIntentId).attr('selected','selected');
+$closingPrayerSelect.val(storage.closingPrayerId).attr('selected','selected');
 
 
 //set silent prayer time and store it for the future  
-$("#silent-prayer-select").change(function(){
+$silentPrayerSelect.change(function(){
 if(page=="" || page == "index"){
 populateTimer($(this).val()); // update the view
 }
@@ -751,7 +760,7 @@ storage.setStore("silentPrayerTime",$(this).val());
 });
 
 //set opening prayer
-$("#opening-prayer-select").change(function(){
+$openingPrayerSelect.change(function(){
 let id = Number($(this).val())
 if(page=="" || page == "index"){
 populatePrayers("opening-prayer",id);
@@ -760,7 +769,7 @@ storage.setStore("openingPrayerId",id);
 });
 
 //set  prayer of intent
-$("#prayer-of-intent-select").change(function(){
+$prayerOfIntentSelect.change(function(){
 let id = Number($(this).val())
 if(page=="" || page == "index"){
 populatePrayers("prayer-of-intent",id);
@@ -769,7 +778,7 @@ storage.setStore("prayerOfIntentId",id);
 });
 
 // set closing prayer
-$("#closing-prayer-select").change(function(){
+$closingPrayerSelect.change(function(){
 let id = Number($(this).val())
 if(page=="" || page == "index"){
 populatePrayers("closing-prayer",id);
@@ -807,7 +816,8 @@ populateTimer(storage.silentPrayerTime); // update the view
 }
 
 /* Enable the dark mode toggle button in sidebar settings*/
-$("#darkModeSwitch").change(function(){
+const $darkModeSwitch = $("#darkModeSwitch");
+$darkModeSwitch.change(function(){
 if($( this ).is(':checked')) {
 darkModeOn();
 } else {
@@ -818,11 +828,11 @@ lightModeOn();  // unchecked
 //On page load check for the status of darkModeStatus and set the toggle and classes accordingly.
 if (storage.darkModeState == "true") {
 darkModeOn();
-$("#darkModeSwitch").prop('checked', true);
+$darkModeSwitch.prop('checked', true);
 
 } else {
 lightModeOn();
-$("#darkModeSwitch").prop('checked', false);
+$darkModeSwitch.prop('checked', false);
 }
 
 
@@ -830,28 +840,29 @@ $("#darkModeSwitch").prop('checked', false);
 /* Toggles for Psalm reading verse numbers and line breaks
 =================================*/
 
-
+const $bibleChapter = $(".bible-chapter");
 function toggleVerseRefs (setval) {
 if (setval=="true") {
-$(".bible-chapter").removeClass('hide-verse-refs');
+$bibleChapter.removeClass('hide-verse-refs');
 
 } else {
-$(".bible-chapter").addClass('hide-verse-refs');
+$bibleChapter.addClass('hide-verse-refs');
 
 }
 }
 
 function toggleVersesInline (setval) {
 if (setval=="true") {
-$(".bible-chapter").addClass('verses-inline');
+$bibleChapter.addClass('verses-inline');
 } else {
-$(".bible-chapter").removeClass('verses-inline');
+$bibleChapter.removeClass('verses-inline');
 }
 }
 
 
 /* Enable the verse refes toggle button in sidebar settings*/
-$("#VerseRefsSwitch").change(function(){
+const $verseRefsSwitch = $("#VerseRefsSwitch");
+$verseRefsSwitch.change(function(){
 if($( this ).is(':checked')) {
   toggleVerseRefs("true");
   storage.setStore("verseRefs", "true");
@@ -862,7 +873,8 @@ if($( this ).is(':checked')) {
 });
 
 /* Enable the versesInlineSwitch toggle button in sidebar settings*/
-$("#versesInlineSwitch").change(function(){
+const $versesInlineSwitch = $("#versesInlineSwitch");
+$versesInlineSwitch.change(function(){
   if($( this ).is(':checked')) {
   toggleVersesInline("true");
   storage.setStore("versesInline", "true");
@@ -876,11 +888,11 @@ $("#versesInlineSwitch").change(function(){
 
 // 
 const verseRefsBool = (storage.verseRefs == "true");
-$("#VerseRefsSwitch").prop('checked', verseRefsBool);
+$verseRefsSwitch.prop('checked', verseRefsBool);
 
 
 const versesInlineBool = (storage.versesInline == "true");
-$("#versesInlineSwitch").prop('checked', versesInlineBool);
+$versesInlineSwitch.prop('checked', versesInlineBool);
 
 
 
@@ -890,7 +902,8 @@ $("#versesInlineSwitch").prop('checked', versesInlineBool);
 
 
 // enable the toggle switch for personal prayer
-$("#personalPrayersSwitch").change(function(){
+const $personalPrayerSwitch = $("#personalPrayersSwitch")
+$personalPrayerSwitch.change(function(){
 if($( this ).is(':checked')){
   storage.setStore('displayPersonalPrayers', 'true');
   togglePersonalPrayers();
@@ -901,12 +914,13 @@ if($( this ).is(':checked')){
 });
 
 if (storage.displayPersonalPrayers == "true") {
-$("#personalPrayersSwitch").prop('checked', true);
+$personalPrayerSwitch.prop('checked', true);
 } else {
-$("#personalPrayersSwitch").prop('checked', false);
+$personalPrayerSwitch.prop('checked', false);
 }
 
-$("#showStartScreenSwitch").change(function(){
+const $showStartScreenSwitch = $("#showStartScreenSwitch");
+$showStartScreenSwitch.change(function(){
   if($( this ).is(':checked')) {
     storage.setStore("showStartScreen", "true");
   } else {
@@ -914,9 +928,9 @@ $("#showStartScreenSwitch").change(function(){
   }
   });
 if (storage.showStartScreen == "true") {
-  $("#showStartScreenSwitch").prop('checked', true);
+  $showStartScreenSwitch.prop('checked', true);
   } else {
-  $("#showStartScreenSwitch").prop('checked', false);
+  $showStartScreenSwitch.prop('checked', false);
   }
 // ./ Sidebar settings
 
