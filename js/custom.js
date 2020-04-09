@@ -77,6 +77,7 @@ const page = window.location.pathname.slice(1).replace(".html","");
 const queryString = window.location.search; // see https://www.sitepoint.com/get-url-parameters-with-javascript/ for how to use this.
 const urlParams = new URLSearchParams(queryString);
 
+const prayerTimer = $("#prayer-timer");
 
 
 /* populate the silent prayer timer with correct time
@@ -92,7 +93,7 @@ const urlParams = new URLSearchParams(queryString);
           }
           
           let timerFileName = "video/" + prayerTime + "mins" + darkFile + ".mp4";
-          $("#prayer-timer").get(0).src = timerFileName;
+          prayerTimer.get(0).src = timerFileName;
       }
 
 
@@ -115,7 +116,7 @@ switch (page) { //depending on which page is being called do the code associated
 /* This is prayer.html
   ==============================*/
 case 'prayer': //display single prayer
-
+    const setPrayer = $(".set-prayer");
     //get prayerid param
     var prayerId = Number(urlParams.get("prayerId"));
     var numberOfPrayers=0;
@@ -146,10 +147,10 @@ case 'prayer': //display single prayer
         $("#prayer-tags").html(tagsCode);
         $("#prayer-content").html(prayersArr[prayerId][4]);
         $("#prayer-source").html(sourceCode);
-        $(".set-prayer").each(function(){
+        setPrayer.each(function(){
           $( this ).data("prayerCard",$(this).attr("data-prayer"));
         });
-        $(".set-prayer").data("prayerId",prayerId);
+        setPrayer.data("prayerId",prayerId);
     }
     setPrayers(); //makes the above function run on first page load
   
@@ -167,7 +168,7 @@ case 'prayer': //display single prayer
         });
 
     //Update localStorage based on link click of set prayers to divs
-    $(".set-prayer").click(function(){
+    setPrayer.click(function(){
       localStorage.setItem($( this ).data("prayerCard"),$( this ).data("prayerId"));
       console.log("localStorage " + $( this ).data("prayerCard") + " was set to " + $( this ).data("prayerId"));
       $('.toast').toast('show');
@@ -190,12 +191,12 @@ Prayers for self and others code  |
 
 /* on personal-prayers.html only : save the textarea content to local storage
 ======================================================*/
-
-  $("#personal-prayers-textarea").val(localStorage.getItem("personalPrayers").replace(/%%/g,"\n"));
+  const personalPrayersTextarea = $("#personal-prayers-textarea");
+  personalPrayersTextarea.val(localStorage.getItem("personalPrayers").replace(/%%/g,"\n"));
 
 
   $("#personal-prayers-save").click(function(){
-      localStorage.setItem('personalPrayers',$("#personal-prayers-textarea").val().replace(/\r?\n/g,"%%"));
+      localStorage.setItem('personalPrayers',personalPrayersTextarea.val().replace(/\r?\n/g,"%%"));
       $('.toast').toast('show');
   });
 
@@ -284,7 +285,6 @@ if (now.isAfter(psalmChangeTime2) && Number(storage.psalmChangeCount) == 1) {
 ======================================================*/
 function togglePersonalPrayers(){
   let slideHtml = "";
-  let darkModeClasses = "";
 
 
   if (storage.personalPrayers != null && storage.displayPersonalPrayers == "true") {
@@ -322,7 +322,7 @@ function togglePersonalPrayers(){
     $("#prayer-timer-item").after(slideHtml);
   } else {
       if ($('#personal-prayers').length){
-        window.location.reload();
+        window.location.reload(); // I need to do this in order to load the carousel item when this option is turned on.
       }
   }
 
@@ -643,7 +643,6 @@ togglePersonalPrayers(); //run on page load
 
         // Timer related controls
             var audio = new Audio('{{site.url}}/sounds/quiet-thought-clip.m4a');
-            var prayerTimer = $("#prayer-timer");//document.getElementById('prayer-timer');
 
             $("#start-timer").click(function(){ 
                 audio.currentTime = 0;    
@@ -677,9 +676,6 @@ togglePersonalPrayers(); //run on page load
 break;
 
 } // ./ Main Switch Function
-
-
-
 
 
 
