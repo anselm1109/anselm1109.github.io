@@ -2,7 +2,160 @@
 layout: default
 title: 'Simply Pray | grid-play'
 ---
+<style>
+    /*grid styles
+    =============================*/
+    .card .card-body {
+        padding: 0;
+        height: 100%;
+        background: #222;
+    }
+    .card .card-body .card-text {
+        color: #fff;
+        background-color: transparent;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 100px
+                            300px 
 
+                            100px
+                            300px 
+
+                            100px
+                            300px;
+        grid-template-areas: "header-one"
+                            "body-one"
+
+                            "header-two"
+                            "body-two"
+
+                            "header-three"
+                            "body-three";
+        justify-items: center;
+        align-items: center;
+        min-height: 100%;
+    }
+
+
+
+
+
+
+
+    #sink-in-text {
+        grid-area: header-one;
+        text-align: center;
+    }
+    #sink-dot {
+        background-color: #45cafc;
+        border: 3px solid #3143A2;
+        height:35px;
+        width: 35px;
+        border-radius: 50%;
+        grid-area: body-one;
+        z-index: 1;
+        animation: 3s cubic-bezier(0.18, 0.29, 0.32, 1.01) 0ms infinite sink;
+    }
+    img#sink-in {
+        width: 300px;    
+        grid-area: body-one;
+        z-index: 2;
+    }
+
+    #indwelling-text {
+        grid-area: header-two;
+        text-align: center;
+    }
+    #indwelling-dot {
+        background-color: #45cafc;
+        border: 8px solid #3143A2;
+        height:201px;
+        width: 201px;
+        border-radius: 50%;
+        grid-area: body-two;
+        z-index: 2;
+        animation: 6s cubic-bezier(0.18, 0.29, 0.32, 1.01) 0ms infinite indwelling;
+    }
+    img#indwelling {
+        width: 300px;    
+        grid-area: body-two;
+        z-index: 1;
+        position: relative;
+        left:-3px;
+    }
+
+
+    #letgo-text {
+        grid-area: header-three;
+        text-align: center;
+    }
+    img#letgo {
+        width: 300px;    
+        grid-area: body-three;
+        z-index: 1;
+        animation: 5s cubic-bezier(0.18, 0.29, 0.32, 1.01) 0ms infinite letgo;
+    }
+
+   
+    
+    @keyframes sink {
+          0% {
+            transform:translate(0, -50px);
+            opacity: 0;
+          }
+          15%   {
+            opacity: 1;
+          }
+
+          75% {
+              opacity: 1;
+          }
+        
+          90% {
+              opacity: 0;
+          }
+          
+          100% {
+            transform:translate(0px, 20px);
+            opacity: 0;
+          }
+      }
+      
+      @keyframes indwelling {
+          0% {
+            transform:translate(150px, 0px) scale(0.19);
+            opacity: 1;
+          } 
+          60% {
+            transform: translate(0px, 0px) scale(0.19);
+            opacity: 1;
+          }       
+          100% {
+            transform: translate(0px, 0px) scale(1);
+            opacity: 0.5;
+          }
+      }
+
+      @keyframes letgo {
+          0% {
+            transform:scale(0);
+            opacity: 0;
+          }
+          30% {
+              opacity: 1;
+          }
+          70% {
+              opacity: 1;
+          }          
+          100% {
+           transform:scale(1);
+            opacity: 0;
+          }
+      }
+
+     
+      
+                      </style>  
 <div class="content-wrap">
     <div class="d-flex justify-content-center flexbox-card-container"><!-- flex box card container -->
 
@@ -14,125 +167,19 @@ title: 'Simply Pray | grid-play'
 
 
              
-                  <style>
-/*grid styles
-=============================*/
-.card .card-body {
-    color: #fff;
-    background: #222;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: "main";
-    justify-items: center;
-    align-items: center;
-    border: 1px dotted blue;
-    height: 100%;
-}
-
-.breather-container {
-    background-color: red;
-    height:300px;
-    width: 300px;
-    grid-area: main;
-    animation: breathe 10s ease-in-out infinite;
-    z-index: 1;
-    border-radius: 50%;
-}
-#breather-outer {
-    background-color: sandybrown;
-    height:300px;
-    width: 300px;
-    grid-area: main;
-    animation: breathe-smaller 10s ease-in-out infinite;
-    z-index: 3;
-    border-radius: 50%;
-}
-#breather-inner {
-    background-color: yellowgreen;
-    height:300px;
-    width: 300px;
-    grid-area: main;
-    animation: breathe-even-smaller 10s ease-in-out infinite;
-    z-index: 5;
-    border-radius: 50%;
-}
-
-
-  
-  @keyframes breathe {
-      0%   {
-          -webkit-transform: scale(0.5);
-          -ms-transform: scale(0.5);
-          transform: scale(0.5);
-          
-      }
-      50% {
-          -webkit-transform: scale(1);
-          -ms-transform: scale(1);
-          transform: scale(1);
-          
-      }
-      100% {
-          -webkit-transform: scale(0.5);
-          -ms-transform: scale(0.5);
-          transform: scale(0.5);
-          
-      }
-  }
-  @keyframes breathe-smaller {
-      0%   {
-          -webkit-transform: scale(0.3);
-          -ms-transform: scale(0.3);
-          transform: scale(0.4);
-      }
-      50% {
-          -webkit-transform: scale(1.3);
-          -ms-transform: scale(1.3);
-          transform: scale(0.98);
-      }
-      100% {
-          -webkit-transform: scale(0.3);
-          -ms-transform: scale(0.3);
-          transform: scale(0.4);
-      }
-  }
-
-  @keyframes breathe-even-smaller {
-      0%   {
-          -webkit-transform: scale(0.6);
-          -ms-transform: scale(0.6);
-          transform: scale(0.3);
-      }
-      50% {
-          -webkit-transform: scale(1.05);
-          -ms-transform: scale(1.05);
-          transform: scale(0.95);
-      }
-      100% {
-          -webkit-transform: scale(0.6);
-          -ms-transform: scale(0.6);
-          transform: scale(0.3);
-      }
-  }
- 
-  
-                  </style>  
-                    
-
-
-
-
-
-                    <div class="breather-container justify-content-center align-items-center">
-                     
+            <div class="card-text">
+                    <div id="sink-in-text">Sink in to the present moment and what you are feeling right now.</div>
+                    <div id="sink-dot"></div>
+                    <img src="/img/welcome/sink_in.png" id="sink-in" />
                         
-                      </div>
-                      <div id="breather-outer"></div>
-                        <div id="breather-inner"></div>
-                     
                   
-                    
+                    <div id="indwelling-text">Welcome what you are experiencing and feeling in your body as an opportunity to consent to the Holy Spirit's Indwelling.</div>
+                    <div id="indwelling-dot"></div>
+                    <img src="/img/welcome/indwelling.png" id="indwelling" />
+
+                    <div id="letgo-text">Let go by saying “I let go of my desire for security, affection, control and embrace this moment as it is.”</div>
+                    <img src="/img/welcome/let_go.png" id="letgo" />
+            </div>       
                         
      
             </div>
