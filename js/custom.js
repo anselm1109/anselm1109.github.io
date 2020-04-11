@@ -187,30 +187,34 @@ Welcoming Prayer page code        |
 ===================================*/
 case "welcoming-prayer":
 
-    const slides = $(".card-body").children();
+    const slides = $("#welcoming-carousel").children();
+    slides.each(function (index) {
+      $(this).css("display","grid");
+      if (index > 0) {$(this).hide();}
+    });
     const len = slides.length;
     console.log("len = " +len);
     let slideIndex = 0;
 
     // make prev and next buttons on main nav switch between animations without having to reload the page
-    $("#next, #prayer-next").click(function(){
+    $("#next, .carousel-control-next").click(function(){
         for (i=0; i<len; i++) {
           if (slides.eq(i).css("display")=="grid") {
             slideIndex=i;
           }
         }      
-        slides.eq(slideIndex).css("display","none");
+        slides.eq(slideIndex).fadeOut(500);
           if (slideIndex == len-1) {
             slideIndex=0;
           } else {
             slideIndex++;
           }
-        slides.eq(slideIndex).css("display","grid");    
+        slides.eq(slideIndex).delay(500).fadeIn(500);    
         return false;
     });
 
 
-    $("#prev, #prayer-prev").click(function(){
+    $("#prev, .carousel-control-prev").click(function(){
       for (i=0; i<len; i++) {
         if (slides.eq(i).css("display")=="grid") {
           slideIndex=i;
@@ -218,19 +222,14 @@ case "welcoming-prayer":
       }      
       // 
 
-      slides.eq(slideIndex).animate({
-        opacity: 0
-      }, 5000).delay(5000).css("display","none");
+      slides.eq(slideIndex).fadeOut(500);
 
         if (slideIndex == 0) {
           slideIndex=len-1;
         } else {
           slideIndex--;
         }
-    slides.eq(slideIndex).css("display","grid");
-      slides.eq(slideIndex).animate({
-        opacity: 1
-      }, 5000);    
+    slides.eq(slideIndex).delay(500).fadeIn(500);   
       return false;
     });
 
