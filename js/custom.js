@@ -187,20 +187,54 @@ Welcoming Prayer page code        |
 ===================================*/
 case "welcoming-prayer":
 
-const slides = $(".card-body").children();
-const len = slides.length;
-slides.eq(0).fadeOut();
-slides.eq(1).fadeIn();
-// make prev and next buttons on main nav switch between animations without having to reload the page
-$("#next, #prayer-next").click(function(){
+    const slides = $(".card-body").children();
+    const len = slides.length;
+    console.log("len = " +len);
+    let slideIndex = 0;
+
+    // make prev and next buttons on main nav switch between animations without having to reload the page
+    $("#next, #prayer-next").click(function(){
+        for (i=0; i<len; i++) {
+          if (slides.eq(i).css("display")=="grid") {
+            slideIndex=i;
+          }
+        }      
+        slides.eq(slideIndex).css("display","none");
+          if (slideIndex == len-1) {
+            slideIndex=0;
+          } else {
+            slideIndex++;
+          }
+        slides.eq(slideIndex).css("display","grid");    
+        return false;
+    });
 
 
-  return false;
-});
-$("#prev, #prayer-prev").click(function(){
+    $("#prev, #prayer-prev").click(function(){
+      for (i=0; i<len; i++) {
+        if (slides.eq(i).css("display")=="grid") {
+          slideIndex=i;
+        }
+      }      
+      // slides.eq(slideIndex).css("display","none");
 
-  return false;
-});
+      slides.eq(slideIndex).animate({
+        opacity: 0,
+        display: 'none',
+      }, 500);
+
+        if (slideIndex == 0) {
+          slideIndex=len-1;
+        } else {
+          slideIndex--;
+        }
+      // slides.eq(slideIndex).css("display","grid");
+      slides.eq(slideIndex).animate({
+        display: 'grid',
+        opacity: 1
+      }, 500);    
+      return false;
+    });
 
 
 
