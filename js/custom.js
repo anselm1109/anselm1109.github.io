@@ -216,23 +216,21 @@ case "welcoming-prayer":
           slideIndex=i;
         }
       }      
-      // slides.eq(slideIndex).css("display","none");
+      // 
 
       slides.eq(slideIndex).animate({
-        opacity: 0,
-        display: 'none',
-      }, 500);
+        opacity: 0
+      }, 5000).delay(5000).css("display","none");
 
         if (slideIndex == 0) {
           slideIndex=len-1;
         } else {
           slideIndex--;
         }
-      // slides.eq(slideIndex).css("display","grid");
+    slides.eq(slideIndex).css("display","grid");
       slides.eq(slideIndex).animate({
-        display: 'grid',
         opacity: 1
-      }, 500);    
+      }, 5000);    
       return false;
     });
 
