@@ -180,8 +180,31 @@ case 'prayer': //display single prayer
 break;
 /* end prayers.html code*/
 
+/* ================================
+                                  |
+Welcoming Prayer page code        |
+                                  |
+===================================*/
+case "welcoming-prayer":
+
+const slides = $(".card-body").children();
+const len = slides.length;
+slides.eq(0).fadeOut();
+slides.eq(1).fadeIn();
+// make prev and next buttons on main nav switch between animations without having to reload the page
+$("#next, #prayer-next").click(function(){
 
 
+  return false;
+});
+$("#prev, #prayer-prev").click(function(){
+
+  return false;
+});
+
+
+
+break;
 case "personal-prayers":
 /* ================================
                                   |

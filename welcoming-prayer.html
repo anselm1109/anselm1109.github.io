@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 'Simply Pray | grid-play'
+title: 'Simply Pray | Welcoming Prayer'
 ---
 <style>
     /*grid styles
@@ -15,27 +15,21 @@ title: 'Simply Pray | grid-play'
         background-color: transparent;
         display: grid;
         grid-template-columns: 100%;
-        grid-template-rows: 100px
-                            300px 
-
-                            100px
-                            300px 
-
-                            100px
-                            300px;
-        grid-template-areas: "header-one"
-                            "body-one"
-
-                            "header-two"
-                            "body-two"
-
-                            "header-three"
-                            "body-three";
+        grid-template-rows: 93vh;
         justify-items: center;
         align-items: center;
-        min-height: 100%;
     }
-
+    #sink-in-container {
+        grid-template-areas: "sink-in-cell";
+    }
+    #indwelling-container {
+        display: none;
+        grid-template-areas: "indwelling-cell";
+    }
+    #letgo-container {
+        display: none;
+        grid-template-areas: "letgo-cell";
+    }
 
 
 
@@ -43,8 +37,10 @@ title: 'Simply Pray | grid-play'
 
 
     #sink-in-text {
-        grid-area: header-one;
+        grid-area: sink-in-cell;
         text-align: center;
+        position: relative;
+        top:-200px;
     }
     #sink-dot {
         background-color: #45cafc;
@@ -52,18 +48,18 @@ title: 'Simply Pray | grid-play'
         height:35px;
         width: 35px;
         border-radius: 50%;
-        grid-area: body-one;
+        grid-area: sink-in-cell;
         z-index: 1;
         animation: 3s cubic-bezier(0.18, 0.29, 0.32, 1.01) 0ms infinite sink;
     }
     img#sink-in {
         width: 300px;    
-        grid-area: body-one;
+        grid-area: sink-in-cell;
         z-index: 2;
     }
 
     #indwelling-text {
-        grid-area: header-two;
+        grid-area: indwelling-cell;
         text-align: center;
     }
     #indwelling-dot {
@@ -72,26 +68,26 @@ title: 'Simply Pray | grid-play'
         height:201px;
         width: 201px;
         border-radius: 50%;
-        grid-area: body-two;
+        grid-area: indwelling-cell;
         z-index: 2;
         animation: 6s cubic-bezier(0.18, 0.29, 0.32, 1.01) 0ms infinite indwelling;
     }
     img#indwelling {
         width: 300px;    
-        grid-area: body-two;
+        grid-area: indwelling-cell;
         z-index: 1;
         position: relative;
-        left:-3px;
+        left:-2.09px;
     }
 
 
     #letgo-text {
-        grid-area: header-three;
+        grid-area: letgo-cell;
         text-align: center;
     }
     img#letgo {
         width: 300px;    
-        grid-area: body-three;
+        grid-area: letgo-cell;
         z-index: 1;
         animation: 5s cubic-bezier(0.18, 0.29, 0.32, 1.01) 0ms infinite letgo;
     }
@@ -167,16 +163,18 @@ title: 'Simply Pray | grid-play'
 
 
              
-            <div class="card-text">
-                    <div id="sink-in-text">Sink in to the present moment and what you are feeling right now.</div>
-                    <div id="sink-dot"></div>
-                    <img src="/img/welcome/sink_in.png" id="sink-in" />
-                        
+            <div class="card-text" id="sink-in-container">
+                <div id="sink-in-text">Sink in to the present moment and what you are feeling right now.</div>
+                <div id="sink-dot"></div>
+                <img src="/img/welcome/sink_in.png" id="sink-in" />
+            </div>            
                   
-                    <div id="indwelling-text">Welcome what you are experiencing and feeling in your body as an opportunity to consent to the Holy Spirit's Indwelling.</div>
-                    <div id="indwelling-dot"></div>
-                    <img src="/img/welcome/indwelling.png" id="indwelling" />
-
+            <div class="card-text" id="indwelling-container">
+                <div id="indwelling-text">Welcome what you are experiencing and feeling in your body as an opportunity to consent to the Holy Spirit's Indwelling.</div>
+                <div id="indwelling-dot"></div>
+                <img src="/img/welcome/indwelling.png" id="indwelling" />
+            </div>
+            <div class="card-text" id="letgo-container">
                     <div id="letgo-text">Let go by saying “I let go of my desire for security, affection, control and embrace this moment as it is.”</div>
                     <img src="/img/welcome/let_go.png" id="letgo" />
             </div>       
