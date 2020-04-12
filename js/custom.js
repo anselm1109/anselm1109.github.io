@@ -76,8 +76,8 @@ for UI to work                    |
 const page = window.location.pathname.slice(1).replace(".html","");
 const queryString = window.location.search; // see https://www.sitepoint.com/get-url-parameters-with-javascript/ for how to use this.
 const urlParams = new URLSearchParams(queryString);
-
 const prayerTimer = $("#prayer-timer");
+const navControls = $(".nav-control");
 
 
 /* populate the silent prayer timer with correct time
@@ -116,6 +116,7 @@ switch (page) { //depending on which page is being called do the code associated
 /* This is prayer.html
   ==============================*/
 case 'prayer': //display single prayer
+    navControls.addClass("nav-control-active");
     const setPrayer = $(".set-prayer");
     //get prayerid param
     var prayerId = Number(urlParams.get("prayerId"));
@@ -186,7 +187,7 @@ Welcoming Prayer page code        |
                                   |
 ===================================*/
 case "welcoming-prayer":
-
+  navControls.addClass("nav-control-active");
     const slides = $("#welcoming-carousel").children();
     slides.each(function (index) {
       $(this).css("display","grid");
@@ -242,7 +243,7 @@ case "personal-prayers":
 Prayers for self and others code  |
                                   |
 ===================================*/
-
+navControls.addClass("nav-control-inactive");
 /* on personal-prayers.html only : save the textarea content to local storage
 ======================================================*/
   const personalPrayersTextarea = $("#personal-prayers-textarea");
@@ -257,20 +258,25 @@ Prayers for self and others code  |
 
 
 break;
+case 'prayer-book':
+  navControls.addClass("nav-control-inactive");
 
 
+ break;
+ case 'breathe':
+  navControls.addClass("nav-control-inactive");
 
 
+ break;
 
-
+case 'index'://main page so do all the magic    
+case '': // or main page so 
 /* ============================================================
                                                               |
 Index page functions                                          |
                                                               |
-==============================================================*/  
-case 'index'://main page so do all the magic    
-case '': // or main page so 
-
+==============================================================*/ 
+navControls.addClass("nav-control-active");
 
 
 
