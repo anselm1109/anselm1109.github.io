@@ -36,7 +36,7 @@ var storage = {
   displayPersonalPrayers: "false",
   verseRefs: "true",
   versesInline: "false",
-  psalmNumber: 1,
+  psalmNumber: 0,
   lastPsalmChange: now.toISOString(true),
   psalmChangeTime1: '5',
   psalmChangeTime2: 'none',
@@ -171,7 +171,7 @@ case 'prayer': //display single prayer
     //Update localStorage based on link click of set prayers to divs
     setPrayer.click(function(){
       localStorage.setItem($( this ).data("prayerCard"),$( this ).data("prayerId"));
-      console.log("localStorage " + $( this ).data("prayerCard") + " was set to " + $( this ).data("prayerId"));
+     
       $('.toast').toast('show');
     });
 
@@ -194,7 +194,7 @@ case "welcoming-prayer":
       if (index > 0) {$(this).hide();}
     });
     const len = slides.length;
-    console.log("len = " +len);
+  
     let slideIndex = 0;
 
     // make prev and next buttons on main nav switch between animations without having to reload the page
@@ -324,7 +324,7 @@ if (now.isAfter(psalmChangeTime1) && Number(storage.psalmChangeCount) == 0) {
       nextPsalm("2");
     } else { // now is after first psalm change time
       nextPsalm("1");
-      console.log("First change happened!");
+      
     }
     
 }
@@ -434,12 +434,23 @@ togglePersonalPrayers(); //run on page load
                   var $chapterHTML = '';
                   var chapter = $(xml).find('chapter[id="psalms.'+$chapterNumber+'"]');
                   var $mainText = $("#daily-psalm");
-                  
+                 
+              
+                 // set the classes for inline and verserefs on .bible-chapter div
+                 var classes = ""; 
+                 if(storage.verseRefs=="false") {
+                   
+                   classes += " hide-verse-refs ";
+                   
+                 }
+                 if(storage.versesInline=="true") {
+                   classes += " verses-inline ";
+                 }
 
               /*format xml for ps 119
               ==========================*/
                 if ($chapterNumber == 119) {
-                  $chapterHTML += '<div class="bible-chapter" data-chapter="119"><h4>Psalm 119</h4>';
+                  $chapterHTML += '<div class="bible-chapter' + classes +'" data-chapter="119"><h4>Psalm 119</h4>';
                   var $thisPoetryBlocks = chapter.find('poetryblock');
                 
                   $thisPoetryBlocks.each(function(index){
@@ -471,17 +482,6 @@ togglePersonalPrayers(); //run on page load
               ==========================*/
                   chapter.each(function () {
                     var $thisChapter = $(this);
-                    
-                    // set the classes for inline and verserefs
-                    var classes = ""; 
-                    if(storage.verseRefs=="false") {
-                      
-                      classes += " hide-verse-refs ";
-                      
-                    }
-                    if(storage.versesInline=="true") {
-                      classes += " verses-inline ";
-                    }
 
 
                     $chapterHTML += '<div class="bible-chapter' + classes + '" data-chapter="' + $thisChapter.attr('display') + '">';
@@ -900,8 +900,10 @@ $darkModeSwitch.prop('checked', false);
 /* Toggles for Psalm reading verse numbers and line breaks
 =================================*/
 
-const $bibleChapter = $(".bible-chapter");
+
+
 function toggleVerseRefs (setval) {
+  let $bibleChapter = $(".bible-chapter");
 if (setval=="true") {
 $bibleChapter.removeClass('hide-verse-refs');
 
@@ -912,6 +914,7 @@ $bibleChapter.addClass('hide-verse-refs');
 }
 
 function toggleVersesInline (setval) {
+  let $bibleChapter = $(".bible-chapter");
 if (setval=="true") {
 $bibleChapter.addClass('verses-inline');
 } else {
