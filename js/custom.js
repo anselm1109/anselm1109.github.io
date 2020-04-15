@@ -674,6 +674,7 @@ togglePersonalPrayers(); //run on page load
           populateDailyPsalm(storage.psalmNumber);
           populateTimer(storage.silentPrayerTime);
           
+          
 
            /* Jump to Slide if param is set
            ================================= */
