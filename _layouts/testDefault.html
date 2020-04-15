@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  {%- include head.html -%}
+  {%- include headTest.html -%}
 
   <body>
 
@@ -37,11 +37,7 @@
   <!-- jQuery Custom Scroller CDN -->
   <script type="text/javascript" src="{{site.url}}/js/jquery.mCustomScrollbar.concat.min.js"></script>
   
-  <script type="text/javascript" src="{{site.url}}/js/manUp.js"></script>
-  {% if page.pwaModule != nil %}
-    {%- include pwaModule.html -%}
-  {% endif %}
-  {{ page.scripts }}
+ 
   </body>
 </html>
 

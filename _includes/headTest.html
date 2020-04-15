@@ -1,0 +1,52 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{{page.title}}</title>
+  
+  <!-- MDB icon -->
+  <link rel="icon" href="{{site.url}}/favicon.png" type="image/x-icon">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="{{site.url}}/css/bootstrap.min.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="{{site.url}}/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+     
+  <link href="{{site.url}}/css/jquery.mCustomScrollbar.min.css" rel="stylesheet">       
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Raleway:wght@200;300;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{site.url}}/css/style.css">
+  <script>
+    function darkMode (state) {
+
+        if (state=="true") {//darkmode
+          document.documentElement.style.setProperty('--theme-bg-color', 'black');
+          document.documentElement.style.setProperty('--theme-note-bg-color', '#333');
+          document.documentElement.style.setProperty('--theme-text-color', 'white');
+          document.documentElement.style.setProperty('--theme-nav-gradient', 'linear-gradient(40deg, #000000, #3d3e40)');
+          document.documentElement.style.setProperty('--theme-title-color', 'white');
+          
+        } else { //lighmode 
+          document.documentElement.style.setProperty('--theme-bg-color', 'white');
+          document.documentElement.style.setProperty('--theme-note-bg-color', '#e4f2f5');
+          document.documentElement.style.setProperty('--theme-text-color', '#151d47');
+          document.documentElement.style.setProperty('--theme-nav-gradient', 'linear-gradient(40deg, #45cafc, #303f9f)');
+          document.documentElement.style.setProperty('--theme-title-color', '#3143A2');
+        }
+    }
+    //run on first page lode
+    if(localStorage.getItem("darkModeState")===null || localStorage.getItem("darkModeState")===undefined || localStorage.getItem("darkModeState")==='') {
+          // there is no local storage darkModeState so leave the styles alone
+        } else {
+          //there is something in the darkModeState, so set the styles accordingly
+          darkMode(localStorage.getItem('darkModeState'));
+        }
+
+
+ 
+  </script>
+ 
+</head>
