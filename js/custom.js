@@ -42,6 +42,7 @@ var storage = {
   psalmChangeTime2: 'none',
   psalmChangeCount: 0,
   showStartScreen: "true",
+  isaacMode: "false",
   setStore: function (kee,val) {
    localStorage.setItem(kee,val);
     this[kee] = val;
@@ -271,14 +272,32 @@ case 'prayer-book':
 
 case 'index'://main page so do all the magic    
 case '': // or main page so 
+
+
+
+
+/*===========================================================
+===========================================================
+===========================================================
+===========================================================
+===========================================================*/
+
+
+
 /* ============================================================
                                                               |
 Index page functions                                          |
                                                               |
 ==============================================================*/ 
-navControls.addClass("nav-control-active");
 
 
+navControls.addClass("nav-control-active"); // make arrows in nav bar visable.
+
+
+/* add or subtract breathe and  welcoming cards */
+if (storage.isaacMode == "false") {
+  $('.breathe-card, .welcoming-card').remove();
+}
 
 
 /* ================================
@@ -784,7 +803,8 @@ const $psalmChangeTime2 = $("#psalm-change-time2");
 const $silentPrayerSelect = $("#silent-prayer-select"); 
 const $openingPrayerSelect = $("#opening-prayer-select");
 const $prayerOfIntentSelect = $("#prayer-of-intent-select");
-const $closingPrayerSelect = $("#closing-prayer-select")
+const $closingPrayerSelect = $("#closing-prayer-select");
+
 
 $psalmSelect.change(function(){
   if(page=="" || page == "index"){
@@ -996,6 +1016,22 @@ if (storage.showStartScreen == "true") {
   } else {
   $showStartScreenSwitch.prop('checked', false);
   }
+
+  const $isaacMode = $("#isaacMode");
+  $isaacMode.change(function(){
+    if($( this ).is(':checked')) {
+      storage.setStore("isaacMode", "true");
+      window.location.reload(); // I need to do this in order to load the carousel item when this option is turned on.
+    } else {
+      storage.setStore("isaacMode", "false");
+      window.location.reload(); // I need to do this in order to load the carousel item when this option is turned on.
+    }
+    });
+  if (storage.isaacMode == "true") {
+    $isaacMode.prop('checked', true);
+    } else {
+    $isaacMode.prop('checked', false);
+    }
 // ./ Sidebar settings
 
 
