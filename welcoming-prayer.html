@@ -17,7 +17,7 @@ title: 'Simply Pray | Welcoming Prayer'
     .card .card-body {
         padding: 0;
         height: 100%;
-        background: #222;
+        background: #000;
     }
     #welcoming-carousel .card-text {
         color: #fff;
@@ -58,6 +58,15 @@ title: 'Simply Pray | Welcoming Prayer'
         position: relative;
         top:-160px;
         z-index: 3;
+    }
+    #screen {
+        grid-area: sink-in-cell;
+        width: 50px;
+        height: 50px;
+        background: #000;
+        z-index: 2;
+        position: relative;
+        top: 35px;
     }
     #sink-dot {
         background-color: #45cafc;
@@ -190,6 +199,7 @@ title: 'Simply Pray | Welcoming Prayer'
             <div class="card-text" id="sink-in-container">
                 <div id="sink-in-text" class="text-title"><span>1</span><br /> Sink in to the present moment and what you are feeling right now in your body.</div>
                 <div id="sink-dot"></div>
+                <div id="screen"></div>
                 <img src="/img/welcome/sink_in.png" id="sink-in" />
             </div>            
                   
