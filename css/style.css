@@ -217,12 +217,24 @@ h1,h2,h3,h4,h5,h6 {
 /* this class alows user to show verses without line breaks*/
 .verses-inline li {
     display:inline;
+    padding-left: 0 !important;
+    text-indent: 0 !important;
 }
 /* this class allows user to hide verse refrences*/
 .hide-verse-refs .verse-ref {
     display:none;
 }
-
+.poetry-list li {
+    padding-left: 2em;
+    text-indent: -2em;
+}
+.poetry-list li.poetry-indent {
+    padding-left: 2em;
+    text-indent: 2em;
+}
+.poetry-list li.poetry-new-paragraph {
+    padding-top:1em;
+}
 
 
 
