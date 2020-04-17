@@ -225,12 +225,12 @@ h1,h2,h3,h4,h5,h6 {
     display:none;
 }
 .poetry-list li {
-    padding-left: 2em;
-    text-indent: -2em;
+    padding-left: 1em;
+    text-indent: -1em;
 }
 .poetry-list li.poetry-indent {
-    padding-left: 2em;
-    text-indent: 2em;
+    padding-left: 1em;
+    text-indent: 1em;
 }
 .poetry-list li.poetry-new-paragraph {
     padding-top:1em;
