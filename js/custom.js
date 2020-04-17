@@ -780,16 +780,19 @@ Side Bar controls and settings    |
 /* Sliding Side Bar Javascript controls
 ========================*/
  const sideBar = $("#sidebar");
+ const dismissCover = $('#dismiss-cover');
  sideBar.mCustomScrollbar({
   theme: "minimal"
 });
 
-$('#dismiss').on('click', function () {
+$('#dismiss, #dismiss-cover').on('click', function () {
   sideBar.removeClass('active');
+  dismissCover.removeClass('active');
 });
 
 $('#sidebarCollapse').on('click', function () {
   sideBar.toggleClass('active');
+  dismissCover.toggleClass('active');
 
 //  $('.collapse.in').toggleClass('in');
   $('a[aria-expanded=true]').attr('aria-expanded', 'false');
