@@ -13,5 +13,223 @@ id,title,source,sourceLink,tags,content
 11,Psalms 25:1-3,CSB Bible,https://read.csbible.com/?book=psalms&chapter=106,opening,"<li>Lord, I appeal to you.</li> <li>My God, I trust in you.</li> <li>Do not let me be disgraced; do not let my enemies gloat over me.</li> <li>No one who waits for you will be disgraced;</li>"
 12,Psalms 106:1-3,CSB Bible,https://read.csbible.com/?book=psalms&chapter=25,"opening,closing","<li>Hallelujah!</li> <li>Give thanks to the Lord, for he is good;</li> <li>his faithful love endures forever.</li> <li>Who can declare the Lord's mighty acts or proclaim all the praise due him?</li> <li>How happy are those who uphold justice, who practice righteousness at all times.</li>"
 13,The Serenity Prayer,,,"opening,closing,other","<li>God, give me grace to accept with serenity the things that cannot be changed,</li> <li>Courage to change the things which should be changed, and the  <li>Wisdom to distinguish the one from the other.</li>  <li class=""poetry-new-paragraph"">Living one day at a time,</li> <li>Enjoying one moment at a time,</li> <li>Accepting hardship as a pathway to peace,</li> <li>Taking, as Jesus did, </li> <li>This sinful world as it is,</li> <li>Not as I would have it,</li> <li>Trusting that You will make all things right,</li> <li>If I surrender to Your will,</li> <li>So that I may be reasonably happy in this life,</li> <li>And supremely happy with You forever in the next.</li>  <li class=""poetry-new-paragraph"">Amen.</li>"
-14,The Apostle's Creed,,,"opening,closing","<li>I believe in God, the Father Almighty, Maker of heaven and earth,</li>  <li class=""poetry-new-paragraph"">And in Jesus Christ, His only Son, our Lord,</li> <li>who was conceived by the Holy Spirit,</li> <li>born of the Virgin Mary,</li> <li>suffered under Pontius Pilate,</li> <li>was crucified, died and was buried;</li> <li>He descended into hell;</li> <li>on the third day He rose again from the dead;</li> <li>He ascended into heaven, and is seated at the right hand of God the Father Almighty;</li> <li>from there He will come to judge the living and the dead.</li>  <li class=""poetry-new-paragraph"">I believe in the Holy Spirit,</li> <li>the Holy Catholic/Christian Church,</li> <li>the communion of Saints,</li> <li>the forgiveness of sins,</li> <li>the resurrection of the body,</li> <li>and life everlasting.</li> <li> class=""poetry-new-paragraph""Amen.</li>"
-15,The Nicene Creed,,,,"<li>I believe in one God, the Father Almighty, maker of heaven and earth and of all  things visible and invisible.</li>  <li class=""poetry-new-paragraph"">And in one Lord Jesus Christ, the only begotten Son of God, begotten of His Father  before all worlds, God of God, Light of Light, very God of very God, begotten, not  made, being of one substance with the Father, by whom all things were made; who  for us men and for our salvation came down from heaven and was incarnate by the  Holy Spirit of the virgin Mary and was made man; and was crucified also for us under  Pontius Pilate. He suffered and was buried. And the third day He rose again according  to the Scriptures and ascended into heaven and sits at the right hand of the Father.  And He will come again with glory to judge both the living and the dead, whose  kingdom will have no end. </li>  <li class=""poetry-new-paragraph"">And I believe in the Holy Spirit, the Lord and giver of life, who proceeds from the  Father and the Son, who with the Father and the Son together is worshiped and  glorified, who spoke by the prophets. And I believe in one holy Christian/catholic and  apostolic Church I acknowledge one Baptism for the remission of sins, and I look for  the resurrection of the dead and the life of the world to come.</li>  <li class=""poetry-new-paragraph"">Amen.</li> "
+14,The Apostle's Creed,,,"opening,intent,closing","<li>I believe in God, the Father Almighty, Maker of heaven and earth,</li>  <li class=""poetry-new-paragraph"">And in Jesus Christ, His only Son, our Lord,</li> <li>who was conceived by the Holy Spirit,</li> <li>born of the Virgin Mary,</li> <li>suffered under Pontius Pilate,</li> <li>was crucified, died and was buried;</li> <li>He descended into hell;</li> <li>on the third day He rose again from the dead;</li> <li>He ascended into heaven, and is seated at the right hand of God the Father Almighty;</li> <li>from there He will come to judge the living and the dead.</li>  <li class=""poetry-new-paragraph"">I believe in the Holy Spirit,</li> <li>the Holy Catholic/Christian Church,</li> <li>the communion of Saints,</li> <li>the forgiveness of sins,</li> <li>the resurrection of the body,</li> <li>and life everlasting.</li> <li> class=""poetry-new-paragraph""Amen.</li>"
+15,The Nicene Creed,,,"opening,intent,closing","<li>I believe in one God, the Father Almighty, maker of heaven and earth and of all  things visible and invisible.</li>  <li class=""poetry-new-paragraph"">And in one Lord Jesus Christ, the only begotten Son of God, begotten of His Father  before all worlds, God of God, Light of Light, very God of very God, begotten, not  made, being of one substance with the Father, by whom all things were made; who  for us men and for our salvation came down from heaven and was incarnate by the  Holy Spirit of the virgin Mary and was made man; and was crucified also for us under  Pontius Pilate. He suffered and was buried. And the third day He rose again according  to the Scriptures and ascended into heaven and sits at the right hand of the Father.  And He will come again with glory to judge both the living and the dead, whose  kingdom will have no end. </li>  <li class=""poetry-new-paragraph"">And I believe in the Holy Spirit, the Lord and giver of life, who proceeds from the  Father and the Son, who with the Father and the Son together is worshiped and  glorified, who spoke by the prophets. And I believe in one holy Christian/catholic and  apostolic Church I acknowledge one Baptism for the remission of sins, and I look for  the resurrection of the dead and the life of the world to come.</li>  <li class=""poetry-new-paragraph"">Amen.</li> "
+16,St. Patrick's Breastplate,"","","opening,intent,closing,other","<li>
+    I arise to-day
+</li>
+<li>
+    Through a mighty strength, the invocation of the Trinity,
+</li>
+<li>
+    Through belief in the threeness. 
+</li>
+<li>
+    Through confession of the oneness 
+</li>
+<li>
+    Of the Creator of Creation.
+</li>
+
+<li class=""poetry-new-paragraph"">
+    I arise to-day
+</li>
+<li>
+    Through the strength of Christ's birth with His baptism,
+</li>
+<li>
+    Through the strength of His crucifixion with His burial,
+</li>
+<li>
+    Through the strength of His resurrection with His ascension. 
+</li>
+<li>
+    Through the strength of His descent for the judgment of Doom.
+</li>
+
+<li class=""poetry-new-paragraph"">
+    I arise to-day
+</li>
+<li>
+    Through the strength of the love of Cherubim,
+</li>
+<li>
+    In obedience of angels,
+</li> 
+<li>
+    In the service of archangels. 
+</li>
+<li>
+    In hope of resurrection to meet with reward,
+</li>
+<li>
+    In prayers of patriarchs, 
+</li>
+<li>
+    In predictions of prophets.
+</li>
+<li>
+    In preachings of apostles. 
+</li>
+<li>
+    In faiths of confessors.
+</li> 
+<li>
+    In innocence of holy virgins,
+</li> 
+<li>
+    In deeds of righteous men.
+</li>
+
+<li class=""poetry-new-paragraph"">
+    I arise to-day
+</li>
+<li>
+	Through the strength of heaven:
+</li> 
+<li>
+	Light of sun,
+</li> 
+<li>
+	Radiance of moon,
+</li>
+<li>
+	Splendour of fire,
+</li> 
+<li>
+	Speed of lightning,
+</li>
+<li>
+	Swiftness of wind,
+</li>
+<li>
+	Depth of sea,
+</li> 
+<li>
+	Stability of earth.
+</li> 
+<li>
+	Firmness of rock.
+</li>
+
+<li class=""poetry-new-paragraph"">
+    I arise to-day
+</li>
+<li>
+    Through God's strength to pilot me
+</li>
+<li>
+    God's might to uphold me,
+</li>
+<li>
+    God's wisdom to guide me,
+</li>
+<li>
+    God's eye to look before me,
+</li>
+<li>
+    God's ear to hear me,
+</li>
+<li>
+    God's word to speak for me,
+</li>
+<li>
+    God's hand to guard me,
+</li>
+<li>
+    God's way to lie before me,
+</li>
+<li>
+    God's shield to protect me,
+</li>
+<li>
+    God's host to save me
+</li>
+<li>
+    From snares of devils,
+</li>
+<li>
+    From temptations of vices. 
+</li>
+<li>
+    From every one who shall wish me ill,
+</li> 
+<li>
+    Afar and near. 
+</li>
+<li>
+    Alone and in a multitude.
+</li>
+
+<li class=""poetry-new-paragraph"">
+    I summon to-day all these powers between me and those evils.
+</li> 
+<li>
+    Against every cruel merciless power that may oppose my body and soul.
+</li> 
+<li>
+    Against incantations of false prophets,
+</li>
+<li>
+    Against black laws of pagandom,
+</li>
+<li>
+    Against false laws of heretics,
+</li>
+<li>
+    Against craft of idolatry.
+</li>
+<li>
+    Against spells of women and smiths and wizards.
+</li>
+<li>
+    Against every knowledge that corrupts man's body and soul.
+</li>
+
+<li class=""poetry-new-paragraph"">
+    Christ to shield me to-day
+</li>
+<li>
+    Against poison, against burning,
+</li>
+<li>
+    Against drowning, against wounding,
+</li>
+<li>
+    So that there may come to me abundance of reward.
+</li>
+<li>
+    Christ with me, Christ before me, Christ behind me,
+</li>
+<li>
+    Christ in me, Christ beneath me, Christ above me,
+</li>
+<li>
+    Christ on my right, Christ on my left, Christ when I lie down, Christ when I sit down,
+</li>
+<li>
+    Christ when I arise, Christ in the heart of every man who thinks of me,
+</li>
+<li>
+    Christ in the mouth of every one who speaks of me,
+</li>
+<li>
+    Christ in every eye that sees me,
+</li>
+<li>
+    Christ in every ear that hears me.
+</li>
+
+<li class=""poetry-new-paragraph"">
+    I arise to-day
+</li>
+<li>
+    Through a mighty strength, the invocation of the Trinity,
+</li>
+<li>
+    Through belief in the threeness,
+</li>
+<li>
+    Through confession of the oneness Of the Creator of Creation.
+</li>
+"
