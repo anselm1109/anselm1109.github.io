@@ -840,7 +840,7 @@ $silentPrayerSelect.change(function(){
 if(page=="" || page == "index"){
 populateTimer($(this).val()); // update the view
 }
-storage.setStore("silentPrayerTime",$(this).val());
+storage.setStore("silentPrayerTime",parseInt($(this).val(),10));
 });
 
 //set opening prayer
